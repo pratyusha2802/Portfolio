@@ -14,7 +14,9 @@ body {
     background: linear-gradient(rgba(201, 222, 230, 0), rgb(0,170,255));
     flex-wrap: inherit;
 }
-
+.navbar .menu{
+  display:none;
+}
 /* NavBar */
 
 .Name {
@@ -30,7 +32,7 @@ ul{
     font-size: 1rem;
   }
 
-h1.logo  {
+span.logo  {
     font-weight: 300;
     line-height: 1.2;
     margin: 1px 0;
@@ -56,10 +58,12 @@ h1.logo  {
     display: flex;
     flex-direction: row;
   }
-
+.navbar li{
+  margin-left:2.5vw;
+}
 .navbar a{
     color: #fff;
-    padding: 10px;
+    
     margin: 0 5px;
     font-size: 1rem;
   }
@@ -72,14 +76,58 @@ h1.logo  {
     justify-content: space-between;
     align-items: center;
   }
-
-  @media(max-width: 600px) {
-    .navbar .flex{
-      flex-direction: column;
-    }
+  .X{
+    background-color:orangered;
+    color:aliceblue;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: bold;
+  }
+  
+  .hide{
+    display:none;
+  }
+  .menudrop{
+    position: fixed;
+    top:12vw;
+    width:100%;
+     z-index: 2;
+  }
+  @media(max-width: 650px) {
+    
     .navbar {
       min-height: 12vh;
     }
+    nav > div {
+      margin-bottom: 50px;
+      
+    }
+    .navbar .menu{
+      display:flex;
+      position:fixed;
+      top:0;
+      right:15px;
+
+    }
+    .navbar ul{
+      display:none;
+    }
+    span.logo  {
+      font-weight: 300;
+      line-height: 1.2;
+      margin: 1px 0;
+      
+      
+      font-family: 'Times New Roman';
+      color: white;
+      font-size: 2rem;
+    }
+    .mystyle{
+      position:fixed;
+      top:12vh;
+
+    }
+    
   }
 
   .container{
@@ -105,11 +153,12 @@ h1.logo  {
 }
 
 img {
-    height: 200px;
-    width: 200px;
+    height: 40px;
+    width: 30px;
     shape-image-threshold: inherit;
     padding: center;
     margin-top: 20px;
+    cursor:pointer;
 }
 
 .center {
@@ -144,8 +193,11 @@ a{
     text-decoration: none;
     color: white;
     text-align: center;
-    padding: 20px;
+    
     margin: 0px 5px;
+}
+.m{
+  margin:20px;
 }
 
 p.linkcenter {
