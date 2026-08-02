@@ -231,28 +231,23 @@ button {
   letter-spacing: -0.035em;
 }
 
-.hero__title .amp {
-  color: var(--forest);
-  position: relative;
+.hero__greeting {
+  display: block;
+  font-family: var(--hand);
+  font-weight: 700;
+  font-size: clamp(24px, 2.6vw, 34px);
+  letter-spacing: 0;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.hero__greeting .wave {
   display: inline-block;
+  transform-origin: 70% 70%;
 }
 
-.hero__title .amp::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0.1em;
-  height: 0.09em;
-  background: var(--amber);
-  opacity: 0.55;
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) 0.7s;
-}
-
-.is-ready .hero__title .amp::after {
-  transform: scaleX(1);
+.is-ready .hero__greeting .wave {
+  animation: wave 0.8s ease-in-out 1.1s;
 }
 
 .hero__lede {
@@ -1080,8 +1075,5 @@ a.work-card:hover {
   }
   .arrow path {
     stroke-dashoffset: 0;
-  }
-  .hero__title .amp::after {
-    transform: scaleX(1);
   }
 }

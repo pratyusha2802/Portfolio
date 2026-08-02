@@ -9,12 +9,15 @@ function Hero() {
     <section className="hero wrap" id="top">
       <div className="hero__top">
         <div>
+          <h1 className="hero__title rise" style={riseDelay(1)}>
+            <span className="hero__greeting">
+              Hi <span className="wave" aria-hidden="true">👋</span>, I'm
+            </span>
+            {profile.name}
+          </h1>
           <p className="eyebrow rise" style={riseDelay(0)}>
             {profile.location}
           </p>
-          <h1 className="hero__title rise" style={riseDelay(1)}>
-            {profile.name}
-          </h1>
         </div>
         <div>
           <p className="hero__lede rise" style={riseDelay(2)}>
