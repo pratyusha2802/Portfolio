@@ -1,5 +1,5 @@
-import { profile, skills } from "../data/portfolio";
-import { riseDelay } from "../lib/rise";
+import { currently, profile, skills } from "../data/portfolio";
+import { arrowLength, riseDelay } from "../lib/rise";
 import { usePointerTilt } from "../lib/usePointerTilt";
 
 function Hero() {
@@ -37,6 +37,25 @@ function Hero() {
 
       <div className="stage">
         <img className="portrait" src="/photo.jpg" alt={profile.name} ref={portraitRef} />
+        <div className="annotation annotation--left rise" style={riseDelay(4)}>
+          <svg className="arrow" viewBox="0 0 50 40" fill="none" aria-hidden="true">
+            <path style={arrowLength(90)} d="M4 6C18 4 34 16 46 34" />
+          </svg>
+          <p className="annotation__text">
+            <span className="annotation__k">Building</span>
+            <span className="annotation__v">{currently.building}</span>
+          </p>
+        </div>
+
+        <div className="annotation annotation--right rise" style={riseDelay(5)}>
+          <svg className="arrow" viewBox="0 0 50 40" fill="none" aria-hidden="true">
+            <path style={arrowLength(90)} d="M46 6C32 4 16 16 4 34" />
+          </svg>
+          <p className="annotation__text">
+            <span className="annotation__k">Elsewhere</span>
+            <span className="annotation__v">{currently.elsewhere}</span>
+          </p>
+        </div>
       </div>
 
       <div className="expertise">

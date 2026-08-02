@@ -9,6 +9,7 @@
 
   --display: 'Plus Jakarta Sans', system-ui, sans-serif;
   --body: 'Instrument Sans', system-ui, sans-serif;
+  --hand: 'Caveat', cursive;
 
   --gutter: clamp(20px, 5vw, 88px);
   --rule: 1px solid rgba(20, 53, 31, 0.14);
@@ -215,12 +216,6 @@ button {
   }
 }
 
-.eyebrow {
-  font-size: clamp(16px, 1.4vw, 19px);
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-
 .hero__title {
   font-family: var(--display);
   font-weight: 800;
@@ -254,7 +249,7 @@ button {
 }
 
 .hero__lede {
-  font-size: clamp(16px, 1.3vw, 19.5px);
+  font-size: clamp(19px, 1.7vw, 24px);
   color: var(--muted);
   max-width: 52ch;
   padding-top: clamp(6px, 1.4vw, 22px);
@@ -272,7 +267,7 @@ button {
   margin-top: clamp(22px, 3vw, 38px);
   font-family: var(--display);
   font-weight: 700;
-  font-size: clamp(16px, 1.25vw, 18px);
+  font-size: clamp(18px, 1.4vw, 21px);
 }
 
 .link-arrow svg {
@@ -307,6 +302,98 @@ button {
   will-change: transform;
 }
 
+.location-pin {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(16px, 1.4vw, 19px);
+  color: var(--muted);
+}
+
+/* Arrow + label live in the same flex row so they can never drift apart —
+   the arrow is a fixed-size icon next to its text, not independently
+   positioned to "point at" something across the layout. */
+.annotation {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 21ch;
+}
+
+.annotation--left {
+  left: 0;
+  bottom: clamp(12%, 16%, 20%);
+}
+
+.annotation--right {
+  right: 0;
+  top: clamp(24%, 28%, 34%);
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.annotation__text {
+  display: block;
+}
+
+.annotation__k {
+  display: block;
+  font-family: var(--hand);
+  font-weight: 700;
+  font-size: clamp(20px, 1.8vw, 24px);
+  letter-spacing: 0.01em;
+  color: var(--forest);
+}
+
+.annotation__v {
+  display: block;
+  font-family: var(--hand);
+  font-size: clamp(17px, 1.5vw, 20px);
+  color: var(--muted);
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.arrow {
+  flex-shrink: 0;
+  width: 40px;
+  height: 32px;
+  margin-top: 6px;
+  color: var(--ink);
+}
+
+.arrow path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: var(--len, 100);
+  stroke-dashoffset: var(--len, 100);
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0.1, 0.2, 1) 0.6s;
+}
+
+.is-ready .arrow path {
+  stroke-dashoffset: 0;
+}
+
+@media (max-width: 719px) {
+  .annotation {
+    max-width: 15ch;
+  }
+  .annotation__k {
+    font-size: 18px;
+  }
+  .annotation__v {
+    font-size: 15px;
+  }
+  .arrow {
+    display: none;
+  }
+}
+
 /* ---------- toolkit strip ---------- */
 .expertise {
   padding-block: clamp(26px, 4vw, 44px) clamp(44px, 6vw, 72px);
@@ -315,7 +402,7 @@ button {
 .expertise__label {
   font-family: var(--display);
   font-weight: 700;
-  font-size: 11.5px;
+  font-size: 13px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
@@ -332,7 +419,7 @@ button {
 .tool {
   font-family: var(--display);
   font-weight: 700;
-  font-size: clamp(17px, 1.7vw, 25px);
+  font-size: clamp(19px, 1.9vw, 27px);
   letter-spacing: -0.02em;
   opacity: 0.82;
 }
@@ -985,6 +1072,9 @@ a.work-card:hover {
   .rise {
     opacity: 1;
     transform: none;
+  }
+  .arrow path {
+    stroke-dashoffset: 0;
   }
   .hero__title .amp::after {
     transform: scaleX(1);
