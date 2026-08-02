@@ -5,7 +5,7 @@
   --forest: #2e2138;
   --forest-mid: #4a3650;
   --ink: #1b1420;
-  --muted: #6b5c70;
+  --muted: #4a3c4d;
   --amber: #b4703f;
 
   --display: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -615,9 +615,9 @@ a.work-card:hover {
 
 .work-card__status {
   font-size: 11.5px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: capitalize;
-  color: var(--amber);
+  color: var(--forest);
 }
 
 .work-card__title {
