@@ -18,13 +18,13 @@ function filterLabel(filter: Track | "all"): string {
 function SelectedWork() {
   const [filter, setFilter] = useState<Track | "all">("all");
 
-  const items = useMemo(
-    () =>
-      work
-        .filter((item) => item.slug && item.title)
-        .filter((item) => filter === "all" || item.track === filter),
-    [filter],
-  );
+  // Always render the same set of DOM nodes and hide non-matching ones with
+  // the `hidden` attribute, rather than removing them from the array. The
+  // scroll-reveal system (useRiseAnimation) observes each .rise element only
+  // once, on mount — if filtering unmounted cards, switching the filter back
+  // would remount fresh nodes that never got their one-time reveal and would
+  // stay invisible forever.
+  const items = useMemo(() => work.filter((item) => item.slug && item.title), []);
 
   return (
     <section className="section wrap" id="work">
@@ -53,6 +53,7 @@ function SelectedWork() {
       <div className="work-grid">
         {items.map((item) => {
           const isLive = item.status === "published";
+          const matchesFilter = filter === "all" || item.track === filter;
           const stages = stageOrder.filter((stage) => item.stages?.includes(stage));
 
           const body = (
@@ -86,11 +87,20 @@ function SelectedWork() {
           );
 
           return isLive ? (
-            <Link className="work-card rise" to={`/work/${item.slug}`} key={item.slug}>
+            <Link
+              className="work-card rise"
+              to={`/work/${item.slug}`}
+              key={item.slug}
+              hidden={!matchesFilter}
+            >
               {body}
             </Link>
           ) : (
-            <div className="work-card work-card--static rise" key={item.slug}>
+            <div
+              className="work-card work-card--static rise"
+              key={item.slug}
+              hidden={!matchesFilter}
+            >
               {body}
             </div>
           );

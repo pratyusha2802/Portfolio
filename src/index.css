@@ -588,6 +588,13 @@ button {
   transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
+/* Filtered-out cards stay mounted (see SelectedWork.tsx) — our own
+   `display: block` above otherwise beats the UA [hidden] rule outright,
+   since author CSS always wins over user-agent CSS regardless of specificity. */
+.work-card[hidden] {
+  display: none;
+}
+
 a.work-card:hover {
   transform: translateY(-4px) rotate(-0.6deg);
 }
