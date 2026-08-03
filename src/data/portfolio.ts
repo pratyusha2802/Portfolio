@@ -154,7 +154,7 @@ export const work: WorkItem[] = [
     title: "Emergency Medical Response — The Pre-Ambulance Gap",
     track: "product",
     type: "case-study",
-    status: "in-progress",
+    status: "planned",
     date: "2025",
     context: "",
     hook: "In India's emergency medical response, the failure isn't ambulance speed — it's that nobody owns the window before the ambulance arrives.",
@@ -162,8 +162,8 @@ export const work: WorkItem[] = [
     decisions: [],
     measure: "",
     tools: [],
-    meta: "Self-directed discovery project · 2025",
-    cta: "Read the case study",
+    meta: "Self-directed discovery project · 2025 · In progress",
+    cta: "Coming soon",
   },
   {
     slug: "gig-economy-worker-passport",
@@ -396,9 +396,12 @@ export const writing = {
 } as const;
 
 export const links: Link[] = [
-  { label: "GitHub", href: "" },
+  { label: "GitHub", href: "https://github.com/pratyusha2802" },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/pratyusha-patidar/" },
-  { label: "Medium", href: "" },
-  { label: "Résumé", href: "" },
+  { label: "Medium", href: "https://medium.com/@pratyushapatidar" },
+  {
+    label: "Résumé",
+    href: "https://drive.google.com/file/d/1M7Q-QxARL85QBAW0G6kgHDfocyx7EkH2/view?usp=sharing",
+  },
   { label: "Email", href: `mailto:${profile.email}` },
 ];
