@@ -1,23 +1,402 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pratyusha Patidar — Software engineer</title>
-    <meta
-      name="description"
-      content="I build software, and I'm increasingly interested in the decisions that come before the building."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;1,400&family=Caveat:wght@600;700&display=swap"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="assets/style.css" />
+    <title>Pratyusha Patidar</title>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Navigation Bar -->
+    <header class="header" id="header">
+      <div class="logo">
+        <h1>Pratyusha's Portfolio</h1>
+      </div>
+      <div class="navbar" id="navbar">
+        <a href="#intro-banner">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#blogs">Blogs</a>
+        <a href="#instagram">Creative</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="navbar-toggle" id="navbarToggle">
+        <i class="fa-solid fa-bars-staggered"></i>
+        <span class="toggle-icon"></span>
+      </button>
+    </header>
+
+    <!-- Name and One-line Intro -->
+    <section class="intro-banner" id="intro-banner">
+      <div class="intro-lines">
+        <div class="intro">
+          <span>Hello, I'm</span>
+          <h1>Pratyusha Patidar</h1>
+          <h5>Frotend Developer, Technical Writer and ML Enthusiast</h5>
+          <button><a href="#">Resume</a></button>
+          <p class="about-me">
+            I am a senior student at NIT Bhopal, pursuing a B.Tech in Computer
+            Science and Engineering. My current focus is on mastering
+            React-JavaScript for web development, alongside building a solid
+            foundation in computer engineering principles. My curiosity extends
+            to the realms of data science and machine learning, where I'm eager
+            to explore further. In addition to my technical pursuits, I'm also
+            delving into the art of professional Technical writing, albeit as a
+            beginner.
+          </p>
+          <p class="collab">
+            My ultimate goal is to secure an SDE intern role, leveraging the
+            skills I've acquired. I'm actively immersing myself in the world of
+            open-source contributions and hackathons to enhance my practical
+            knowledge.
+          </p>
+          <p class="collab">
+            If you're interested in collaborating, feel free to
+            <a href="mailto:pratyusha.2802@gmail.com"> Reach out! </a>♥️
+          </p>
+        </div>
+        <div class="links">
+          <button>
+            <a href="https://github.com/pratyusha2802" target="_blank"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+          </button>
+          <button>
+            <a
+              href="https://www.linkedin.com/in/pratyusha-patidar/"
+              target="_blank"
+              ><i class="fa-brands fa-linkedin"></i
+            ></a>
+          </button>
+          <button>
+            <a href="https://medium.com/@pratyushapatidar" target="_blank"
+              ><i class="fa-brands fa-medium"></i
+            ></a>
+          </button>
+          <button>
+            <a href="mailto:pratyusha2802@gmail.com" target="_blank"
+              ><i class="fa-solid fa-envelope"></i
+            ></a>
+          </button>
+          <button>
+            <a
+              href="https://www.instagram.com/dawndailydiary/?hl=en"
+              target="_blank"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+          </button>
+          <button>
+            <a
+              href="https://pratyusha2802.notion.site/pratyusha2802/Pratyusha-Patidar-cef7e1753dd3487c8215e172be4bb386"
+              target="_blank"
+              ><i class="fa-solid fa-circle-user"></i
+            ></a>
+          </button>
+        </div>
+      </div>
+      <div class="intro-pfp">
+        <img src="assets/images/pfp.jpg" alt="pfp" />
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="skills" id="skills">
+      <span>My Skills</span>
+      <div class="skill-cards">
+        <div class="skill-card">
+          <i class="fa-solid fa-desktop"></i>
+          <span>Web Developement</span>
+          <p>
+            Skilled in creating frontend using HTML, CSS and JavaScript and
+            Learning React.js currently
+          </p>
+        </div>
+        <div class="skill-card">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Machine Learning</span>
+          <p>
+            Machine Learning enthusiast trying to aid real life problems with
+            data science
+          </p>
+        </div>
+        <div class="skill-card">
+          <i class="fa-solid fa-pen-nib"></i>
+          <span>Technical Writing</span>
+          <p>
+            Begineer at Professionally writing technical blogs and articles on
+            Web Developement and my experiences
+          </p>
+        </div>
+        <div class="skill-card">
+          <i class="fa-solid fa-users"></i>
+          <span>Communication and Leadership</span>
+          <p>
+            Part of multiple clubs and societies within the institute and
+            responsible for managing them.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="projects" id="projects">
+      <span>My Projects</span>
+      <p>
+        I participate in hackathons and in coding competitions to gain exposure
+        and learn at a fast pace.
+      </p>
+      <div class="project-cards">
+        <div class="project-card">
+          <img src="assets/images/projects/daily-diary.png" alt="daily-diary" />
+          <span>Daily Diary</span>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
+            aliquid dicta molestias excepturi distinctio cum porro quia
+            veritatis! Doloremque, non?
+          </p>
+        </div>
+        <div class="project-card">
+          <img src="assets/images/projects/daily-diary.png" alt="daily-diary" />
+          <span>Daily Diary</span>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
+            aliquid dicta molestias excepturi distinctio cum porro quia
+            veritatis! Doloremque, non?
+          </p>
+        </div>
+        <div class="project-card">
+          <img src="assets/images/projects/daily-diary.png" alt="daily-diary" />
+          <span>Daily Diary</span>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
+            aliquid dicta molestias excepturi distinctio cum porro quia
+            veritatis! Doloremque, non?
+          </p>
+        </div>
+        <div class="project-card">
+          <img src="assets/images/projects/daily-diary.png" alt="daily-diary" />
+          <span>Daily Diary</span>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
+            aliquid dicta molestias excepturi distinctio cum porro quia
+            veritatis! Doloremque, non?
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blogs -->
+    <section class="blogs" id="blogs">
+      <span>My Blogs</span>
+      <div class="blog-cards">
+        <div class="blog-card">
+          <img
+            src="assets/images/blogs/1.png"
+            alt="Exploring JavaScript APIs"
+          />
+        </div>
+        <div class="blog-card">
+          <img
+            src="assets/images/blogs/2.png"
+            alt="Exploring JavaScript APIs"
+          />
+        </div>
+        <div class="blog-card">
+          <img
+            src="assets/images/blogs/2.png"
+            alt="Exploring JavaScript APIs"
+          />
+        </div>
+        <div class="blog-card">
+          <img
+            src="assets/images/blogs/2.png"
+            alt="Exploring JavaScript APIs"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Illustrations -->
+    <section class="instagram" id="instagram">
+      <section class="illustrate">
+        <span>My Illustrations</span>
+        <div class="illustrate-cards">
+          <div class="illustrate-card">
+            <a
+              href="https://www.instagram.com/p/CurqlKyNy3u/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA=="
+              target="_blank"
+            >
+              <img src="assets/images/illustrations/1.jpg"
+            /></a>
+          </div>
+          <div class="illustrate-card">
+            <a
+              href="https://www.instagram.com/p/CvGDM_Kt1jz/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA=="
+              target="_blank"
+            >
+              <img src="assets/images/illustrations/2.jpg"
+            /></a>
+          </div>
+          <div class="illustrate-card">
+            <a
+              href="https://www.instagram.com/p/CuR6tWQB72G/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA=="
+              target="_blank"
+            >
+              <img src="assets/images/illustrations/3.jpg"
+            /></a>
+          </div>
+          <div class="illustrate-card">
+            <a
+              href="https://www.instagram.com/p/CtuLlaThR5-/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA=="
+              target="_blank"
+            >
+              <img src="assets/images/illustrations/4.jpg"
+            /></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Photographs -->
+      <section class="photos">
+        <span>My Photographs</span>
+        <div class="photos-cards">
+          <div class="photos-card">
+            <a
+              href="https://www.instagram.com/p/Ctg2KI8BeWa/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA=="
+              target="_blank"
+            >
+              <img src="assets/images/photos/1.jpg" />
+            </a>
+          </div>
+          <div class="photos-card">
+            <a
+              href="https://www.instagram.com/p/CtInRHzB2ng/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA=="
+              target="_blank"
+            >
+              <img src="assets/images/photos/2.jpg" />
+            </a>
+          </div>
+          <div class="photos-card">
+            <a
+              href="https://www.instagram.com/p/CtbguB2BvBc/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA=="
+              target="_blank"
+            >
+              <img src="assets/images/photos/3.jpg" />
+            </a>
+          </div>
+          <div class="photos-card">
+            <a
+              href="https://www.instagram.com/p/CuMcCh8hP5j/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA=="
+              target="_blank"
+            >
+              <img src="assets/images/photos/4.jpg" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- contact -->
+    <!-- <section class="contact" id="contact">
+      <div class="contact-form">
+        <form action="action_page.php">
+          <div class="contact-field">
+            <label for="fname">First Name</label>
+            <input
+              type="text"
+              id="fname"
+              name="firstname"
+              placeholder="Your name.."
+            />
+          </div>
+
+          <div class="contact-field">
+            <label for="lname">Last Name</label>
+            <input
+              type="text"
+              id="lname"
+              name="lastname"
+              placeholder="Your last name.."
+            />
+          </div>
+
+          <div class="contact-field">
+            <label for="subject">Subject</label>
+            <textarea
+              id="subject"
+              name="subject"
+              placeholder="Write something.."
+              style="height: 200px"
+            ></textarea>
+          </div>
+
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </section> -->
+
+    <!-- footer -->
+    <footer>
+      <div class="footer">
+        <div class="logo">
+          <h1>Pratyusha</h1>
+          <p>
+            Reach out on these platforms or
+            <a href="mailto:pratyusha.2802@gmail.com">Mail me!</a>
+          </p>
+        </div>
+        <div class="links">
+          <button>
+            <a href="https://github.com/pratyusha2802" target="_blank"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+          </button>
+          <button>
+            <a
+              href="https://www.linkedin.com/in/pratyusha-patidar/"
+              target="_blank"
+              ><i class="fa-brands fa-linkedin"></i
+            ></a>
+          </button>
+          <button>
+            <a href="https://medium.com/@pratyushapatidar" target="_blank"
+              ><i class="fa-brands fa-medium"></i
+            ></a>
+          </button>
+          <button>
+            <a href="mailto:pratyusha2802@gmail.com" target="_blank"
+              ><i class="fa-solid fa-envelope"></i
+            ></a>
+          </button>
+          <button>
+            <a
+              href="https://www.instagram.com/dawndailydiary/?hl=en"
+              target="_blank"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+          </button>
+          <button>
+            <a
+              href="https://pratyusha2802.notion.site/pratyusha2802/Pratyusha-Patidar-cef7e1753dd3487c8215e172be4bb386"
+              target="_blank"
+              ><i class="fa-solid fa-circle-user"></i
+            ></a>
+          </button>
+        </div>
+      </div>
+    </footer>
+    <div class="copyright">
+      <p>© 2023 All rights reserved to Pratyusha</p>
+    </div>
+
+    <script src="assets/script.js"></script>
   </body>
 </html>
