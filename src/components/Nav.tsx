@@ -22,11 +22,11 @@ function Nav() {
           {rest.join(" ")}
         </a>
         <nav className="nav__links">
-          <a className="nav__link" href="/#how-i-work">
-            How I Work
-          </a>
           <a className="nav__link" href="/#work">
-            Selected Work
+            Case Studies
+          </a>
+          <a className="nav__link" href="/#about">
+            About
           </a>
           <a className="nav__link" href="/#experience">
             Experience

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
+import About from "../components/About";
 import Background from "../components/Background";
+import CaseStudies from "../components/CaseStudies";
 import Currently from "../components/Currently";
 import Experience from "../components/Experience";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
-import Principles from "../components/Principles";
-import SelectedWork from "../components/SelectedWork";
 import { profile } from "../data/portfolio";
 import { useRiseAnimation } from "../lib/useRiseAnimation";
 
@@ -19,10 +19,10 @@ function Home() {
   return (
     <>
       <Hero />
-      <Principles />
-      <SelectedWork />
-      <Experience />
       <Currently />
+      <CaseStudies />
+      <About />
+      <Experience />
       <Background />
       <Footer />
     </>

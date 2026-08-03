@@ -48,7 +48,7 @@ export interface WorkItem {
   track: Track;
   type: WorkType;
   status: WorkStatus;
-  date: string;              // YYYY-MM
+  date: string;              // YYYY-MM, or just YYYY when that's all that's known
   /** Where it came from — "Code for Good 2022", "Final-year project". Quiet metadata. */
   context?: string;
   /** One sentence. The problem, not the deliverable. */
@@ -64,6 +64,18 @@ export interface WorkItem {
   href?: string;             // live link — empty until real
   repo?: string;
   reflection?: string;
+  /** Exact card sub-heading line, e.g. "Self-directed discovery project · 2025". Overrides the default type/context/tools line when present. */
+  meta?: string;
+  /** Card CTA text. "Coming soon" (exact string) makes the card non-clickable instead of linking to /work/:slug. */
+  cta?: string;
+}
+
+/** A role with more than one project inside it, each on its own timeline. */
+export interface SubProject {
+  name: string;
+  start: string;
+  end: string | "Present";
+  note?: string;
 }
 
 export interface Role {
@@ -72,9 +84,11 @@ export interface Role {
   location: string;
   start: string;
   end: string | "Present";
-  summary: string;
-  highlights: string[];
   stack: string[];
+  /** Single-paragraph roles (e.g. internships) use this. */
+  description?: string;
+  /** Roles spanning more than one project use this instead of `description`. */
+  projects?: SubProject[];
 }
 
 export interface Link {
@@ -91,16 +105,17 @@ export const profile = {
   location: "Bengaluru, India",
   email: "pratyusha.2802@gmail.com",
 
-  /** What she does, not what she's becoming. */
-  role: "Software engineer, JP Morgan Chase",
+  /** Used for <title> only — the hero states the direction plainly now. */
+  role: "Software Engineer, JPMorgan Chase",
 
   tagline:
-    "I build software, and I'm increasingly interested in the decisions that come before the building.",
+    "Software engineer at JPMorgan Chase, moving into product management. I've spent two years building interfaces used by 300,000+ employees. Now I spend as much time on what's worth building as on how to build it.",
 
   about: [
-    "I'm a software engineer at JP Morgan Chase. Right now I'm building a desktop employee assistant from scratch — conversational AI for internal users. Before that I worked on the core UI of a Digital Assistant inside a productivity tool used across the firm.",
-    "I'm drawn to the parts of a product that don't announce themselves: the error state, the second-year maintenance cost, the flow nobody diagrammed. Two years of shipping AI features taught me the hardest problems sit upstream of the code — which problem is worth solving, what a good answer looks like when the model is non-deterministic, and how you evaluate something nobody has evaluated before.",
-    "So I've started working on that side deliberately, and publishing what comes out of it. The work below is the evidence.",
+    "I'm a software engineer at JPMorgan Chase, moving toward product management.",
+    "Right now I'm a frontend developer on a new internal desktop assistant. Before that I spent a year and a half on the Core UI team behind an employee productivity application used by 300,000+ people across the firm — the team that owns the shared component layer both the core product and every team-built add-on depends on. Other teams across the bank build features that plug into that platform and ship on their own release cycle, which meant our users were internal developers as much as employees.",
+    "I'm drawn to the parts of a product that don't announce themselves: the error state, the second-year maintenance cost, the flow nobody diagrammed. Building for teams I didn't control taught me the hardest problems sit upstream of the code — which problem is worth solving, whose constraint actually binds, and what \"good\" means before anyone has agreed how to measure it.",
+    "So I've started doing product work deliberately, outside my job, and publishing what comes out of it.",
   ],
 } as const;
 
@@ -163,21 +178,40 @@ export const principles = [
  *    completed, depth signals judgement.
  */
 export const work: WorkItem[] = [
-  /* Product track — rename slug and title to the real subject as each is built */
+  /* Product track — scaffolded case studies. Every substantive claim beyond
+   * the problem framing below is a placeholder until real research/decision
+   * material is supplied — see the TODOs in the matching .md files. */
   {
-    slug: "",
-    title: "",
+    slug: "emergency-medical-response-india",
+    title: "Emergency Medical Response — The Pre-Ambulance Gap",
     track: "product",
-    type: "prd",
-    status: "planned",
-    date: "",
-    context: "AI product management programme",
-    hook: "",
+    type: "case-study",
+    status: "in-progress",
+    date: "2025",
+    context: "",
+    hook: "In India's emergency medical response, the failure isn't ambulance speed — it's that nobody owns the window before the ambulance arrives.",
     users: "",
     decisions: [],
     measure: "",
-    stages: [],
     tools: [],
+    meta: "Self-directed discovery project · 2025",
+    cta: "Read the case study",
+  },
+  {
+    slug: "gig-economy-worker-passport",
+    title: "Worker Passport",
+    track: "product",
+    type: "case-study",
+    status: "planned",
+    date: "2025",
+    context: "",
+    hook: "Gig and quick-commerce workers rebuild their standing from zero every time they switch platforms. Worker Passport is a concept for portable, verified work history.",
+    users: "",
+    decisions: [],
+    measure: "",
+    tools: [],
+    meta: "Self-directed concept work · 2025 · In progress",
+    cta: "Coming soon",
   },
 
   /* Engineering track */
@@ -204,15 +238,19 @@ export const work: WorkItem[] = [
     type: "build",
     status: "published",
     date: "2022-08",
-    context: "Code for Good 2022",
-    hook: "Surplus food and the people who need it exist in the same city and rarely find each other in time.",
+    context: "Code for Good hackathon, 2022",
+    hook: "Surplus food and the people who need it exist in the same city and rarely find each other in time. Built the frontend in 24 hours with an assigned team.",
+    users: "Volunteers coordinating surplus-food pickup, and people/orgs with food nearing spoilage.",
     decisions: [
       "Led the frontend under a 24-hour constraint — scoped to one flow done properly rather than four half-built.",
       "Built for volunteers on low-end phones, which ruled out most of what we'd have reached for by default.",
     ],
+    measure:
+      "None tracked — judged by hackathon evaluators, not usage data. There was no usage to measure.",
     tools: ["React", "Node.js", "Express"],
     reflection:
-      "The hackathon is also how I ended up at JP Morgan, which I did not plan.",
+      "The hackathon is also how I ended up at JPMorgan Chase, which I did not plan.",
+    meta: "Build · Code for Good hackathon, 2022 · React, Node.js, Express",
   },
   {
     slug: "pen-in-the-air",
@@ -275,30 +313,45 @@ export const stageOrder: Stage[] = [
 
 export const experience: Role[] = [
   {
-    company: "JP Morgan Chase & Co.",
+    company: "JPMorgan Chase & Co.",
     title: "Software Engineer",
     location: "Bengaluru",
     start: "Jul 2024",
     end: "Present",
-    summary:
-      "Internal productivity and conversational-AI tooling for a firmwide employee base.",
-    highlights: [
-      "Building a greenfield desktop employee assistant — conversational AI for employee support alongside broader productivity features.",
-      "Previously on the core UI team for a Digital Assistant inside a firmwide productivity tool used by 300,000+ employees across meetings, calls, and intranet search.",
-      "Led work with product and design on an accessible, reusable component set adopted across that surface.",
+    stack: ["React", "TypeScript", "Node.js", "Electron", "SCSS", "micro-frontend architecture"],
+    projects: [
+      {
+        name: "Internal desktop assistant",
+        start: "Nov 2025",
+        end: "Present",
+      },
+      {
+        name: "Employee productivity platform, Core UI team",
+        start: "Jul 2024",
+        end: "Nov 2025",
+        note: "accessible, reusable UI components adopted across a platform serving 300,000+ employees",
+      },
     ],
-    stack: ["React", "TypeScript", "Electron", "Node.js", "Jest"],
   },
   {
-    company: "JP Morgan Chase & Co.",
+    company: "JPMorgan Chase & Co.",
+    title: "Software Engineering Intern",
+    location: "Bengaluru",
+    start: "Jan 2024",
+    end: "Jun 2024",
+    stack: ["React", "TypeScript", "Electron", "HTML/CSS"],
+    description:
+      "Built two proof-of-concepts for the experimental phase of the productivity platform using micro-frontend architecture. Converted to a full-time offer.",
+  },
+  {
+    company: "JPMorgan Chase & Co.",
     title: "Software Engineering Intern",
     location: "Bengaluru",
     start: "May 2023",
-    end: "Jun 2024",
-    summary:
-      "Summer internship followed by an extended term; converted to a full-time offer.",
-    highlights: ["Entered through Code for Good 2022, JPMC's social-impact hackathon."],
-    stack: ["React", "JavaScript", "Node.js"],
+    end: "Jul 2023",
+    stack: ["JavaScript", "TypeScript", "HTML/CSS"],
+    description:
+      "Developed a feature for the productivity platform. Entered through the firm's Code for Good hackathon.",
   },
 ];
 
@@ -326,10 +379,21 @@ export const skills = {
 /* ------------------------------------------------------------------ */
 
 export const currently = {
-  building: "A desktop employee assistant at JP Morgan Chase.",
+  // TODO — her draft had "[SEE NOTE 2] a new internal desktop assistant..."
+  // with an unresolved bracketed note before "a new". Left out until she
+  // supplies what that note actually says — don't guess at it.
+  building: "Working as a software developer in the employee-facing internal productivity tool at JPMorgan Chase",
   learning:
-    "AI product management — discovery, evals, and what makes an AI feature trustworthy — through a nine-week programme at Rethink Systems.",
-  elsewhere: "Illustration, badminton, and a Robin Hood Army chapter in Bengaluru.",
+    "AI product management: discovery, evals, and what makes an AI feature trustworthy. Nine-week programme at",
+  learningLink: {
+    label: "Rethink Systems",
+    href: "https://rethinksystems.in"
+  },
+  elsewhere: "Observing life a little more closely and documenting it at",
+  elsewhereLink: {
+    label: "@dawndailydiary",
+    href: "https://www.instagram.com/dawndailydiary/",
+  },
 } as const;
 
 /* ------------------------------------------------------------------ */
@@ -340,11 +404,14 @@ export const education = {
   degree: "B.Tech, Computer Science & Engineering",
   institution: "Maulana Azad National Institute of Technology, Bhopal",
   years: "2020 – 2024",
+  /** Not currently rendered — her latest Background copy omits it. Kept here, not deleted, in case that was an oversight rather than a choice. */
   note: "CGPA 8.19",
 } as const;
 
 export const recognition: string[] = [
-  "Finalist, Flipkart GRID",
+  // TODO — her draft prefixed this line with "[SEE NOTE 1]", unresolved.
+  // Corrected from the old "Finalist, Flipkart GRID" claim — don't revert.
+  "Flipkart GRID — qualified for Level 1, top 1,335 teams nationally",
   "Contributor, GirlScript Summer of Code 2023",
   "MMVY merit scholarship, all four years",
 ];

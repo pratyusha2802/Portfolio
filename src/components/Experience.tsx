@@ -6,35 +6,43 @@ function Experience() {
       <div className="section__head">
         <h2 className="section__title rise">Experience</h2>
       </div>
-      <div className="timeline">
+
+      <ul className="experience-list">
         {experience.map((role) => (
-          <div className="timeline-item rise" key={`${role.company}-${role.title}-${role.start}`}>
-            <div className="timeline-item__meta">
-              <span className="timeline-item__range">
-                {role.start} – {role.end}
+          <li className="experience-item rise" key={`${role.company}-${role.title}-${role.start}`}>
+            <div className="experience-item__head">
+              <h3 className="experience-item__title">{role.title}</h3>
+              <span className="experience-item__meta">
+                {role.company} · {role.start} – {role.end} · {role.location}
               </span>
-              <span className="timeline-item__location">{role.location}</span>
             </div>
-            <div className="timeline-item__body">
-              <h3 className="timeline-item__title">{role.title}</h3>
-              <p className="timeline-item__company">{role.company}</p>
-              <p className="timeline-item__summary">{role.summary}</p>
-              <ul className="timeline-item__highlights">
-                {role.highlights.map((highlight) => (
-                  <li key={highlight}>{highlight}</li>
+
+            <div className="work-card__tools">
+              {role.stack.map((tool) => (
+                <span className="tool-chip" key={tool}>
+                  {tool}
+                </span>
+              ))}
+            </div>
+
+            {role.description && <p className="experience-item__desc">{role.description}</p>}
+
+            {role.projects && (
+              <ul className="experience-item__projects">
+                {role.projects.map((project) => (
+                  <li key={project.name}>
+                    <strong>{project.name}</strong>{" "}
+                    <span className="about__range">
+                      ({project.start} – {project.end})
+                    </span>
+                    {project.note && <> — {project.note}</>}
+                  </li>
                 ))}
               </ul>
-              <div className="work-card__tools">
-                {role.stack.map((tool) => (
-                  <span className="tool-chip" key={tool}>
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+            )}
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
