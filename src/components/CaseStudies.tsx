@@ -38,9 +38,7 @@ function CaseStudies() {
               </div>
               <h3 className="work-card__title">{item.title}</h3>
               <p className="work-card__hook">{item.hook}</p>
-              {!item.meta && item.context && (
-                <p className="work-card__context">{item.context}</p>
-              )}
+              {!item.meta && item.context && <p className="work-card__context">{item.context}</p>}
               {!item.meta && item.tools.length > 0 && (
                 <div className="work-card__tools">
                   {item.tools.map((tool) => (

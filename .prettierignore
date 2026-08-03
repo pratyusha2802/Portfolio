@@ -1,0 +1,11 @@
+dist
+node_modules
+package-lock.json
+
+# Legacy pre-React static template remnants — not part of the current app.
+about.html
+work.html
+
+# Hand-formatted prose, not code — Prettier's markdown rewrap fights how
+# these are deliberately line-broken.
+*.md

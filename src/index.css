@@ -8,9 +8,9 @@
   --muted: #4a3c4d;
   --amber: #b4703f;
 
-  --display: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --body: 'Instrument Sans', system-ui, sans-serif;
-  --hand: 'Caveat', cursive;
+  --display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --body: "Instrument Sans", system-ui, sans-serif;
+  --hand: "Caveat", cursive;
 
   --gutter: clamp(20px, 5vw, 88px);
   --rule: 1px solid rgba(46, 33, 56, 0.14);
@@ -141,7 +141,7 @@ button {
 }
 
 .nav__link::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -166,7 +166,9 @@ button {
   font-size: 14px;
   padding: 12px 22px;
   border-radius: 8px;
-  transition: transform 0.25s ease, background 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
 }
 
 .pill:hover {
@@ -248,22 +250,41 @@ button {
   padding-top: clamp(6px, 1.4vw, 22px);
 }
 
-.link-arrow {
+.hero__lede strong {
+  color: var(--forest);
+  font-weight: 700;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: clamp(20px, 3vw, 32px);
+  row-gap: 14px;
+  margin-top: clamp(22px, 3vw, 38px);
+}
+
+.pill-outline {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin-top: clamp(22px, 3vw, 38px);
+  gap: 8px;
   font-family: var(--display);
   font-weight: 700;
-  font-size: clamp(18px, 1.4vw, 21px);
+  font-size: 14px;
+  color: var(--forest);
+  padding: 12px 22px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(46, 33, 56, 0.28);
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
 }
 
-.link-arrow svg {
-  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
-}
-
-.link-arrow:hover svg {
-  transform: translateX(7px);
+.pill-outline:hover {
+  background: rgba(46, 33, 56, 0.06);
+  border-color: var(--forest);
+  transform: translateY(-2px);
 }
 
 /* ---------- portrait ---------- */
@@ -289,6 +310,96 @@ button {
   transform: perspective(800px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
   transition: transform 0.3s ease-out;
   will-change: transform;
+}
+
+/* Arrow + phrase live in the same flex row so they can never drift apart —
+   the arrow is a fixed-size icon next to its text, not independently
+   positioned to "point at" something across the layout. */
+.annotation {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 16ch;
+}
+
+.annotation--mid-left {
+  left: 0;
+  top: clamp(44%, 48%, 52%);
+}
+
+.annotation--mid-right {
+  right: 0;
+  top: clamp(36%, 40%, 44%);
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.annotation__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.annotation__head {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(19px, 1.8vw, 23px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+}
+
+.annotation__label {
+  font-weight: 500;
+  font-size: clamp(12.5px, 1.05vw, 14px);
+  line-height: 1.3;
+  color: var(--muted);
+}
+
+.arrow {
+  flex-shrink: 0;
+  color: var(--ink);
+}
+
+.arrow--arc {
+  width: 62px;
+  height: 27px;
+}
+
+.arrow--loop {
+  width: 68px;
+  height: 34px;
+}
+
+.arrow path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: var(--len, 150);
+  stroke-dashoffset: var(--len, 150);
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.4, 0.1, 0.2, 1) 0.6s;
+}
+
+.is-ready .arrow path {
+  stroke-dashoffset: 0;
+}
+
+@media (max-width: 719px) {
+  .annotation {
+    max-width: 13ch;
+  }
+  .annotation__head {
+    font-size: 17px;
+  }
+  .annotation__label {
+    font-size: 12px;
+  }
+  .arrow {
+    display: none;
+  }
 }
 
 /* ---------- generic section ---------- */
@@ -475,6 +586,22 @@ button {
   border-radius: 10px;
 }
 
+/* Overrides .pill--lg's display: inline-block — must come after it in the
+   cascade since both are single-class selectors of equal specificity. */
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero__cta svg {
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.hero__cta:hover svg {
+  transform: translateX(5px);
+}
+
 .foot {
   border-top: var(--rule);
   padding-block: 26px;
@@ -510,11 +637,14 @@ button {
   padding: 9px 18px;
   border-radius: 999px;
   border: 1.5px solid rgba(46, 33, 56, 0.22);
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
     transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.filter-chip[aria-pressed='true'] {
+.filter-chip[aria-pressed="true"] {
   background: var(--forest);
   border-color: var(--forest);
   color: var(--paper);
@@ -644,7 +774,7 @@ a.work-card:hover {
 }
 
 .work-card__cta::after {
-  content: ' →';
+  content: " →";
 }
 
 .work-card__cta--locked {
@@ -652,7 +782,7 @@ a.work-card:hover {
 }
 
 .work-card__cta--locked::after {
-  content: '';
+  content: "";
 }
 
 .tool-chip {
@@ -663,7 +793,9 @@ a.work-card:hover {
   background: rgba(46, 33, 56, 0.08);
   padding: 5px 12px;
   border-radius: 999px;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
 .tool-chip:hover {
@@ -738,7 +870,7 @@ a.work-card:hover {
 }
 
 .timeline-item__highlights li::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0.65em;
@@ -790,7 +922,7 @@ a.work-card:hover {
 }
 
 .currently dt::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 7px;
   height: 7px;
@@ -818,24 +950,17 @@ a.work-card:hover {
   max-width: 40ch;
 }
 
-.currently__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 10px;
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 13px;
+.currently__inline-link {
   color: var(--forest);
-  background: rgba(46, 33, 56, 0.08);
-  padding: 5px 12px;
-  border-radius: 999px;
-  transition: background 0.2s ease, transform 0.2s ease;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(46, 33, 56, 0.35);
+  transition: text-decoration-color 0.2s ease;
 }
 
-.currently__link:hover {
-  background: rgba(46, 33, 56, 0.14);
-  transform: translateY(-1px);
+.currently__inline-link:hover {
+  text-decoration-color: currentColor;
 }
 
 /* ---------- background ---------- */
@@ -1054,7 +1179,9 @@ a.work-card:hover {
 .rise {
   opacity: 0;
   transform: translateY(22px);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 .rise.in {

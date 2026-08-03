@@ -8,8 +8,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build` — production build to `dist/`
 - `npm run preview` — serve the production build locally
 - `npm run lint` — run oxlint (config in `.oxlintrc.json`)
+- `npm run format` — apply Prettier (`.prettierrc.json`) to all source files
+- `npm run format:check` — check formatting without writing, for CI-style use
 
 There is no test suite in this project.
+
+**Prettier scope:** `.prettierignore` excludes `about.html`/`work.html` (legacy pre-React
+template remnants, not part of this app) and all `*.md` files (hand-formatted prose —
+Prettier's markdown rewrap fights deliberate line breaks in `CLAUDE.md` and the case-study
+content). It formats the actual app source: `src/**`, `index.html`, config files. oxlint and
+Prettier don't fight each other here — oxlint's default config (see below) doesn't enable
+stylistic/formatting rules, only correctness ones, so there's no overlap to reconcile.
 
 **Node version:** Vite 8 requires Node ^20.19 or >=22.12. The default system Node here is v20.17.0, which prints a version warning but still works. Node v23.11.0 is available via `nvm` (`nvm use 23.11.0`) if the warning needs to go away.
 
@@ -44,8 +53,9 @@ React SPA on Vite, TypeScript strict, `react-router-dom` for client-side routing
 
 - The resume/profile content was originally distilled from a much larger raw export (full academic transcripts, every hackathon, every certification). The site deliberately shows only the highlights — don't re-expand sections back to the full raw dump without being asked.
 - **`profile.about` describes the JPMC Core UI role as "extensible" — teams building add-ons that plug in and ship on independent release cycles, Core UI owning the shared layer they depend on.** This was flagged once as reading like the kind of architecture/release-process detail the NDA rules ban, and she included it again anyway in her own words (and again, unprompted, in `experience`'s project note). Treat that as a confirmed, deliberate call about where her own NDA line actually sits — don't re-flag it, and don't use it as precedent to add *more* architecture detail elsewhere without the same explicit confirmation.
-- **Two unresolved `[SEE NOTE]` placeholders from her copy, currently just dropped rather than guessed:** her draft had "`[SEE NOTE 2]` a new internal desktop assistant" in `currently.building`, and "`[SEE NOTE 1]` Flipkart GRID" prefixing the recognition line. Neither note's actual content was ever supplied. Both are marked with `TODO` comments at their spot in `portfolio.ts` — ask her what they say rather than inventing a plausible-sounding qualifier.
-- **`education.note` ("CGPA 8.19") is no longer rendered.** Her latest Background copy didn't include it when she rewrote that section as a flat list; the field is kept in `portfolio.ts` rather than deleted in case the omission was incidental, not a decision.
+- **The `[SEE NOTE 2]` placeholder in `currently.building` is still unresolved** — her original draft had "`[SEE NOTE 2]` a new internal desktop assistant" and the note's actual content was never supplied. Still marked with a `TODO` comment in `portfolio.ts` — ask her rather than guessing. (The matching `[SEE NOTE 1]` on the Flipkart GRID line is moot now — see below, that whole line is gone from Background.)
+- **Background is college-only now, by explicit instruction.** `recognition` dropped Flipkart GRID and GirlScript Summer of Code (neither is a college credential); `community` (Robin Hood Army, Force For Good) was emptied entirely — both are post-graduation. `recognition` kept the MMVY merit scholarship since it's tied to the degree itself. `education.note` ("CGPA 8.19") is back in the rendered output — it had briefly been dropped, then explicitly asked for back as "other relevant info" once Background narrowed to college-only. Don't re-add Flipkart/GirlScript/community entries without being asked; don't re-drop CGPA either.
+- **`currently.learning`/`currently.elsewhere` now end mid-sentence ("...programme at", "...documenting it at") by design** — the link (`learningLink`/`elsewhereLink`) completes the sentence inline rather than sitting on its own line as a separate badge. `Currently.tsx` renders these as a plain underlined inline link (`.currently__inline-link`), not the pill/icon treatment used earlier — that pill design is gone, don't bring it back for this section without a reason. `building` has no link and gets a plain trailing period instead.
 - **Nav order doesn't match her literal text.** She wrote "Case studies · Experience · About · Say hello" but the page order is Case Studies → About → Experience. Nav here follows page order (Case Studies, About, Experience) on the assumption that was a small dictation slip, not a deliberate "nav order independent of scroll order" choice — flag/fix if that assumption is wrong.
 - **The hero's "Hi 👋, I'm" wave emoji was removed.** Her literal hero spec just said "Hi, I'm" with no emoji mentioned, after it had been added a few rounds earlier at her request for more whimsy. Read as an intentional simplification given the rest of this pass tightened the tone considerably — but it was inferred from an omission, not stated directly, so it's worth confirming rather than assuming.
 
@@ -123,15 +133,21 @@ strings are hardcoded in JSX.
 Long-form case content lives in `src/content/work/{slug}.md`, slug matching the
 `work` entry. Route: `/work/{slug}`.
 
-### `principles` — not currently on the site
+### `principles` — her final words now, partially surfaced
 
-The drafted principles are **inferred, not dictated** and were always meant to
-be rewritten in her own words before publishing — that part hasn't changed.
-What has changed: the IA restructure dropped the "How I work" section
-entirely, so `principles` isn't rendered anywhere right now. That was a scope
-call made under time pressure, not a considered decision to cut it forever —
-if "How I work" comes back, this data is still here and still needs her voice
-before it goes live.
+`principles` is `string[]` — four short standalone lines, her own final
+wording (not the earlier inferred claim/detail drafts, which are gone). No
+elaboration exists underneath them and none should be invented. Two of the
+four ("Debugs products, not just code", "Half systems thinker, half
+storyteller") are used as the hero's arrow-annotation captions. "Engineer
+turned PM" is deliberately *not* used there — the hero tagline already states
+the same thing in prose, right next to where an arrow would point. "Ships
+with intent" isn't used anywhere yet.
+
+A full "How I work" section (`Principles.tsx`) still exists on disk, updated
+to render these as plain lines instead of the old claim/detail cards, but
+it's not wired into `Home.tsx` — same orphaned status as before, just no
+longer broken by the shape change.
 
 ## Writing a case page
 

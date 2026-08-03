@@ -11,8 +11,8 @@ function Footer() {
             something useful.
           </h2>
           <p className="contact__note rise">
-            Open to conversations about product roles, discovery work, or
-            anything at the intersection of engineering and product.
+            Open to conversations about product roles, discovery work, or anything at the
+            intersection of engineering and product.
           </p>
           <a className="pill pill--lg rise" href={`mailto:${profile.email}`}>
             Say hello

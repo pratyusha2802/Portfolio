@@ -30,9 +30,7 @@ function SelectedWork() {
     <section className="section wrap" id="work">
       <div className="section__head">
         <h2 className="section__title rise">Selected work</h2>
-        <p className="section__note rise">
-          Product and engineering, together — filter by track.
-        </p>
+        <p className="section__note rise">Product and engineering, together — filter by track.</p>
       </div>
 
       <fieldset className="filters rise">
@@ -60,7 +58,9 @@ function SelectedWork() {
             <>
               <div className="work-card__top">
                 <span className="work-card__type">{typeLabels[item.type]}</span>
-                {!isLive && <span className="work-card__status">{item.status.replace("-", " ")}</span>}
+                {!isLive && (
+                  <span className="work-card__status">{item.status.replace("-", " ")}</span>
+                )}
               </div>
               <h3 className="work-card__title">{item.title}</h3>
               <p className="work-card__hook">{item.hook}</p>

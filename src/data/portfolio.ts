@@ -33,22 +33,15 @@ export type WorkStatus = "published" | "in-progress" | "planned";
  * fastest way to lose a reader who opens the piece.
  */
 export type Stage =
-  | "problem"
-  | "discovery"
-  | "solution"
-  | "scope"
-  | "ux"
-  | "metrics"
-  | "build"
-  | "evals";
+  "problem" | "discovery" | "solution" | "scope" | "ux" | "metrics" | "build" | "evals";
 
 export interface WorkItem {
-  slug: string;              // matches src/content/work/{slug}.md
+  slug: string; // matches src/content/work/{slug}.md
   title: string;
   track: Track;
   type: WorkType;
   status: WorkStatus;
-  date: string;              // YYYY-MM, or just YYYY when that's all that's known
+  date: string; // YYYY-MM, or just YYYY when that's all that's known
   /** Where it came from — "Code for Good 2022", "Final-year project". Quiet metadata. */
   context?: string;
   /** One sentence. The problem, not the deliverable. */
@@ -61,7 +54,7 @@ export interface WorkItem {
   measure?: string;
   stages?: Stage[];
   tools: string[];
-  href?: string;             // live link — empty until real
+  href?: string; // live link — empty until real
   repo?: string;
   reflection?: string;
   /** Exact card sub-heading line, e.g. "Self-directed discovery project · 2025". Overrides the default type/context/tools line when present. */
@@ -124,39 +117,14 @@ export const profile = {
 /* ------------------------------------------------------------------ */
 
 /**
- * DRAFT. These are inferred, not dictated — rewrite them in your own words
- * before publishing. This is the section a reader remembers, and it can't
- * sound like it was generated.
- *
- * Each principle: a claim, then a concrete way it shows up in the work.
- * A principle nobody would disagree with isn't a principle.
+ * Her own words, final — not the earlier drafted claim/detail pairs. Short,
+ * standalone lines; no elaboration to invent underneath them.
  */
-export const principles = [
-  {
-    claim: "I start with the structure.",
-    detail:
-      "Before writing a component or a document, I want to know what it's made of and what it'll be asked to do later. Planning isn't overhead; it's the cheapest hour in the project.",
-  },
-  {
-    claim: "I build for the second year.",
-    detail:
-      "Anyone can ship a demo. I care whether the thing is still readable when someone else inherits it — which is why I keep ending up on reusable components and design systems.",
-  },
-  {
-    claim: "Accessibility is a default, not a phase.",
-    detail:
-      "I led accessible component work because retrofitting it costs more and works worse. It's the same argument as testing: cheap early, expensive late.",
-  },
-  {
-    claim: "I want to know how it fails.",
-    detail:
-      "The happy path is the least interesting part of any spec. I look for the empty state, the timeout, the wrong answer confidently delivered — especially with AI features, where confident wrongness is the default failure mode.",
-  },
-  {
-    claim: "I'd rather be corrected early than right late.",
-    detail:
-      "I publish work before it's finished, including the parts I got wrong. It's slower to look polished and faster to actually improve.",
-  },
+export const principles: string[] = [
+  "Engineer turned PM",
+  "Debugs products, not just code",
+  "Ships with intent",
+  "Half systems thinker, half storyteller",
 ];
 
 /* ------------------------------------------------------------------ */
@@ -240,7 +208,8 @@ export const work: WorkItem[] = [
     date: "2022-08",
     context: "Code for Good hackathon, 2022",
     hook: "Surplus food and the people who need it exist in the same city and rarely find each other in time. Built the frontend in 24 hours with an assigned team.",
-    users: "Volunteers coordinating surplus-food pickup, and people/orgs with food nearing spoilage.",
+    users:
+      "Volunteers coordinating surplus-food pickup, and people/orgs with food nearing spoilage.",
     decisions: [
       "Led the frontend under a 24-hour constraint — scoped to one flow done properly rather than four half-built.",
       "Built for volunteers on low-end phones, which ruled out most of what we'd have reached for by default.",
@@ -248,8 +217,7 @@ export const work: WorkItem[] = [
     measure:
       "None tracked — judged by hackathon evaluators, not usage data. There was no usage to measure.",
     tools: ["React", "Node.js", "Express"],
-    reflection:
-      "The hackathon is also how I ended up at JPMorgan Chase, which I did not plan.",
+    reflection: "The hackathon is also how I ended up at JPMorgan Chase, which I did not plan.",
     meta: "Build · Code for Good hackathon, 2022 · React, Node.js, Express",
   },
   {
@@ -382,12 +350,13 @@ export const currently = {
   // TODO — her draft had "[SEE NOTE 2] a new internal desktop assistant..."
   // with an unresolved bracketed note before "a new". Left out until she
   // supplies what that note actually says — don't guess at it.
-  building: "Working as a software developer in the employee-facing internal productivity tool at JPMorgan Chase",
+  building:
+    "Working as a software developer in the employee-facing internal productivity tool at JPMorgan Chase",
   learning:
     "AI product management: discovery, evals, and what makes an AI feature trustworthy. Nine-week programme at",
   learningLink: {
     label: "Rethink Systems",
-    href: "https://rethinksystems.in"
+    href: "https://rethinksystems.in",
   },
   elsewhere: "Observing life a little more closely and documenting it at",
   elsewhereLink: {
@@ -404,22 +373,21 @@ export const education = {
   degree: "B.Tech, Computer Science & Engineering",
   institution: "Maulana Azad National Institute of Technology, Bhopal",
   years: "2020 – 2024",
-  /** Not currently rendered — her latest Background copy omits it. Kept here, not deleted, in case that was an oversight rather than a choice. */
   note: "CGPA 8.19",
 } as const;
 
-export const recognition: string[] = [
-  // TODO — her draft prefixed this line with "[SEE NOTE 1]", unresolved.
-  // Corrected from the old "Finalist, Flipkart GRID" claim — don't revert.
-  "Flipkart GRID — qualified for Level 1, top 1,335 teams nationally",
-  "Contributor, GirlScript Summer of Code 2023",
-  "MMVY merit scholarship, all four years",
-];
+/**
+ * College-only, per her instruction — Background shows nothing outside her
+ * degree now. Flipkart GRID and GirlScript Summer of Code were cut (neither
+ * is a college credential); MMVY stayed because it's a merit scholarship
+ * tied to her four years of the degree itself.
+ */
+export const recognition: string[] = ["MMVY merit scholarship, all four years"];
 
-export const community: string[] = [
-  "Chapter Representative, Robin Hood Army — Marathahalli–Bellandur (2025 – present)",
-  "Developer, Force For Good — JPMC's technology-for-nonprofits programme",
-];
+/** Emptied deliberately — Robin Hood Army and Force For Good are both
+ * post-graduation, not college details. Kept as a typed export (not deleted)
+ * in case community involvement belongs elsewhere on the site later. */
+export const community: string[] = [];
 
 export const writing = {
   platform: "Medium",
@@ -429,7 +397,7 @@ export const writing = {
 
 export const links: Link[] = [
   { label: "GitHub", href: "" },
-  { label: "LinkedIn", href: "" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/pratyusha-patidar/" },
   { label: "Medium", href: "" },
   { label: "Résumé", href: "" },
   { label: "Email", href: `mailto:${profile.email}` },
