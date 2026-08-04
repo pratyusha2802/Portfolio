@@ -12,14 +12,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@rolldown/binding-darwin-arm64": "^1.1.5",
     "marked": "^18.0.7",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.2"
   },
   "devDependencies": {
-    "@oxlint/binding-darwin-arm64": "^1.74.0",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
@@ -27,5 +25,9 @@
     "prettier": "^3.9.6",
     "typescript": "^7.0.2",
     "vite": "^8.1.1"
+  },
+  "optionalDependencies": {
+    "@rolldown/binding-darwin-arm64": "1.1.5",
+    "@oxlint/binding-darwin-arm64": "1.74.0"
   }
 }
