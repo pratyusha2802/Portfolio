@@ -1,3 +1,5 @@
+import { pageUrl } from "../lib/url";
+
 function NotFound() {
   return (
     <section className="wrap not-found">
@@ -8,7 +10,7 @@ function NotFound() {
       <p className="not-found__note">
         Whatever you were looking for isn't at this address. It might not exist at all.
       </p>
-      <a className="pill" href="/">
+      <a className="pill" href={pageUrl()}>
         Back to the homepage
       </a>
     </section>

@@ -1,5 +1,6 @@
 import { links, principles, profile } from "../data/portfolio";
 import { arrowLength, riseDelay } from "../lib/rise";
+import { pageUrl } from "../lib/url";
 import { usePointerTilt } from "../lib/usePointerTilt";
 
 /** Splits "Head, rest of the line" into a bold lead + lighter label below it. */
@@ -48,7 +49,7 @@ function Hero() {
                 LinkedIn
               </a>
             )}
-            <a className="pill pill--lg hero__cta rise" style={riseDelay(4)} href="/#work">
+            <a className="pill pill--lg hero__cta rise" style={riseDelay(4)} href={pageUrl("work")}>
               See the work
               <svg width="22" height="12" viewBox="0 0 22 12" fill="none" aria-hidden="true">
                 <path
@@ -65,7 +66,12 @@ function Hero() {
       </div>
 
       <div className="stage">
-        <img className="portrait" src="/photo.jpg" alt={profile.name} ref={portraitRef} />
+        <img
+          className="portrait"
+          src={`${import.meta.env.BASE_URL}photo.jpg`}
+          alt={profile.name}
+          ref={portraitRef}
+        />
 
         <div className="annotation annotation--mid-left rise" style={riseDelay(5)}>
           <div className="annotation__text">

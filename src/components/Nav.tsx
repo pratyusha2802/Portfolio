@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { profile } from "../data/portfolio";
+import { pageUrl } from "../lib/url";
 
 function Nav() {
   const [isStuck, setIsStuck] = useState(false);
@@ -16,19 +17,19 @@ function Nav() {
   return (
     <header className={`nav${isStuck ? " is-stuck" : ""}`} id="nav">
       <div className="wrap nav__inner">
-        <a href="/" className="mark">
+        <a href={pageUrl()} className="mark">
           {firstName}
           <br />
           {rest.join(" ")}
         </a>
         <nav className="nav__links">
-          <a className="nav__link" href="/#work">
+          <a className="nav__link" href={pageUrl("work")}>
             Case Studies
           </a>
-          <a className="nav__link" href="/#about">
+          <a className="nav__link" href={pageUrl("about")}>
             About
           </a>
-          <a className="nav__link" href="/#experience">
+          <a className="nav__link" href={pageUrl("experience")}>
             Experience
           </a>
           <a className="pill" href={`mailto:${profile.email}`}>
