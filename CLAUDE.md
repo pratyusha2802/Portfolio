@@ -22,7 +22,12 @@ stylistic/formatting rules, only correctness ones, so there's no overlap to reco
 
 **Node version:** Vite 8 requires Node ^20.19 or >=22.12. The default system Node here is v20.17.0, which prints a version warning but still works. Node v23.11.0 is available via `nvm` (`nvm use 23.11.0`) if the warning needs to go away.
 
-**Native binding gotcha:** Vite 8 uses the rolldown bundler, and oxlint ships the same way — both distribute their actual binary as a platform-specific optional dependency (`@rolldown/binding-darwin-arm64`, `@oxlint/binding-darwin-arm64` here) that a fresh `npm install` can silently fail to pull in (an [npm optional-deps bug](https://github.com/npm/cli/issues/4828)), causing `Cannot find module './rolldown-binding.darwin-universal.node'` or oxlint's equivalent `Cannot find native binding`. Fix by installing the matching-version binding explicitly. Both are now pinned directly in `package.json` to avoid this recurring.
+**Native binding gotcha:** Vite 8 uses the rolldown bundler, and oxlint ships the same way — both distribute their actual binary as a platform-specific optional dependency (`@rolldown/binding-darwin-arm64`, `@oxlint/binding-darwin-arm64` here) that a fresh install can silently fail to pull in on this machine (an [npm optional-deps bug](https://github.com/npm/cli/issues/4828)), causing `Cannot find module './rolldown-binding.darwin-universal.node'` or oxlint's equivalent `Cannot find native binding`.
+
+Two things fixed this properly, after an earlier attempt (hard-pinning these as regular `dependencies`) turned out to actively break the GitHub Actions deploy — a `darwin-arm64`-only package as a *required* dependency makes `npm ci` hard-fail on Linux runners, since a platform mismatch on a required dep is an error, not a skip.
+
+1. **They're `optionalDependencies` now, not regular ones.** This is what lets Linux CI skip them gracefully (correct — Linux needs the Linux binaries, which vite/oxlint resolve themselves) while still installing on a matching platform.
+2. **The bug itself is npm-version-specific, not project-specific.** It reproduces reliably with npm 10.8.2 (bundled with the default system Node 20.17.0 here) but not with npm 11.2.0 (bundled with Node 23.11.0, available via `nvm use 23.11.0`). If a fresh install is missing a binding, switching Node versions first (`nvm use 23.11.0`) is the real fix — the old manual `npm install @scope/pkg@version` workaround still works too if switching Node isn't convenient, but don't reach for hard-pinning these as required dependencies again; that's what broke deployment.
 
 ## Architecture
 
