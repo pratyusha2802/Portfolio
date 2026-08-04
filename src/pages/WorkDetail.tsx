@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { profile, typeLabels, work } from "../data/portfolio";
 import { getCaseContent } from "../lib/markdown";
+import { pageUrl } from "../lib/url";
 
 function WorkDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -22,7 +23,7 @@ function WorkDetail() {
 
   return (
     <article className="case wrap">
-      <a className="case__back" href="/#work">
+      <a className="case__back" href={pageUrl("work")}>
         ← Back to selected work
       </a>
 
