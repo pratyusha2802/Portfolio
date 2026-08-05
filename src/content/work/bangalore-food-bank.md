@@ -5,19 +5,20 @@ type: "build"
 status: "published"
 date: "2022-08"
 context: "Code for Good 2022"
-hook: "Surplus food and the people who need it exist in the same city and rarely find each other in time."
-tools: ["React", "Node.js", "Express"]
+hook: "Bangalore Food Bank could only ask donors for an undirected sum and hope it stretched far enough — no way to give toward a specific item."
+tools: ["JavaScript", "Node.js", "Express"]
 href: "/Portfolio/bangalore-food-bank-deck.html"
 ---
 
 ## TL;DR
 
-**Problem:** surplus food and the people who need it exist in the same city, but
-rarely find each other before the food's no good. **Approach:** led the
-frontend under a 24-hour hackathon constraint, scoped to one working flow
-instead of four shallow ones, built for low-end Android phones. **Outcome:** a
-working demo prototype, judged at Code for Good 2022 — not a shipped or
-running service.
+**Problem:** Bangalore Food Bank could only ask for an undirected donation and
+hope it stretched far enough — no way for a donor to give toward a specific
+item the NGO actually needed. **Approach:** led the frontend on a donation
+portal for donors and admins under a 24-hour hackathon constraint —
+item-level giving, a cart and checkout, and an admin dashboard for inventory
+and pricing. **Outcome:** a working demo prototype, judged at Code for Good
+2022 — not a shipped or running service.
 
 ## Context
 
@@ -26,9 +27,10 @@ Code for Good 2022, JPMorgan Chase's social-impact hackathon. Team build, one
 
 ## The problem
 
-Two sides of the same gap: people and organizations with surplus food nearing
-spoilage, and volunteers who could redistribute it, with no shared real-time
-way to coordinate before the window to act closes.
+Bangalore Food Bank's donors could only give an undirected sum and trust it
+would be used well — no way to see what the NGO actually needed and give
+toward that specific item. The NGO had the mirror problem: no way to set
+prices, run campaigns, or track inventory against what had actually come in.
 
 ## Constraints
 
@@ -47,20 +49,27 @@ something I sourced through interviews or field research.
 
 | Option | Why it's tempting | Why not |
 | --- | --- | --- |
-| Build all 4 planned flows, shallowly | Demo shows the full breadth of the concept | Nothing would work end-to-end in 24 hours |
+| Keep donations as an undirected lump sum | Simplest possible form — one amount, one submit | The NGO can't steer what comes in, and a donor can't see their money land on anything specific |
+| **Chosen: item-level giving** — a catalogue of priced items, a cart, checkout | Donor gives toward something concrete; NGO controls what's listed and at what price | More surface to build in 24 hours: a catalogue, a cart, a checkout, and an admin side to manage all of it |
 | Rich, animated frontend | A more polished-looking demo | Target users are on low-end phones — exactly where that cost lands hardest |
-| **Chosen: one flow (surplus → volunteer matching), lean frontend** | Something real works, on real target hardware | Everything else planned (history, alerts) stayed unbuilt |
 
 ## Decision and the tradeoff it cost
 
-Chose depth over breadth: one working flow instead of four partial ones. The
-cost was real — no notification or persistence layer, so a volunteer had to
-actively check the app for new surplus rather than being alerted to it.
+Chose item-level giving over a simpler undirected-sum form, which meant
+building two connected surfaces instead of one in the same 24 hours: a
+donor-facing catalogue, cart, and checkout, and a separate admin dashboard to
+manage what's in that catalogue. The cost was real — less time for polish on
+either side, on hardware (low-end Android) that punishes an unpolished
+frontend the most.
 
 ## What shipped
 
-A demo prototype, judged at the hackathon. **This was not a shipped or running
-service** — it didn't go further than the event. A [deck from the
+On the donor side: a catalogue of items (staples like wheat, rice, toor dal,
+and cooking oil, priced individually), a cart with an auto-calculated total,
+and checkout. On the admin side: a JWT-authenticated dashboard to add, edit,
+retire, and reprice items, and run campaign banners. A demo prototype, judged
+at the hackathon. **This was not a shipped or running service** — it didn't
+go further than the event. A [deck from the
 event](/Portfolio/bangalore-food-bank-deck.html) walks through the concept
 and the approach — it's team work, so it also names the rest of the team and
 both mentors alongside my own contribution.
@@ -72,10 +81,11 @@ other demos, not measured against usage data — there was no usage to measure.
 
 ## What I'd do differently
 
-The call to scope down to one flow was right for a 24-hour deadline, but a
-matching flow with no notification layer doesn't survive past the demo. Given
-a second day, I'd add the piece that makes it a running service rather than a
-hackathon prototype — some way for a volunteer to be notified when new surplus
-appears nearby, instead of only being able to browse it.
+The team scoped the rest deliberately, as future work rather than something
+missed: volunteer accounts, live market pricing pulled from an external API
+instead of prices the admin sets by hand, and inventory visualized as charts
+and dashboards rather than a plain list. Given a second day, live pricing is
+where I'd start — it's the piece that keeps the catalogue honest without an
+admin manually checking prices against the market.
 
 This hackathon is also how I ended up at JPMorgan Chase.
