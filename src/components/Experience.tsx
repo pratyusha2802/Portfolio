@@ -17,14 +17,6 @@ function Experience() {
               </span>
             </div>
 
-            <div className="work-card__tools">
-              {role.stack.map((tool) => (
-                <span className="tool-chip" key={tool}>
-                  {tool}
-                </span>
-              ))}
-            </div>
-
             {role.description && <p className="experience-item__desc">{role.description}</p>}
 
             {role.projects && (
@@ -40,6 +32,14 @@ function Experience() {
                 ))}
               </ul>
             )}
+
+            <div className="work-card__tools experience-item__stack">
+              {role.stack.map((tool) => (
+                <span className="tool-chip" key={tool}>
+                  {tool}
+                </span>
+              ))}
+            </div>
           </li>
         ))}
       </ul>
