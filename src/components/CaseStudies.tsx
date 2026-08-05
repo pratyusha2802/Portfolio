@@ -22,8 +22,8 @@ function CaseStudies() {
       <div className="section__head">
         <h2 className="section__title rise">Case studies</h2>
         <p className="section__note rise">
-          Product work, self-directed and team-based. The problems are real; the analysis is mine.
-          Lately, that means as much time on what's worth building as on how to build it.
+          Real problems. Thoughtful decisions. Product work driven by curiosity, structured
+          thinking, and user needs.
         </p>
       </div>
 
