@@ -41,26 +41,31 @@ place for families to find, compare, and verify them.
 Two hypotheses were tested against primary research (48 survey responses
 across adult children, elderly respondents, caregivers, NGO workers, and
 healthcare professionals, plus a 61-question interview series across seven
-stakeholder groups) before landing here. The first — that childless or
-family-less elders face the sharpest unmet need — failed against the data:
-none of the surveyed elderly respondents were without family support, even
-the one living alone. The second — that caregiver trust and sourcing is
-adult children's top named pain point — held only partially: just 2 of 32
-adult-child respondents named it unprompted, ranking behind distance from
-parents, local service quality, and parental resistance to care, and even a
-verified caregiver hire failed in one interview (slept on duty, missed
-medicines, theft).
+stakeholder groups) before landing here:
 
-What the data converged on instead: half of surveyed adult children (16 of
-32) were unaware professional elder care services existed at all; more than
-half (17 of 32) live apart from their parent; involvement in arranging care
-splits unpredictably across siblings, the parent, other relatives, and
-doctors rather than following one channel; families plan reactively,
-typically only after a health crisis; and trust in a caregiver required both
-background verification and a personal recommendation together — either
-alone left the large majority of respondents unconvinced. The common thread
-across all four findings was discovery and coordination, not care
-availability itself.
+- **Childless or family-less elders face the sharpest unmet need.** Failed
+  against the data — none of the surveyed elderly respondents were without
+  family support, even the one living alone.
+- **Caregiver trust and sourcing is adult children's top named pain point.**
+  Held only partially — just 2 of 32 adult-child respondents named it
+  unprompted, ranking behind distance from parents, local service quality,
+  and parental resistance to care. Even a verified caregiver hire failed in
+  one interview (slept on duty, missed medicines, theft).
+
+What the data converged on instead:
+
+- Half of surveyed adult children (16 of 32) were unaware professional elder
+  care services existed at all.
+- More than half (17 of 32) live apart from their parent.
+- Involvement in arranging care splits unpredictably across siblings, the
+  parent, other relatives, and doctors rather than following one channel.
+- Families plan reactively, typically only after a health crisis.
+- Trust in a caregiver required both background verification and a personal
+  recommendation together — either alone left the large majority of
+  respondents unconvinced.
+
+The common thread across these findings was discovery and coordination, not
+care availability itself.
 
 ## Constraints
 
@@ -77,11 +82,14 @@ availability itself.
 
 ## Research and discovery
 
-Research combined 48 survey responses (32 adult children, 8 elderly
-respondents, 4 caregivers, 2 NGO workers, 2 healthcare professionals) with a
-61-question semi-structured interview series across seven stakeholder groups,
-plus three additional contributions from an old-age-home operator, a
-caregiver-platform founder, and independent workforce research.
+Research combined:
+
+- 48 survey responses (32 adult children, 8 elderly respondents, 4
+  caregivers, 2 NGO workers, 2 healthcare professionals)
+- A 61-question semi-structured interview series across seven stakeholder
+  groups
+- Three additional contributions from an old-age-home operator, a
+  caregiver-platform founder, and independent workforce research
 
 Driving the pivot away from both starting hypotheses and toward the pattern
 the data actually showed — that families weren't blocked by a shortage of
@@ -101,10 +109,11 @@ directly.
 The team chose a two-sided aggregator that hands users off to a provider's
 own site to complete booking, rather than owning bookings and payments
 directly. That kept the platform software-light and avoided taking on
-hiring, training, and liability costs that would scale with volume. The real
-cost: no visibility into what happens after handoff — a slow or broken
-provider website, or a provider who simply doesn't convert a lead, becomes a
-failure the platform can neither see nor fix.
+hiring, training, and liability costs that would scale with volume.
+
+The real cost: no visibility into what happens after handoff — a slow or
+broken provider website, or a provider who simply doesn't convert a lead,
+becomes a failure the platform can neither see nor fix.
 
 I worked on this comparison and the MVP scope that followed from it —
 location/care-type search, filters, a service detail and reviews view, and
