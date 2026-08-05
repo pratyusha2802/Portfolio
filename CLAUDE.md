@@ -117,8 +117,8 @@ Don't assume either the 4-section or 6-section version is current.
 The three case studies are, in this order: **Emergency Medical Response**
 (self-directed discovery, framed around an ownership gap in the
 pre-ambulance window, not a transport-speed problem) → **Worker Passport**
-(gig-economy/quick-commerce, India — locked, "Coming soon") → **Anna Setu**
-(proven, published, closes on established engineering
+(gig-economy/quick-commerce, India — locked, "Coming soon") → **Harvest
+Ledger Trust** (proven, published, closes on established engineering
 credibility). Product-direction work leads now; the engineering-credibility
 piece closes — this flipped from an earlier ordering that led with
 engineering credibility first, which the current copy explicitly overrode.
@@ -168,7 +168,7 @@ longer broken by the shape change.
 
 **Two anatomies coexist here — know which one applies.**
 
-**The 3 featured case studies** (`anna-setu`,
+**The 3 featured case studies** (`harvest-ledger-trust`,
 `emergency-medical-response-india`, `gig-economy-worker-passport`) use a fixed,
 recruiter-oriented anatomy, in this order, every time:
 
@@ -222,19 +222,23 @@ three, in full, beats five, thin.
   sit at a deliberately public level. Internal products, roadmaps, metrics, and
   architecture don't become case studies on a personal site. Flag it if a request
   drifts that way. *Tested once already: a brief asked for a JPMorgan project as
-  case study #1 — the rule held, and `anna-setu` (existing, personal,
-  hackathon work) got the full case-study treatment instead.*
-- **The `anna-setu` case study uses a mock NGO name.** The real partner NGO's
-  name is under an NDA-style confidentiality constraint and must not appear
-  anywhere on the site — not in copy, not in a linked file, not in the URL
-  slug. "Anna Setu" is a stand-in, stated as such in the case study's Context
-  section. The real event deck (`public/bangalore-food-bank-deck.html`,
-  filename kept as-is since renaming it wouldn't scrub the real name from git
-  history anyway) names the real NGO throughout its own content and is
-  intentionally **not linked** from the site for this reason — don't
-  re-link it. If asked to add detail to this case study, only use what's
-  already in the anonymized `.md`/`portfolio.ts` content; don't pull from the
-  original deck.
+  case study #1 — the rule held, and `harvest-ledger-trust` (existing,
+  personal, hackathon work) got the full case-study treatment instead.*
+- **The `harvest-ledger-trust` case study uses a mock NGO name.** The real
+  partner NGO's name is under an NDA-style confidentiality constraint and
+  must not appear anywhere on the site — not in copy, not in a linked file,
+  not in the URL slug. "Harvest Ledger Trust" is a stand-in, stated as such
+  in the case study's Context section. A first attempt at a mock name,
+  "Anna Setu," turned out to itself be a real NGO's name and was replaced —
+  don't reuse "Anna Setu" either. Before picking any future replacement name,
+  verify it isn't a real org (web search) rather than assuming an invented-
+  sounding name is safe. The real event deck
+  (`public/bangalore-food-bank-deck.html`, filename kept as-is since renaming
+  it wouldn't scrub the real name from git history anyway) names the real NGO
+  throughout its own content and is intentionally **not linked** from the
+  site for this reason — don't re-link it. If asked to add detail to this
+  case study, only use what's already in the anonymized `.md`/`portfolio.ts`
+  content; don't pull from the original deck.
 - **No apologetic framing.** "Although I don't have direct PM experience..." or
   any variant. State what she's done; don't hedge around what she hasn't.
 - **No framework name-dropping without the judgment call attached.** Naming
