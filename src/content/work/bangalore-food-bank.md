@@ -67,6 +67,24 @@ actively check the app for new surplus rather than being alerted to it.
 A demo prototype, judged at the hackathon. **This was not a shipped or running
 service** — it didn't go further than the event.
 
+<ol class="flow-diagram">
+  <li>
+    <span class="flow-diagram__label">Surplus posted</span>
+    <span class="flow-diagram__detail">Person or org lists food nearing spoilage</span>
+  </li>
+  <li>
+    <span class="flow-diagram__label">Volunteer checks the app</span>
+    <span class="flow-diagram__detail">Browsed nearby surplus — no alert, had to look</span>
+  </li>
+  <li>
+    <span class="flow-diagram__label">Pickup</span>
+    <span class="flow-diagram__detail">Volunteer collects and redistributes</span>
+  </li>
+</ol>
+
+The gap between steps 1 and 2 is exactly the "what I'd do differently" below —
+a volunteer had to think to check, rather than being told.
+
 ## How I'd measure success
 
 There wasn't a metric tracked. This was judged by hackathon evaluators against
