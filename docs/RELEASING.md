@@ -39,8 +39,10 @@ What this means in practice:
 
 ## Before every deploy (i.e. before that confirmed push to `master`)
 
-1. **Verify locally, all of these, all green:**
-   `tsc --noEmit`, `oxlint src`, `prettier --check .`, `npm run build`.
+1. **Run `npm run verify`** (typecheck, lint, format check, build — all must
+   pass). This also runs automatically: the pre-push hook blocks a push that
+   fails it, and CI (`.github/workflows/ci.yml`) re-runs it on every push and
+   PR to `dev` and `master` as a backstop.
 2. **Bump the version** in `package.json` (see Versioning below).
 3. **Add a `CHANGELOG.md` entry** describing what's shipping, under the new
    version heading.

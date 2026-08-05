@@ -1,16 +1,38 @@
-# React + Vite
+# Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Source for [pratyusha2802.github.io/Portfolio](https://pratyusha2802.github.io/Portfolio/) —
+a React + TypeScript single-page site, statically built and deployed via
+GitHub Pages.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19 + TypeScript (strict) + Vite, `react-router-dom` for client-side routing
+- Case-study content authored as markdown under `src/content/work/`
+- No CMS, no server — everything ships as static files
 
-## React Compiler
+## Getting started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+nvm use          # Node version pinned in .nvmrc
+npm install
+npm run dev
+```
 
-## Expanding the Oxlint configuration
+## Scripts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Local dev server with HMR |
+| `npm run build` | Production build to `dist/` |
+| `npm run test` | Run the test suite (Vitest) |
+| `npm run lint` | oxlint |
+| `npm run format` / `format:check` | Prettier, write or check |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run verify` | typecheck + lint + format check + test + build — the full gate, also run by the pre-push hook and CI |
+
+## Contributing / process docs
+
+- [`CLAUDE.md`](./CLAUDE.md) — architecture, content rules, and known gotchas
+- [`docs/RELEASING.md`](./docs/RELEASING.md) — branch model, versioning, and the deploy checklist
+- [`docs/CHANGELOG.md`](./docs/CHANGELOG.md) — what's live at each version
+- [`docs/_authoring.md`](./docs/_authoring.md) — spec for writing a new case study
