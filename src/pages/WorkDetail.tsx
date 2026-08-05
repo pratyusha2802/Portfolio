@@ -42,10 +42,19 @@ function WorkDetail() {
             </span>
           ))}
         </div>
-        {item.href && (
-          <a className="pill" href={item.href} target="_blank" rel="noreferrer">
-            {item.hrefLabel ?? "View live"}
-          </a>
+        {(item.href || item.links) && (
+          <div className="case__links">
+            {item.href && (
+              <a className="pill" href={item.href} target="_blank" rel="noreferrer">
+                {item.hrefLabel ?? "View live"}
+              </a>
+            )}
+            {item.links?.map((link) => (
+              <a className="pill" href={link.href} target="_blank" rel="noreferrer" key={link.href}>
+                {link.label}
+              </a>
+            ))}
+          </div>
         )}
       </header>
 

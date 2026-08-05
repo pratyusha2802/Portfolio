@@ -57,6 +57,8 @@ export interface WorkItem {
   href?: string; // live link — empty until real
   /** Overrides the default "View live" label — use for a prototype/concept link that isn't an actual shipped, running product. */
   hrefLabel?: string;
+  /** Additional pills shown alongside href, e.g. a second prototype/deck link. */
+  links?: { href: string; label: string }[];
   repo?: string;
   reflection?: string;
   /** Exact card sub-heading line, e.g. "Self-directed discovery project · 2025". Overrides the default type/context/tools line when present. */
@@ -188,6 +190,12 @@ export const work: WorkItem[] = [
     tools: [],
     href: `${import.meta.env.BASE_URL}paarth-deck.html`,
     hrefLabel: "View deck",
+    links: [
+      {
+        href: "https://claude.ai/code/artifact/155cdbed-1dff-47b8-9c25-eceb00f78503",
+        label: "View prototype",
+      },
+    ],
   },
   {
     slug: "gig-economy-worker-passport",
