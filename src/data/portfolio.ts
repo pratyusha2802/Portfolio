@@ -256,6 +256,8 @@ export const work: WorkItem[] = [
     tools: ["JavaScript", "Node.js", "Express"],
     reflection: "The hackathon is also how I ended up at JPMorgan Chase.",
     meta: "Build · Code for Good hackathon, 2022 · JavaScript, Node.js, Express",
+    href: `${import.meta.env.BASE_URL}food-donation-portal.html`,
+    hrefLabel: "View deck",
     links: [
       {
         href: "https://claude.ai/code/artifact/e498540c-0e4e-4120-b039-990643e84004",
