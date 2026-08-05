@@ -784,17 +784,17 @@ button {
    same .work-card-ish chrome elsewhere (e.g. Currently's rows) were
    indistinguishable until you happened to hover one. */
 a.work-card {
-  border: 1px solid rgba(46, 33, 56, 0.08);
+  border: 1px solid rgba(46, 33, 56, 0.14);
   box-shadow:
-    0 1px 2px rgba(46, 33, 56, 0.05),
-    0 10px 24px -16px rgba(46, 33, 56, 0.35);
+    0 2px 4px rgba(46, 33, 56, 0.08),
+    0 14px 28px -14px rgba(46, 33, 56, 0.5);
 }
 
 a.work-card:hover {
   transform: translateY(-4px) rotate(-0.6deg);
   box-shadow:
-    0 1px 2px rgba(46, 33, 56, 0.06),
-    0 18px 32px -16px rgba(46, 33, 56, 0.4);
+    0 2px 4px rgba(46, 33, 56, 0.1),
+    0 22px 36px -14px rgba(46, 33, 56, 0.55);
 }
 
 .work-card--static {
@@ -873,22 +873,34 @@ a.work-card:hover {
   margin-top: 16px;
 }
 
+/* Styled like a real button (same family as .pill in the hero) rather
+   than a text link — a card is easy to skim past, but a solid button
+   sitting inside it reads as "click me" without needing to hover first. */
 .work-card__cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   margin-top: 18px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--forest);
+  color: var(--paper);
   font-family: var(--display);
   font-weight: 700;
-  font-size: 14px;
-  color: var(--forest);
-  text-decoration: underline;
-  text-decoration-color: rgba(46, 33, 56, 0.28);
-  text-underline-offset: 3px;
+  font-size: 13.5px;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
 .work-card__cta::after {
-  content: " →";
+  content: "→";
   display: inline-block;
   transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+a.work-card:hover .work-card__cta {
+  background: var(--forest-mid);
 }
 
 a.work-card:hover .work-card__cta::after {
@@ -896,8 +908,9 @@ a.work-card:hover .work-card__cta::after {
 }
 
 .work-card__cta--locked {
+  background: transparent;
   color: var(--muted);
-  text-decoration: none;
+  border: 1px solid rgba(46, 33, 56, 0.16);
 }
 
 .work-card__cta--locked::after {
