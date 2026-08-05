@@ -23,7 +23,7 @@ function CaseStudies() {
         <h2 className="section__title rise">Case studies</h2>
         <p className="section__note rise">
           Product work, self-directed and team-based. The problems are real; the analysis is mine.
-          Now I spend as much time on what's worth building as on how to build it.
+          Lately, that means as much time on what's worth building as on how to build it.
         </p>
       </div>
 
