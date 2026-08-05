@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**Read `RELEASING.md` before running any `git push`.** It has one hard rule:
+never push to `origin` (either branch) without an explicit, same-turn
+confirmation — earlier approval doesn't carry forward. This exists because
+that rule got broken, more than once, and it briefly took the live site back
+to an old template with a third party's personal data in it. `RELEASING.md`
+also covers the version/changelog step required before every deploy.
+
 ## Commands
 
 - `npm run dev` — start the Vite dev server (http://localhost:5173)
