@@ -75,5 +75,4 @@ a second day, I'd add the piece that makes it a running service rather than a
 hackathon prototype — some way for a volunteer to be notified when new surplus
 appears nearby, instead of only being able to browse it.
 
-This hackathon is also how I ended up at JPMorgan Chase, which I didn't plan
-going in.
+This hackathon is also how I ended up at JPMorgan Chase.
