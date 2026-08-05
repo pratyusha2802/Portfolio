@@ -23,7 +23,7 @@ shipped product.
 
 ## Context
 
-A 12-person team deliverable (Team Token Tikkas) from an AI product
+A 12-person team deliverable from an AI product
 management programme, submitted August 2026.
 
 My work:
@@ -101,7 +101,7 @@ actually showed is the whole pivot in one chart:
   </div>
 </div>
 
-## Constraints
+<h2 style="text-align: center">Constraints</h2>
 
 - India has limited long-term care insurance — health insurance covers
   hospitalization, not ongoing home-based care — so families carry nearly all
