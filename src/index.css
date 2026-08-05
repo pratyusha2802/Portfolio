@@ -767,7 +767,9 @@ button {
   background: var(--paper-deep);
   border-radius: 16px;
   padding: clamp(22px, 2.4vw, 30px);
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 /* Filtered-out cards stay mounted (see SelectedWork.tsx) — our own
@@ -777,8 +779,22 @@ button {
   display: none;
 }
 
+/* Only the real links get a resting elevation + border — otherwise a
+   clickable case-study card and a purely informational box using the
+   same .work-card-ish chrome elsewhere (e.g. Currently's rows) were
+   indistinguishable until you happened to hover one. */
+a.work-card {
+  border: 1px solid rgba(46, 33, 56, 0.08);
+  box-shadow:
+    0 1px 2px rgba(46, 33, 56, 0.05),
+    0 10px 24px -16px rgba(46, 33, 56, 0.35);
+}
+
 a.work-card:hover {
   transform: translateY(-4px) rotate(-0.6deg);
+  box-shadow:
+    0 1px 2px rgba(46, 33, 56, 0.06),
+    0 18px 32px -16px rgba(46, 33, 56, 0.4);
 }
 
 .work-card--static {
@@ -864,14 +880,24 @@ a.work-card:hover {
   font-weight: 700;
   font-size: 14px;
   color: var(--forest);
+  text-decoration: underline;
+  text-decoration-color: rgba(46, 33, 56, 0.28);
+  text-underline-offset: 3px;
 }
 
 .work-card__cta::after {
   content: " →";
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+a.work-card:hover .work-card__cta::after {
+  transform: translateX(4px);
 }
 
 .work-card__cta--locked {
   color: var(--muted);
+  text-decoration: none;
 }
 
 .work-card__cta--locked::after {
@@ -996,11 +1022,6 @@ a.work-card:hover {
   padding: clamp(22px, 2.6vw, 30px);
   background: var(--paper-deep);
   border-radius: 16px;
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1);
-}
-
-.currently__row:hover {
-  transform: translateY(-3px);
 }
 
 .currently dt {
