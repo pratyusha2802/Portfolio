@@ -486,9 +486,22 @@ button {
 }
 
 /* A vertical line connects the positions held at one company; each
-   position gets a dot on it, like a small timeline. Both grow in on
-   scroll, gated by .company-block's own .rise/.in state (added by
-   useRiseAnimation's IntersectionObserver) rather than a second one. */
+   position gets a dot on it, like a small timeline. .company-block is
+   tall (header + stack + every position), so gating on *its* .in was
+   too early — by the time it's 12% visible near the top, the line and
+   every dot had already finished animating off-screen before the
+   timeline itself scrolled into view. .position-list and each
+   .position-item are their own .rise targets instead (still via
+   useRiseAnimation's one shared IntersectionObserver — no second one),
+   so the line grows as the timeline itself appears and each dot pops
+   as its own row is actually scrolled to. */
+.position-list.rise {
+  /* Only added for its own independent .in toggle below — the list
+     itself isn't content that should fade as a block. */
+  opacity: 1;
+  transform: none;
+}
+
 .position-list {
   position: relative;
   display: grid;
@@ -509,7 +522,7 @@ button {
   transition: transform 1s cubic-bezier(0.3, 0.7, 0.2, 1) 0.15s;
 }
 
-.company-block.in .position-list::before {
+.position-list.in::before {
   transform: scaleY(1);
 }
 
@@ -528,10 +541,10 @@ button {
   background: var(--paper);
   border: 2px solid var(--forest);
   transform: scale(0);
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) calc(0.35s + var(--i, 0) * 0.22s);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
 }
 
-.company-block.in .position-item::before {
+.position-item.in::before {
   transform: scale(1);
 }
 
