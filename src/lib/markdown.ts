@@ -1,7 +1,7 @@
 /**
  * Loads and parses the markdown case pages under src/content/work/*.md.
  *
- * Frontmatter here is a flat, known shape (see _authoring.md) — a tiny
+ * Frontmatter here is a flat, known shape (see docs/_authoring.md) — a tiny
  * hand-rolled parser is enough and avoids pulling in a YAML lib that assumes
  * a Node Buffer global the browser doesn't have.
  */
@@ -54,7 +54,7 @@ const cases = new Map<string, CaseContent>();
 
 for (const [path, raw] of Object.entries(files)) {
   const slug = path.split("/").pop()?.replace(/\.md$/, "") ?? "";
-  if (!slug || slug.startsWith("_")) continue; // skip _authoring.md
+  if (!slug || slug.startsWith("_")) continue; // defensive: skip any non-case file
   const { data, body } = parseFrontmatter(raw);
   cases.set(slug, { slug, frontmatter: data, html: marked.parse(body, { async: false }) });
 }

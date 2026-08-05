@@ -2,12 +2,15 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Read `RELEASING.md` before running any `git push`.** It has one hard rule:
-never push to `origin` (either branch) without an explicit, same-turn
+**Read `docs/RELEASING.md` before running any `git push`.** It has one hard
+rule: never push to `origin` (either branch) without an explicit, same-turn
 confirmation — earlier approval doesn't carry forward. This exists because
 that rule got broken, more than once, and it briefly took the live site back
-to an old template with a third party's personal data in it. `RELEASING.md`
-also covers the version/changelog step required before every deploy.
+to an old template with a third party's personal data in it. `docs/RELEASING.md`
+also covers the version/changelog step required before every deploy. All spec
+docs (`RELEASING.md`, `CHANGELOG.md`, `_authoring.md`) live under `docs/`;
+this file stays at the repo root because Claude Code only auto-loads
+`CLAUDE.md` from there.
 
 ## Commands
 
@@ -41,7 +44,7 @@ Two things fixed this properly, after an earlier attempt (hard-pinning these as 
 React SPA on Vite, TypeScript strict, `react-router-dom` for client-side routing. No CMS, no server — everything ships as static files.
 
 - **`src/data/portfolio.ts`** is the single source of truth for all copy — see "Content model" below for what each export renders as. **To change what the site says, edit this file, not a component.**
-- **`src/content/work/{slug}.md`** — long-form case content for entries in `work`, one markdown file per slug, loaded at build time via `import.meta.glob` and parsed by `src/lib/markdown.ts` (a small hand-rolled frontmatter parser + `marked` for the body — deliberately not `gray-matter`, which assumes a Node `Buffer` global the browser doesn't have). `_authoring.md` in that folder is the authoring guide, not a case page — the loader skips any file starting with `_`.
+- **`src/content/work/{slug}.md`** — long-form case content for entries in `work`, one markdown file per slug, loaded at build time via `import.meta.glob` and parsed by `src/lib/markdown.ts` (a small hand-rolled frontmatter parser + `marked` for the body — deliberately not `gray-matter`, which assumes a Node `Buffer` global the browser doesn't have). The authoring guide lives at `docs/_authoring.md`, outside this folder so the loader never has to special-case it.
 - **`src/pages/`** — route-level components: `Home.tsx` (the whole single-page scroll), `WorkDetail.tsx` (`/work/:slug`), `NotFound.tsx` (catch-all `*`). Routing lives in `App.tsx`; `main.tsx` mounts `BrowserRouter`.
 - **`src/components/`** — `Hero`, `Currently` (the "building/learning/elsewhere" strip, `id="currently"`, right after the hero), `CaseStudies` (curated 3-item section, `id="work"`), `About` (bio only now, `id="about"`), `Experience` (`id="experience"`), `Background` (`id="background"`), `Footer`, `Nav`. Each presentation-only, reading from `portfolio.ts`.
 - **`src/index.css`** is the only stylesheet — global, BEM-ish class names, CSS custom properties in `:root` for the forest/paper theme. No CSS modules or scoping.
@@ -135,7 +138,7 @@ strings are hardcoded in JSX.
 | `profile.about` | About (bio only) |
 | `currently` | Its own strip section, right after the hero |
 | `work` + `typeLabels` | Case studies — curated 3 only, see `CaseStudies.tsx`'s `featuredSlugs`. `WorkItem.meta`/`.cta` override the default type/context/tools line and CTA per card when present |
-| `stageLabels` / `stageOrder` | Belong to the older spine+blocks authoring system (`_authoring.md`), not the featured-3 anatomy — still used by `WorkItem.stages` typing, not rendered by `CaseStudies` |
+| `stageLabels` / `stageOrder` | Belong to the older spine+blocks authoring system (`docs/_authoring.md`), not the featured-3 anatomy — still used by `WorkItem.stages` typing, not rendered by `CaseStudies` |
 | `experience` | Its own `Experience` section |
 | `education`, `recognition`, `community` | `Background`, as a flat list |
 | `skills.engineering.core` | **Not currently rendered anywhere** — it was Hero's toolkit strip, removed when it started duplicating `experience`'s stack tags. `skills.product`/`skills.tools` were never rendered. |
@@ -181,7 +184,7 @@ sections and the ones most likely to get cut for length. Don't cut them.
 
 **Any other case page** (the two archived engineering projects, anything added
 outside the featured 3) uses the older, looser system in
-`src/content/work/_authoring.md`: a fixed spine (summary → problem → … → what
+`docs/_authoring.md`: a fixed spine (summary → problem → … → what
 I'd do differently) with optional blocks (`discovery`, `solution`, `scope`,
 `ux`, `metrics`, `build`, `evals`) composed in based on how far the work went.
 `stages`/`stageLabels`/`stageOrder` belong to *that* system, not the featured
