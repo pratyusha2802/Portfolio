@@ -143,10 +143,9 @@ Paarth is a **concept** — a PRD, not a shipped product. What it proposes:
   upfront.
 - Scoped to 5 Indian cities for initial launch.
 
-A [working prototype of the concept exists as a Claude
-artifact](https://claude.ai/code/artifact/155cdbed-1dff-47b8-9c25-eceb00f78503) —
-it's cohort work, so it also names the teammates and mentors on the project
-alongside my own contribution.
+A [deck walking through the market opportunity and the
+concept](/Portfolio/paarth-deck.html) — not an interactive prototype, a
+market-sizing and concept-intro presentation.
 
 ## How I'd measure success
 
