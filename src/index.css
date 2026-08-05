@@ -345,7 +345,7 @@ button {
 .annotation__head {
   font-family: var(--display);
   font-weight: 800;
-  font-size: clamp(19px, 1.8vw, 23px);
+  font-size: clamp(19px, 2.3vw, 29px);
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--forest);
@@ -353,7 +353,7 @@ button {
 
 .annotation__label {
   font-weight: 500;
-  font-size: clamp(12.5px, 1.05vw, 14px);
+  font-size: clamp(12.5px, 1.3vw, 16px);
   line-height: 1.3;
   color: var(--muted);
 }
