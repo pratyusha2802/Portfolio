@@ -212,6 +212,7 @@ export const work: WorkItem[] = [
         label: "View prototype",
       },
     ],
+    cta: "Read the case study",
   },
   {
     slug: "gig-economy-worker-passport",
@@ -275,6 +276,7 @@ export const work: WorkItem[] = [
         label: "View prototype",
       },
     ],
+    cta: "Read the case study",
   },
   {
     slug: "pen-in-the-air",
