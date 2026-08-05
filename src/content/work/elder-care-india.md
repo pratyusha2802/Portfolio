@@ -101,7 +101,7 @@ actually showed is the whole pivot in one chart:
   </div>
 </div>
 
-<h2 style="text-align: center">Constraints</h2>
+## Constraints
 
 - India has limited long-term care insurance — health insurance covers
   hospitalization, not ongoing home-based care — so families carry nearly all
