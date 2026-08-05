@@ -165,24 +165,30 @@ export const principles: string[] = [
  *    completed, depth signals judgement.
  */
 export const work: WorkItem[] = [
-  /* Product track — scaffolded case studies. Every substantive claim beyond
-   * the problem framing below is a placeholder until real research/decision
-   * material is supplied — see the TODOs in the matching .md files. */
   {
-    slug: "emergency-medical-response-india",
-    title: "Emergency Medical Response — The Pre-Ambulance Gap",
+    slug: "convenience-economy-india",
+    title: "Golden Hour Bridge — Convenience Economy Discovery in India",
     track: "product",
     type: "case-study",
-    status: "planned",
-    date: "2025",
-    context: "",
-    hook: "In India's emergency medical response, the failure isn't ambulance speed — it's that nobody owns the window before the ambulance arrives.",
-    users: "",
-    decisions: [],
-    measure: "",
+    status: "published",
+    date: "2026-07",
+    context: "AI product management programme, 2026",
+    hook: "The average Indian ambulance takes 25–40 minutes to arrive. The average food-delivery rider is three minutes away.",
+    users:
+      "People experiencing a medical emergency in India — especially road-accident and cardiac-arrest victims — and the hospitals, RWAs, and state EMS systems that would license the responder network.",
+    decisions: [
+      "Chose to activate the existing 10M+ gig-delivery workforce as a software-orchestrated 'bridge' (B2B SaaS/B2G Presence-as-a-Service) over competing as an ambulance fleet — zero asset intensity against competitors' fleet-ownership models.",
+      "Bounded the gig worker's intervention strictly to presence, notification, and BLS-level stabilization — explicitly ruled out patient transport and any clinical intervention beyond basic life support.",
+      "Targeted the $3.8B→$39.7B India digital-health and corporate-wellness market instead of the $1.67B ambulance-transport market, which is capital-intensive and growing at a slow 4.75% CAGR by comparison.",
+      "Sequenced the rollout to prove the arrival-time edge in hospital/RWA pilots before leaning on two government subsidy schemes (PM-RAHAT, Rah-Veer Reward) that were still new and unproven when this was written.",
+    ],
+    measure:
+      "Two hypothetical targets defined for the concept: a sub-5-minute responder arrival edge against the ₹2,000 flat-fee ambulance benchmark, and a measurable reduction in claims severity insurers would recognize once government subsidy integration begins. Neither is a measured result — nothing has piloted.",
     tools: [],
-    meta: "Self-directed discovery project · 2025 · In progress",
-    cta: "Coming soon",
+    topics: ["Emergency response", "Gig economy", "B2B SaaS", "0→1"],
+    href: `${import.meta.env.BASE_URL}golden-hour-bridge-deck.html`,
+    hrefLabel: "View deck",
+    cta: "Read the case study",
   },
   {
     slug: "elder-care-india",
@@ -214,6 +220,9 @@ export const work: WorkItem[] = [
     ],
     cta: "Read the case study",
   },
+  /* Scaffolded case study. Every substantive claim beyond the problem
+   * framing below is a placeholder until real research/decision material
+   * is supplied — see the TODOs in the matching .md file. */
   {
     slug: "gig-economy-worker-passport",
     title: "Worker Passport",
