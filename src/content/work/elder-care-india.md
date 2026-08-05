@@ -74,21 +74,30 @@ What the data converged on instead:
 itself. The gap between the failed trust hypothesis and what the data
 actually showed is the whole pivot in one chart:
 
-<div class="stat-bars">
-  <div class="stat-bars__row" title="16 of 32 respondents (50%)">
-    <span class="stat-bars__label">Unaware services existed</span>
-    <span class="stat-bars__track" aria-hidden="true"><span class="stat-bars__fill" style="width: 50%"></span></span>
-    <span class="stat-bars__value">16/32</span>
+<div class="ring-meters">
+  <div class="ring-meter" title="16 of 32 respondents (50%)">
+    <svg class="ring-meter__svg" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true">
+      <circle cx="50" cy="50" r="42" fill="none" stroke="var(--paper-deep)" stroke-width="10" />
+      <circle class="ring-meter__fill" cx="50" cy="50" r="42" fill="none" stroke="var(--forest)" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.89" stroke-dashoffset="131.95" transform="rotate(-90 50 50)" />
+    </svg>
+    <p class="ring-meter__value">16/32</p>
+    <p class="ring-meter__label">Unaware services existed</p>
   </div>
-  <div class="stat-bars__row" title="17 of 32 respondents (53%)">
-    <span class="stat-bars__label">Live apart from parent</span>
-    <span class="stat-bars__track" aria-hidden="true"><span class="stat-bars__fill" style="width: 53%"></span></span>
-    <span class="stat-bars__value">17/32</span>
+  <div class="ring-meter" title="17 of 32 respondents (53%)">
+    <svg class="ring-meter__svg" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true">
+      <circle cx="50" cy="50" r="42" fill="none" stroke="var(--paper-deep)" stroke-width="10" />
+      <circle class="ring-meter__fill" cx="50" cy="50" r="42" fill="none" stroke="var(--forest)" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.89" stroke-dashoffset="123.70" transform="rotate(-90 50 50)" />
+    </svg>
+    <p class="ring-meter__value">17/32</p>
+    <p class="ring-meter__label">Live apart from parent</p>
   </div>
-  <div class="stat-bars__row" title="2 of 32 respondents (6%) — the hypothesis this project started with">
-    <span class="stat-bars__label">Named caregiver trust unprompted</span>
-    <span class="stat-bars__track" aria-hidden="true"><span class="stat-bars__fill" style="width: 6%"></span></span>
-    <span class="stat-bars__value">2/32</span>
+  <div class="ring-meter" title="2 of 32 respondents (6%) — the hypothesis this project started with">
+    <svg class="ring-meter__svg" viewBox="0 0 100 100" width="96" height="96" aria-hidden="true">
+      <circle cx="50" cy="50" r="42" fill="none" stroke="var(--paper-deep)" stroke-width="10" />
+      <circle class="ring-meter__fill" cx="50" cy="50" r="42" fill="none" stroke="var(--forest)" stroke-width="10" stroke-linecap="round" stroke-dasharray="263.89" stroke-dashoffset="247.40" transform="rotate(-90 50 50)" />
+    </svg>
+    <p class="ring-meter__value">2/32</p>
+    <p class="ring-meter__label">Named caregiver trust unprompted</p>
   </div>
 </div>
 
