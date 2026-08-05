@@ -360,31 +360,21 @@ button {
 
 .arrow {
   flex-shrink: 0;
-  color: var(--ink);
+  aspect-ratio: 447 / 559;
+  object-fit: contain;
+  /* Annotations can overlap the portrait at narrow widths, where the
+     line art would otherwise blend into skin, hair, or clothing. A
+     paper-colored halo keeps it legible against any background. */
+  filter: drop-shadow(0 0 3px var(--paper)) drop-shadow(0 0 3px var(--paper))
+    drop-shadow(0 0 1px var(--paper));
 }
 
 .arrow--arc {
-  width: 62px;
-  height: 27px;
+  width: clamp(34px, 5.4vw, 52px);
 }
 
 .arrow--loop {
-  width: 68px;
-  height: 34px;
-}
-
-.arrow path {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-dasharray: var(--len, 150);
-  stroke-dashoffset: var(--len, 150);
-  transition: stroke-dashoffset 1.4s cubic-bezier(0.4, 0.1, 0.2, 1) 0.6s;
-}
-
-.is-ready .arrow path {
-  stroke-dashoffset: 0;
+  width: clamp(36px, 6vw, 58px);
 }
 
 @media (max-width: 719px) {
@@ -396,9 +386,6 @@ button {
   }
   .annotation__label {
     font-size: 12px;
-  }
-  .arrow {
-    display: none;
   }
 }
 

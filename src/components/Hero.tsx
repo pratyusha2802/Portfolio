@@ -1,5 +1,5 @@
 import { links, principles, profile } from "../data/portfolio";
-import { arrowLength, riseDelay } from "../lib/rise";
+import { riseDelay } from "../lib/rise";
 import { pageUrl } from "../lib/url";
 import { usePointerTilt } from "../lib/usePointerTilt";
 
@@ -78,9 +78,11 @@ function Hero() {
             <span className="annotation__head">{leftHead}</span>
             <span className="annotation__label">{leftLabel}</span>
           </div>
-          <svg className="arrow arrow--arc" viewBox="0 0 70 30" fill="none" aria-hidden="true">
-            <path style={arrowLength(80)} d="M4 10C20 26 40 26 56 8" strokeLinejoin="round" />
-          </svg>
+          <img
+            className="arrow arrow--arc"
+            src={`${import.meta.env.BASE_URL}arrow-left.png`}
+            alt=""
+          />
         </div>
 
         <div className="annotation annotation--mid-right rise" style={riseDelay(6)}>
@@ -88,13 +90,11 @@ function Hero() {
             <span className="annotation__head">{rightHead}</span>
             <span className="annotation__label">{rightLabel}</span>
           </div>
-          <svg className="arrow arrow--loop" viewBox="0 0 80 40" fill="none" aria-hidden="true">
-            <path
-              style={arrowLength(160)}
-              d="M10 22C2 14 6 4 16 6C26 8 24 20 14 18C8 16 10 8 18 6C28 3 40 10 48 16C58 23 66 22 76 28"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <img
+            className="arrow arrow--loop"
+            src={`${import.meta.env.BASE_URL}arrow-right.png`}
+            alt=""
+          />
         </div>
       </div>
     </section>
