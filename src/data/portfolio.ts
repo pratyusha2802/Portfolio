@@ -82,7 +82,6 @@ export interface Position {
   title: string;
   start: string;
   end: string | "Present";
-  stack: string[];
   /** Single-paragraph positions (e.g. internships) use this. */
   description?: string;
   /** Positions spanning more than one project use this instead of `description`. */
@@ -93,10 +92,14 @@ export interface Position {
  * One company, one or more positions held there — same employer shown once,
  * not repeated per position. `positions` is ordered most-recent-first; the
  * date range shown next to the company name is derived from it, not stored.
+ * `stack` is the union across all positions, shown once — a stack chip
+ * repeated on every position it applied to just restated the same handful
+ * of tools three times over.
  */
 export interface CompanyExperience {
   company: string;
   location: string;
+  stack: string[];
   positions: Position[];
 }
 
@@ -336,19 +339,22 @@ export const experience: CompanyExperience[] = [
   {
     company: "JPMorgan Chase & Co.",
     location: "Bengaluru",
+    // Union of every position's stack below, most-recent-role-first order.
+    stack: [
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Electron",
+      "SCSS",
+      "micro-frontend architecture",
+      "HTML/CSS",
+      "JavaScript",
+    ],
     positions: [
       {
         title: "Software Engineer",
         start: "Jul 2024",
         end: "Present",
-        stack: [
-          "React",
-          "TypeScript",
-          "Node.js",
-          "Electron",
-          "SCSS",
-          "micro-frontend architecture",
-        ],
         projects: [
           {
             name: "Internal desktop assistant",
@@ -367,7 +373,6 @@ export const experience: CompanyExperience[] = [
         title: "Software Engineering Intern",
         start: "Jan 2024",
         end: "Jun 2024",
-        stack: ["React", "TypeScript", "Electron", "HTML/CSS"],
         description:
           "Built two proof-of-concepts for the experimental phase of the productivity platform using micro-frontend architecture. Converted to a full-time offer.",
       },
@@ -375,7 +380,6 @@ export const experience: CompanyExperience[] = [
         title: "Software Engineering Intern",
         start: "May 2023",
         end: "Jul 2023",
-        stack: ["JavaScript", "TypeScript", "HTML/CSS"],
         description:
           "Developed a feature for the productivity platform. Entered through the firm's Code for Good hackathon.",
       },
