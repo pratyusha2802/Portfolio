@@ -1,36 +1,36 @@
 ---
-slug: "bangalore-food-bank"
-title: "Bangalore Food Bank"
+slug: "anna-setu"
+title: "Anna Setu"
 type: "build"
 status: "published"
 date: "2022-08"
 context: "Code for Good 2022"
-hook: "Bangalore Food Bank could only ask donors for an undirected sum and hope it stretched far enough — no way to give toward a specific item."
+hook: "Anna Setu could only ask donors for an undirected sum and hope it stretched far enough — no way to give toward a specific item."
 tools: ["JavaScript", "Node.js", "Express"]
-href: "/Portfolio/bangalore-food-bank-deck.html"
 ---
 
 ## TL;DR
 
-**Problem:** Bangalore Food Bank could only ask for an undirected donation and
-hope it stretched far enough — no way for a donor to give toward a specific
-item the NGO actually needed. **Approach:** led the frontend on a donation
-portal for donors and admins under a 24-hour hackathon constraint —
-item-level giving, a cart and checkout, and an admin dashboard for inventory
-and pricing. **Outcome:** a working demo prototype, judged at Code for Good
-2022 — not a shipped or running service.
+**Problem:** Anna Setu could only ask for an undirected donation and hope it
+stretched far enough — no way for a donor to give toward a specific item the
+NGO actually needed. **Approach:** led the frontend on a donation portal for
+donors and admins under a 24-hour hackathon constraint — item-level giving, a
+cart and checkout, and an admin dashboard for inventory and pricing.
+**Outcome:** a working demo prototype, judged at Code for Good 2022 — not a
+shipped or running service.
 
 ## Context
 
 Code for Good 2022, JPMorgan Chase's social-impact hackathon. Team build, one
-24-hour window. I led the frontend.
+24-hour window. I led the frontend. The partner NGO's real name isn't shared
+here — I'm using **Anna Setu** as a stand-in throughout.
 
 ## The problem
 
-Bangalore Food Bank's donors could only give an undirected sum and trust it
-would be used well — no way to see what the NGO actually needed and give
-toward that specific item. The NGO had the mirror problem: no way to set
-prices, run campaigns, or track inventory against what had actually come in.
+Anna Setu's donors could only give an undirected sum and trust it would be
+used well — no way to see what the NGO actually needed and give toward that
+specific item. The NGO had the mirror problem: no way to set prices, run
+campaigns, or track inventory against what had actually come in.
 
 ## Constraints
 
@@ -69,13 +69,10 @@ and cooking oil, priced individually), a cart with an auto-calculated total,
 and checkout. On the admin side: a JWT-authenticated dashboard to add, edit,
 retire, and reprice items, and run campaign banners. A demo prototype, judged
 at the hackathon. **This was not a shipped or running service** — it didn't
-go further than the event. A [deck from the
-event](/Portfolio/bangalore-food-bank-deck.html) walks through the concept
-and the approach — it's team work, so it also names the rest of the team and
-both mentors alongside my own contribution. A [rebuilt interactive
+go further than the event. A [rebuilt interactive
 prototype](https://claude.ai/code/artifact/e498540c-0e4e-4120-b039-990643e84004)
-is linked above too — it demonstrates the donor and admin flows in the
-browser, built later for this portfolio, not the original hackathon code.
+is linked above — it demonstrates the donor and admin flows in the browser,
+built later for this portfolio, not the original hackathon code.
 
 ## How I'd measure success
 

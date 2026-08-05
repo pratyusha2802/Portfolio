@@ -237,14 +237,14 @@ export const work: WorkItem[] = [
     tools: ["Python", "scikit-learn"],
   },
   {
-    slug: "bangalore-food-bank",
-    title: "Bangalore Food Bank",
+    slug: "anna-setu",
+    title: "Anna Setu",
     track: "engineering",
     type: "build",
     status: "published",
     date: "2022-08",
     context: "Code for Good hackathon, 2022",
-    hook: "Bangalore Food Bank could only ask donors for an undirected sum and hope it stretched far enough. Built the frontend in 24 hours with an assigned team.",
+    hook: "Anna Setu could only ask donors for an undirected sum and hope it stretched far enough. Built the frontend in 24 hours with an assigned team.",
     users:
       "Donors giving toward specific items, and the NGO admin managing what's listed, priced, and in stock.",
     decisions: [
@@ -256,8 +256,6 @@ export const work: WorkItem[] = [
     tools: ["JavaScript", "Node.js", "Express"],
     reflection: "The hackathon is also how I ended up at JPMorgan Chase.",
     meta: "Build · Code for Good hackathon, 2022 · JavaScript, Node.js, Express",
-    href: `${import.meta.env.BASE_URL}bangalore-food-bank-deck.html`,
-    hrefLabel: "View deck",
     links: [
       {
         href: "https://claude.ai/code/artifact/e498540c-0e4e-4120-b039-990643e84004",

@@ -9,7 +9,7 @@ import { work, typeLabels } from "../data/portfolio";
 const featuredSlugs = [
   "emergency-medical-response-india",
   "elder-care-india",
-  "bangalore-food-bank",
+  "anna-setu",
 ] as const;
 
 function CaseStudies() {
