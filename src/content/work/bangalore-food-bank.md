@@ -72,7 +72,10 @@ at the hackathon. **This was not a shipped or running service** — it didn't
 go further than the event. A [deck from the
 event](/Portfolio/bangalore-food-bank-deck.html) walks through the concept
 and the approach — it's team work, so it also names the rest of the team and
-both mentors alongside my own contribution.
+both mentors alongside my own contribution. A [rebuilt interactive
+prototype](https://claude.ai/code/artifact/e498540c-0e4e-4120-b039-990643e84004)
+is linked above too — it demonstrates the donor and admin flows in the
+browser, built later for this portfolio, not the original hackathon code.
 
 ## How I'd measure success
 

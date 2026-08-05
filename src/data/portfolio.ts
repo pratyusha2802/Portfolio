@@ -258,6 +258,12 @@ export const work: WorkItem[] = [
     meta: "Build · Code for Good hackathon, 2022 · JavaScript, Node.js, Express",
     href: `${import.meta.env.BASE_URL}bangalore-food-bank-deck.html`,
     hrefLabel: "View deck",
+    links: [
+      {
+        href: "https://claude.ai/code/artifact/e498540c-0e4e-4120-b039-990643e84004",
+        label: "View prototype",
+      },
+    ],
   },
   {
     slug: "pen-in-the-air",
