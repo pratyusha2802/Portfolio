@@ -393,6 +393,13 @@ button {
   .annotation__label {
     font-size: 12px;
   }
+  /* The portrait's floor width leaves too little margin on narrow
+     screens for the arrow's tail to sit near it (as intended) without
+     landing on the photo itself — hide rather than shrink it past
+     legibility. */
+  .arrow {
+    display: none;
+  }
 }
 
 /* ---------- generic section ---------- */
