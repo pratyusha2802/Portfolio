@@ -6,6 +6,10 @@ package-lock.json
 about.html
 work.html
 
+# Static case-study asset with embedded base64 images — not app source,
+# and a 2MB single-file HTML blob isn't meaningful to reformat.
+public/paarth-deck.html
+
 # Hand-formatted prose, not code — Prettier's markdown rewrap fights how
 # these are deliberately line-broken.
 *.md

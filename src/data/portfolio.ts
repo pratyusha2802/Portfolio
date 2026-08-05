@@ -186,8 +186,8 @@ export const work: WorkItem[] = [
     measure:
       "Two hypothetical targets defined for the concept: 15–20% search-to-booking conversion within 3 months, 80%+ redirect completion rate. Neither is a measured result — nothing has shipped.",
     tools: [],
-    href: "https://claude.ai/code/artifact/155cdbed-1dff-47b8-9c25-eceb00f78503",
-    hrefLabel: "View prototype",
+    href: `${import.meta.env.BASE_URL}paarth-deck.html`,
+    hrefLabel: "View deck",
   },
   {
     slug: "gig-economy-worker-passport",
