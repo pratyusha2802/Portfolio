@@ -66,11 +66,16 @@ function Hero() {
       </div>
 
       <div className="stage">
+        {/* oxlint-disable-next-line no-noninteractive-element-interactions -- purely
+            blocks the native right-click menu, doesn't add functionality a keyboard
+            or screen-reader user would need. */}
         <img
           className="portrait"
           src={`${import.meta.env.BASE_URL}photo.jpg`}
           alt={profile.name}
           ref={portraitRef}
+          draggable={false}
+          onContextMenu={(e) => e.preventDefault()}
         />
 
         <div className="annotation annotation--mid-left rise" style={riseDelay(5)}>
