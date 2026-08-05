@@ -408,35 +408,6 @@ button {
   border-top: var(--rule);
 }
 
-/* A pull-quote styled like a taped-up sticky note — deliberately not another
-   card, to break the card/card/card rhythm the rest of the page runs on. */
-.sticky-quote {
-  padding-block: clamp(28px, 4vw, 44px);
-}
-
-.sticky-quote__text {
-  max-width: 46ch;
-  margin: 0 auto;
-  padding: clamp(22px, 2.6vw, 30px);
-  background: var(--paper-deep);
-  border-radius: 4px 16px 4px 16px;
-  box-shadow: 0 12px 26px rgba(46, 33, 56, 0.12);
-  transform: rotate(-1.5deg);
-  font-family: var(--hand);
-  font-weight: 700;
-  font-size: clamp(20px, 2.2vw, 26px);
-  line-height: 1.35;
-  color: var(--forest);
-  text-align: center;
-}
-
-.sticky-quote__source {
-  margin-top: 14px;
-  text-align: center;
-  font-size: 13px;
-  color: var(--muted);
-}
-
 .section__head {
   display: grid;
   gap: 12px;
@@ -1122,103 +1093,23 @@ a.work-card:hover {
   color: var(--forest);
 }
 
-.case__body .flow-diagram {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding-left: 0;
-  gap: 32px;
-  margin: 24px 0;
-}
-
-.case__body .flow-diagram li {
-  position: relative;
-  flex: 1 1 160px;
-  display: grid;
-  gap: 4px;
-  padding: 16px 18px;
-  background: var(--paper-deep);
-  border-radius: 12px;
-  max-width: none;
-}
-
-.case__body .flow-diagram li:not(:last-child)::after {
-  content: "→";
-  position: absolute;
-  right: -24px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted);
-  font-size: 18px;
-}
-
-.flow-diagram__label {
-  display: block;
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--forest);
-}
-
-.flow-diagram__detail {
-  display: block;
-  font-size: 12.5px;
-  color: var(--muted);
-  line-height: 1.35;
-}
-
-@media (max-width: 640px) {
-  .case__body .flow-diagram {
-    flex-direction: column;
-  }
-  .case__body .flow-diagram li:not(:last-child)::after {
-    content: "↓";
-    right: auto;
-    left: 24px;
-    top: auto;
-    bottom: -20px;
-    transform: none;
-  }
-}
-
 .case__body table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 10px;
+  border-collapse: collapse;
   margin-bottom: 20px;
   font-size: 14.5px;
 }
 
-.case__body th {
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-align: left;
-  padding: 0 14px 8px;
-}
-
+.case__body th,
 .case__body td {
   text-align: left;
-  vertical-align: top;
-  padding: 14px;
+  padding: 10px 14px;
+  border: var(--rule);
+}
+
+.case__body th {
+  font-family: var(--display);
   background: var(--paper-deep);
-}
-
-.case__body td:first-child {
-  border-radius: 10px 0 0 10px;
-}
-
-.case__body td:last-child {
-  border-radius: 0 10px 10px 0;
-}
-
-/* The chosen option is marked with **bold** in the markdown source —
-   give that row a visible highlight instead of leaving every row identical. */
-.case__body tr:has(strong) td {
-  background: rgba(46, 33, 56, 0.12);
 }
 
 /* ---------- not found ---------- */
