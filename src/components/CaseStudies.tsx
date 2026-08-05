@@ -8,7 +8,7 @@ import { work, typeLabels } from "../data/portfolio";
  */
 const featuredSlugs = [
   "emergency-medical-response-india",
-  "gig-economy-worker-passport",
+  "elder-care-india",
   "bangalore-food-bank",
 ] as const;
 
