@@ -1,36 +1,36 @@
 ---
-slug: "anna-setu"
-title: "Anna Setu"
+slug: "harvest-ledger-trust"
+title: "Harvest Ledger Trust"
 type: "build"
 status: "published"
 date: "2022-08"
 context: "Code for Good 2022"
-hook: "Anna Setu could only ask donors for an undirected sum and hope it stretched far enough — no way to give toward a specific item."
+hook: "Harvest Ledger Trust could only ask donors for an undirected sum and hope it stretched far enough — no way to give toward a specific item."
 tools: ["JavaScript", "Node.js", "Express"]
 ---
 
 ## TL;DR
 
-**Problem:** Anna Setu could only ask for an undirected donation and hope it
-stretched far enough — no way for a donor to give toward a specific item the
-NGO actually needed. **Approach:** led the frontend on a donation portal for
-donors and admins under a 24-hour hackathon constraint — item-level giving, a
-cart and checkout, and an admin dashboard for inventory and pricing.
-**Outcome:** a working demo prototype, judged at Code for Good 2022 — not a
-shipped or running service.
+**Problem:** Harvest Ledger Trust could only ask for an undirected donation
+and hope it stretched far enough — no way for a donor to give toward a
+specific item the NGO actually needed. **Approach:** led the frontend on a
+donation portal for donors and admins under a 24-hour hackathon constraint —
+item-level giving, a cart and checkout, and an admin dashboard for inventory
+and pricing. **Outcome:** a working demo prototype, judged at Code for Good
+2022 — not a shipped or running service.
 
 ## Context
 
 Code for Good 2022, JPMorgan Chase's social-impact hackathon. Team build, one
 24-hour window. I led the frontend. The partner NGO's real name isn't shared
-here — I'm using **Anna Setu** as a stand-in throughout.
+here — I'm using **Harvest Ledger Trust** as a stand-in throughout.
 
 ## The problem
 
-Anna Setu's donors could only give an undirected sum and trust it would be
-used well — no way to see what the NGO actually needed and give toward that
-specific item. The NGO had the mirror problem: no way to set prices, run
-campaigns, or track inventory against what had actually come in.
+Harvest Ledger Trust's donors could only give an undirected sum and trust it
+would be used well — no way to see what the NGO actually needed and give
+toward that specific item. The NGO had the mirror problem: no way to set
+prices, run campaigns, or track inventory against what had actually come in.
 
 ## Constraints
 

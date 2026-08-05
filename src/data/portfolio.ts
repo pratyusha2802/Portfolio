@@ -237,14 +237,14 @@ export const work: WorkItem[] = [
     tools: ["Python", "scikit-learn"],
   },
   {
-    slug: "anna-setu",
-    title: "Anna Setu",
+    slug: "harvest-ledger-trust",
+    title: "Harvest Ledger Trust",
     track: "engineering",
     type: "build",
     status: "published",
     date: "2022-08",
     context: "Code for Good hackathon, 2022",
-    hook: "Anna Setu could only ask donors for an undirected sum and hope it stretched far enough. Built the frontend in 24 hours with an assigned team.",
+    hook: "Harvest Ledger Trust could only ask donors for an undirected sum and hope it stretched far enough. Built the frontend in 24 hours with an assigned team.",
     users:
       "Donors giving toward specific items, and the NGO admin managing what's listed, priced, and in stock.",
     decisions: [
