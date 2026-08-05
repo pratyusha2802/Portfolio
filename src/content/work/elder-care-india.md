@@ -71,7 +71,26 @@ What the data converged on instead:
   respondents unconvinced.
 
 **The common thread:** discovery and coordination, not care availability
-itself.
+itself. The gap between the failed trust hypothesis and what the data
+actually showed is the whole pivot in one chart:
+
+<div class="stat-bars">
+  <div class="stat-bars__row" title="16 of 32 respondents (50%)">
+    <span class="stat-bars__label">Unaware services existed</span>
+    <span class="stat-bars__track" aria-hidden="true"><span class="stat-bars__fill" style="width: 50%"></span></span>
+    <span class="stat-bars__value">16/32</span>
+  </div>
+  <div class="stat-bars__row" title="17 of 32 respondents (53%)">
+    <span class="stat-bars__label">Live apart from parent</span>
+    <span class="stat-bars__track" aria-hidden="true"><span class="stat-bars__fill" style="width: 53%"></span></span>
+    <span class="stat-bars__value">17/32</span>
+  </div>
+  <div class="stat-bars__row" title="2 of 32 respondents (6%) — the hypothesis this project started with">
+    <span class="stat-bars__label">Named caregiver trust unprompted</span>
+    <span class="stat-bars__track" aria-hidden="true"><span class="stat-bars__fill" style="width: 6%"></span></span>
+    <span class="stat-bars__value">2/32</span>
+  </div>
+</div>
 
 ## Constraints
 
@@ -96,6 +115,34 @@ Research combined:
   groups
 - Three additional contributions from an old-age-home operator, a
   caregiver-platform founder, and independent workforce research
+
+<div class="stat-bars">
+  <div class="stat-bars__row" title="32 of 48 respondents">
+    <span class="stat-bars__label">Adult children</span>
+    <span class="stat-bars__track" aria-hidden="true"><span class="stat-bars__fill" style="width: 100%"></span></span>
+    <span class="stat-bars__value">32</span>
+  </div>
+  <div class="stat-bars__row" title="8 of 48 respondents">
+    <span class="stat-bars__label">Elderly respondents</span>
+    <span class="stat-bars__track" aria-hidden="true"><span class="stat-bars__fill" style="width: 25%"></span></span>
+    <span class="stat-bars__value">8</span>
+  </div>
+  <div class="stat-bars__row" title="4 of 48 respondents">
+    <span class="stat-bars__label">Caregivers</span>
+    <span class="stat-bars__track" aria-hidden="true"><span class="stat-bars__fill" style="width: 12.5%"></span></span>
+    <span class="stat-bars__value">4</span>
+  </div>
+  <div class="stat-bars__row" title="2 of 48 respondents">
+    <span class="stat-bars__label">NGO workers</span>
+    <span class="stat-bars__track" aria-hidden="true"><span class="stat-bars__fill" style="width: 6.25%"></span></span>
+    <span class="stat-bars__value">2</span>
+  </div>
+  <div class="stat-bars__row" title="2 of 48 respondents">
+    <span class="stat-bars__label">Healthcare professionals</span>
+    <span class="stat-bars__track" aria-hidden="true"><span class="stat-bars__fill" style="width: 6.25%"></span></span>
+    <span class="stat-bars__value">2</span>
+  </div>
+</div>
 
 **Driving the pivot** away from both starting hypotheses and toward the
 pattern the data actually showed — that families weren't blocked by a
@@ -153,9 +200,16 @@ project alongside my own contribution.
 The PRD defines two targets for the concept, both hypothetical — nothing has
 shipped or been measured:
 
-- 15–20% search-to-booking conversion rate within 3 months of launch
-- 80%+ redirect-completion rate (users who enter a phone number and actually
-  reach the provider's site)
+<div class="meter-row">
+  <div class="meter">
+    <p class="meter__label"><strong>15–20%</strong> search-to-booking conversion within 3 months of launch<span class="meter__tag">target, hypothetical</span></p>
+    <div class="meter__track"><div class="meter__fill" style="width: 17.5%"></div></div>
+  </div>
+  <div class="meter">
+    <p class="meter__label"><strong>80%+</strong> redirect-completion rate — users who enter a phone number and actually reach the provider's site<span class="meter__tag">target, hypothetical</span></p>
+    <div class="meter__track"><div class="meter__fill" style="width: 80%"></div></div>
+  </div>
+</div>
 
 Neither is a result; both are what the team judged "working" would look
 like.
