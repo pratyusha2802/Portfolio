@@ -153,7 +153,7 @@ Long-form case content lives in `src/content/work/{slug}.md`, slug matching the
 `principles` is `string[]` — four short standalone lines, her own final
 wording (not the earlier inferred claim/detail drafts, which are gone). No
 elaboration exists underneath them and none should be invented. Two of the
-four ("Debugs products, not just code", "Half systems thinker, half
+four ("Debugs products, not just code", "Part systems thinker, part
 storyteller") are used as the hero's arrow-annotation captions. "Engineer
 turned PM" is deliberately *not* used there — the hero tagline already states
 the same thing in prose, right next to where an arrow would point. "Ships

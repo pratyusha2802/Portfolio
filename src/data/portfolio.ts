@@ -54,6 +54,10 @@ export interface WorkItem {
   measure?: string;
   stages?: Stage[];
   tools: string[];
+  /** Domain/PM keyword chips (e.g. "Elder care", "0→1", "Marketplace") — rendered
+   * like a tool-chip but semantically distinct from tools: this is the niche or
+   * skill the work demonstrates, not literal software used. Don't conflate the two. */
+  topics?: string[];
   href?: string; // live link — empty until real
   /** Overrides the default "View live" label — use for a prototype/concept link that isn't an actual shipped, running product. */
   hrefLabel?: string;
@@ -128,7 +132,7 @@ export const principles: string[] = [
   "Engineer turned PM",
   "Debugs products, not just code",
   "Ships with intent",
-  "Half systems thinker, half storyteller",
+  "Part systems thinker, part storyteller",
 ];
 
 /* ------------------------------------------------------------------ */
@@ -188,6 +192,7 @@ export const work: WorkItem[] = [
     measure:
       "Two hypothetical targets defined for the concept: 15–20% search-to-booking conversion within 3 months, 80%+ redirect completion rate. Neither is a measured result — nothing has shipped.",
     tools: [],
+    topics: ["Elder care", "0→1", "User research", "Marketplace"],
     href: `${import.meta.env.BASE_URL}paarth-deck.html`,
     hrefLabel: "View deck",
     links: [
