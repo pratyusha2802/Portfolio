@@ -10,10 +10,6 @@ work.html
 # and a 2MB single-file HTML blob isn't meaningful to reformat.
 public/paarth-deck.html
 
-# Not yet wired into any case study — excluded here only so it doesn't
-# block the pre-push format check while it sits in the working tree.
-bangalore-food-bank-deck.html
-
 # Hand-formatted prose, not code — Prettier's markdown rewrap fights how
 # these are deliberately line-broken.
 *.md

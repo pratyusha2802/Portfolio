@@ -7,7 +7,7 @@ date: "2022-08"
 context: "Code for Good 2022"
 hook: "Surplus food and the people who need it exist in the same city and rarely find each other in time."
 tools: ["React", "Node.js", "Express"]
-href: ""
+href: "/Portfolio/bangalore-food-bank-deck.html"
 ---
 
 ## TL;DR
@@ -60,7 +60,10 @@ actively check the app for new surplus rather than being alerted to it.
 ## What shipped
 
 A demo prototype, judged at the hackathon. **This was not a shipped or running
-service** — it didn't go further than the event.
+service** — it didn't go further than the event. A [deck from the
+event](/Portfolio/bangalore-food-bank-deck.html) walks through the concept
+and the approach — it's team work, so it also names the rest of the team and
+both mentors alongside my own contribution.
 
 ## How I'd measure success
 

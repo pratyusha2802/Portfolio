@@ -254,8 +254,10 @@ export const work: WorkItem[] = [
     measure:
       "None tracked — judged by hackathon evaluators, not usage data. There was no usage to measure.",
     tools: ["React", "Node.js", "Express"],
-    reflection: "The hackathon is also how I ended up at JPMorgan Chase, which I did not plan.",
+    reflection: "The hackathon is also how I ended up at JPMorgan Chase.",
     meta: "Build · Code for Good hackathon, 2022 · React, Node.js, Express",
+    href: `${import.meta.env.BASE_URL}bangalore-food-bank-deck.html`,
+    hrefLabel: "View deck",
   },
   {
     slug: "pen-in-the-air",
