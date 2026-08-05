@@ -2,35 +2,32 @@
 slug: "elder-care-india"
 title: "Paarth — Elder Care Discovery in India"
 type: "case-study"
-status: "in-progress"
-date: ""
-context: ""
+status: "published"
+date: "2026-08"
+context: "AI product management programme, 2026"
 hook: "Adult children arranging elder care for ageing parents in India aren't short on providers — home nursing, caregivers, assisted living all exist. What's missing is a single trusted place to find, compare, and verify them. Paarth is a concept for that discovery layer."
-tools: []
+tools: ["Google Forms"]
 href: ""
 ---
-
-> **Scaffold — not yet real content.** Every section below except "The
-> problem" is a placeholder. This page exists to hold the structure; nothing
-> in it should be read as a finding, a decision, or an outcome until the real
-> material replaces these TODOs.
 
 ## TL;DR
 
 **Problem:** adult children arranging elder care for ageing parents in India
 aren't blocked by a lack of services — they're blocked by having no single
-trusted place to discover, compare, and verify them. **Approach:** *TODO.*
-**Outcome:** *TODO — concept only, not built or shipped.*
+trusted place to discover, compare, and verify them. **Approach:** research
+across 48 survey responses and interviews spanning seven stakeholder groups,
+testing two hypotheses that both failed or held only thinly, before the data
+converged on discovery and coordination as the real gap. **Outcome:** a PRD
+recommending Paarth, a two-sided discovery platform — a concept, not a
+shipped product.
 
 ## Context
 
-*TODO — this was a group deliverable (12-person team) from an AI product
-management programme, submitted August 2026. What's still needed: her specific
-individual contribution stated plainly, not a generic "contributed across all
-parts" — the site's voice rule is "I, not we, where the contribution was
-hers," and that requires an actual bounded claim (like Bangalore Food Bank's
-"led the frontend"), not a vague one. Programme reference stays to six words,
-no cohort/week branding, per CLAUDE.md.*
+A 12-person team deliverable (Team Token Tikkas) from an AI product
+management programme, submitted August 2026. My work spanned primary and
+secondary research, the hypothesis testing that drove the pivot to the final
+problem statement, solution design and MVP scoping, and writing the team's
+PRD.
 
 ## The problem
 
@@ -46,72 +43,99 @@ across adult children, elderly respondents, caregivers, NGO workers, and
 healthcare professionals, plus a 61-question interview series across seven
 stakeholder groups) before landing here. The first — that childless or
 family-less elders face the sharpest unmet need — failed against the data:
-none of the surveyed elderly respondents were without family support. The
-second — that caregiver trust and sourcing is adult children's top named pain
-point — held only partially: just 2 of 32 adult-child respondents named it
-unprompted, ranking behind distance from parents, local service quality, and
-parental resistance to care.
+none of the surveyed elderly respondents were without family support, even
+the one living alone. The second — that caregiver trust and sourcing is
+adult children's top named pain point — held only partially: just 2 of 32
+adult-child respondents named it unprompted, ranking behind distance from
+parents, local service quality, and parental resistance to care, and even a
+verified caregiver hire failed in one interview (slept on duty, missed
+medicines, theft).
 
 What the data converged on instead: half of surveyed adult children (16 of
 32) were unaware professional elder care services existed at all; more than
 half (17 of 32) live apart from their parent; involvement in arranging care
-splits unpredictably across siblings, the parent, other relatives, and doctors
-rather than following one channel; families plan reactively, typically only
-after a health crisis; and trust in a caregiver required both background
-verification and a personal recommendation together — either alone left the
-large majority of respondents unconvinced. The common thread across all four
-findings was discovery and coordination, not care availability itself.
-
-*TODO — her specific role in gathering or interpreting this research needs to
-be stated, once supplied.*
+splits unpredictably across siblings, the parent, other relatives, and
+doctors rather than following one channel; families plan reactively,
+typically only after a health crisis; and trust in a caregiver required both
+background verification and a personal recommendation together — either
+alone left the large majority of respondents unconvinced. The common thread
+across all four findings was discovery and coordination, not care
+availability itself.
 
 ## Constraints
 
-*TODO — real constraints exist in the source material (no long-term care
-insurance market in India, an unregulated and unverified caregiver labour
-market, opaque provider pricing) but need to be selected and stated in her own
-words, not copied wholesale from the group's PRD.*
+- India has limited long-term care insurance — health insurance covers
+  hospitalization, not ongoing home-based care — so families carry nearly all
+  of the cost themselves.
+- No universally accepted caregiver registry or certification exists;
+  verification is informal, word-of-mouth work.
+- The market is fragmented across caregivers, hospitals, pharmacies,
+  diagnostics, and equipment suppliers, with no single entity coordinating a
+  family's path through it.
+- A 12-person team, one deliverable, on a programme deadline — scope had to
+  be prioritized, not exhaustive.
 
 ## Research and discovery
 
-*TODO — real material already exists: 48 survey responses, a 61-question
-semi-structured interview series across 7 stakeholder groups, and two
-hypotheses tested and revised against the data (see "The problem" above).
-Needs to be written up specific to her actual role in gathering and
-interpreting it — not the team's collective findings restated as "I found."*
+Research combined 48 survey responses (32 adult children, 8 elderly
+respondents, 4 caregivers, 2 NGO workers, 2 healthcare professionals) with a
+61-question semi-structured interview series across seven stakeholder groups,
+plus three additional contributions from an old-age-home operator, a
+caregiver-platform founder, and independent workforce research.
+
+Driving the pivot away from both starting hypotheses and toward the pattern
+the data actually showed — that families weren't blocked by a shortage of
+trustworthy care, but by not knowing where to look for it — was my work
+directly.
 
 ## Options considered
 
-*TODO — the group's PRD already has a real options table (direct care
-provider vs. reviews-only platform vs. two-sided aggregator with handoff,
-each with a stated reason for rejection or selection). Needs adapting into
-this section, credited accurately to what she specifically worked on.*
+| Option | Why it's tempting | Why not |
+| --- | --- | --- |
+| Direct care provider | Full control over hiring, training, and quality | Owns liability and scheduling costs that scale with volume, not below it — and competes with the supply-side partners the platform needs |
+| Reviews-only platform | Low build cost, easy to launch | Never touches the booking moment or its data — no leads or reduced admin work for providers, so no reason to stay engaged |
+| **Chosen: two-sided aggregator with handoff** | Software-light — providers deliver care, not the platform — while still capturing the booking moment | Less control over quality and the transaction itself once a user is handed off; accepted for speed and capital efficiency, revisitable later |
 
 ## Decision and the tradeoff it cost
 
-*TODO — the group's decision (a two-sided aggregator with handoff, trading
-transaction control and quality oversight for speed and capital efficiency)
-is real and already documented. Needs her own framing of what it cost, in her
-voice.*
+The team chose a two-sided aggregator that hands users off to a provider's
+own site to complete booking, rather than owning bookings and payments
+directly. That kept the platform software-light and avoided taking on
+hiring, training, and liability costs that would scale with volume. The real
+cost: no visibility into what happens after handoff — a slow or broken
+provider website, or a provider who simply doesn't convert a lead, becomes a
+failure the platform can neither see nor fix.
+
+I worked on this comparison and the MVP scope that followed from it —
+location/care-type search, filters, a service detail and reviews view, and
+mobile-number capture before redirect — deliberately leaving booking,
+payments, and a provider dashboard for a later phase.
 
 ## What shipped / what the concept is
 
-Paarth, as named, is a **concept** — a two-sided discovery platform matching
-adult children to elder-care providers by location and care type, handing
-off to the provider's own site to complete booking rather than owning the
-transaction itself.
-
-*TODO — a prototype exists (built as a Claude artifact) but whether to link
-it publicly needs a decision first: it may reference teammates or mentors not
-meant for public exposure outside the programme.*
+Paarth is a **concept** — a PRD, not a shipped product. It proposes a
+two-sided elder-care discovery platform: adult children search by location
+and care type, filter and compare providers, and get redirected to the
+provider's own site to complete booking; providers get visibility and
+qualified demand without paying for it upfront. Scoped to 5 Indian cities for
+initial launch. A prototype exists as a Claude artifact but isn't linked
+here — it's cohort work referencing teammates and mentors, not meant for
+public exposure outside the programme.
 
 ## How I'd measure success
 
-*TODO — the group's PRD already defines two product-level metrics
-(search-to-booking conversion rate, redirect completion rate). This section
-needs her own read on what success means for her specific contribution, not
-just the product's target metrics.*
+The PRD defines two targets for the concept, both hypothetical — nothing has
+shipped or been measured: a 15–20% search-to-booking conversion rate within 3
+months of launch, and an 80%+ redirect-completion rate (users who enter a
+phone number and actually reach the provider's site). Neither is a result;
+both are what the team judged "working" would look like.
 
 ## What I'd do differently
 
-*TODO — hers to write; nothing to draft here.*
+The handoff model's biggest open risk is one the PRD names but doesn't
+resolve: provider participation. A discovery platform is only as useful as
+the supply behind it, and there's no confirmed answer for how agencies get
+persuaded to onboard before there's a user base to justify it — the classic
+two-sided cold-start problem. If I were taking this further, I'd want that
+answered with real provider conversations before writing another line of the
+MVP spec, not after.
