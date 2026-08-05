@@ -1060,6 +1060,9 @@ a.work-card:hover {
 .case__body p {
   margin-bottom: 16px;
   max-width: 68ch;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
 }
 
 .case__body ul,
@@ -1227,6 +1230,7 @@ a.work-card:hover {
 .ring-meters {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 28px;
   margin: 20px 0 24px;
 }
