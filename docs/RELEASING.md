@@ -32,9 +32,9 @@ What this means in practice:
   GitHub Actions (`.github/workflows/deploy.yml`) on every push to `master`.
   Anything pushed here is public within minutes.
 - Keep `dev` and `master` content-identical after every promotion — promote
-  via `git cherry-pick`, never a divergent merge in either direction. See
-  `CLAUDE.md`'s git-incident notes for exactly what went wrong the one time
-  this wasn't followed (a `master`-into-`dev` merge reintroduced the old
+  via `git cherry-pick`, never a divergent merge in either direction. See the
+  root `../CLAUDE.md`'s git-incident notes for exactly what went wrong the one
+  time this wasn't followed (a `master`-into-`dev` merge reintroduced the old
   template and a third party's images).
 
 ## Before every deploy (i.e. before that confirmed push to `master`)

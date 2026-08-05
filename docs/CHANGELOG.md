@@ -24,4 +24,4 @@ shipped in one change":
 - `dev` and `master` restored to identical content after an accidental
   `master`-into-`dev` merge briefly reverted the live site to the original
   pre-React template and reintroduced a third party's personal images —
-  see `CLAUDE.md` for the full incident notes.
+  see `../CLAUDE.md` for the full incident notes.
