@@ -40,13 +40,8 @@ way to coordinate before the window to act closes.
 ## Research and discovery
 
 None, formally — a 24-hour hackathon doesn't leave room for it. The problem
-was given or selected at the event itself, not something I sourced through
-interviews or field research.
-
-*TODO — I don't have a confirmed answer for whether this specific problem came
-from a Code for Good NGO partner brief (the event's usual format) or was
-chosen by the team from a shortlist. Flagging rather than asserting either way;
-happy to correct this once confirmed.*
+came from a Code for Good NGO partner brief, the event's usual format, not
+something I sourced through interviews or field research.
 
 ## Options considered
 
