@@ -310,6 +310,12 @@ button {
   transform: perspective(800px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
   transition: transform 0.3s ease-out;
   will-change: transform;
+  /* Deterrents against casual right-click-save / drag-out / long-press-save —
+     not real protection (view-source and screenshots always work), just
+     friction against the common cases. */
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
 }
 
 /* Arrow + phrase live in the same flex row so they can never drift apart —
