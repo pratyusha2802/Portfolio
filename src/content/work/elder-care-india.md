@@ -6,8 +6,8 @@ status: "published"
 date: "2026-08"
 context: "AI product management programme, 2026"
 hook: "Adult children arranging elder care for ageing parents in India aren't short on providers — home nursing, caregivers, assisted living all exist. What's missing is a single trusted place to find, compare, and verify them. Paarth is a concept for that discovery layer."
-tools: ["Google Forms"]
-href: ""
+tools: []
+href: "https://claude.ai/code/artifact/155cdbed-1dff-47b8-9c25-eceb00f78503"
 ---
 
 ## TL;DR
@@ -118,9 +118,10 @@ two-sided elder-care discovery platform: adult children search by location
 and care type, filter and compare providers, and get redirected to the
 provider's own site to complete booking; providers get visibility and
 qualified demand without paying for it upfront. Scoped to 5 Indian cities for
-initial launch. A prototype exists as a Claude artifact but isn't linked
-here — it's cohort work referencing teammates and mentors, not meant for
-public exposure outside the programme.
+initial launch. A [working prototype of the concept exists as a Claude
+artifact](https://claude.ai/code/artifact/155cdbed-1dff-47b8-9c25-eceb00f78503) —
+it's cohort work, so it also names the teammates and mentors on the project
+alongside my own contribution.
 
 ## How I'd measure success
 
@@ -139,3 +140,11 @@ persuaded to onboard before there's a user base to justify it — the classic
 two-sided cold-start problem. If I were taking this further, I'd want that
 answered with real provider conversations before writing another line of the
 MVP spec, not after.
+
+What stuck with me from this project wasn't the platform concept — it was
+how wrong the starting hypotheses were. Family-less elders, the more dramatic
+framing, wasn't a real segment in the data at all. Caregiver trust, the
+obvious pain point, was only a minor one. The actual problem only became
+visible by looking at what four unrelated findings had in common, not by
+chasing the hypothesis that sounded most compelling going in. Evidence over
+intuition is easy to say and easy to skip once there's a deadline attached.
