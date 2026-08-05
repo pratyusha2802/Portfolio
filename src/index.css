@@ -1105,6 +1105,121 @@ a.work-card:hover {
   background: var(--paper-deep);
 }
 
+/* ---------- case body: stat bars & meters ----------
+   Single-hue magnitude bars/meters for numbers already stated as text in the
+   case body — the chart supplements the sentence, never replaces it, so the
+   value is always readable without the bar. Bar tracks are aria-hidden;
+   screen readers get the same label/value as sighted readers via plain text. */
+.stat-bars {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 24px;
+  max-width: 68ch;
+}
+
+.stat-bars__row {
+  display: grid;
+  grid-template-columns: minmax(120px, 200px) 1fr auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.stat-bars__label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.stat-bars__track {
+  position: relative;
+  height: 18px;
+  background: var(--paper-deep);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stat-bars__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--forest);
+  border-radius: 0 4px 4px 0;
+  transition: background-color 0.15s ease;
+}
+
+.stat-bars__row:hover .stat-bars__fill {
+  background: var(--amber);
+}
+
+.stat-bars__value {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--forest);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-bars__fill {
+    transition: none;
+  }
+}
+
+.meter-row {
+  display: grid;
+  gap: 16px;
+  margin: 20px 0 24px;
+  max-width: 68ch;
+}
+
+.meter__label {
+  font-size: 14.5px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.meter__label strong {
+  color: var(--forest);
+}
+
+.meter__tag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 7px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--paper-deep);
+  border-radius: 999px;
+}
+
+.meter__track {
+  position: relative;
+  height: 10px;
+  background: var(--paper-deep);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.meter__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--forest);
+  border-radius: 999px;
+  transition: background-color 0.15s ease;
+}
+
+.meter:hover .meter__fill {
+  background: var(--amber);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meter__fill {
+    transition: none;
+  }
+}
+
 /* ---------- not found ---------- */
 .not-found {
   padding-block: clamp(80px, 14vw, 160px);
