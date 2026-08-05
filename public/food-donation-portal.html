@@ -1,0 +1,1328 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harvest Ledger Trust — Donation Portal | Code for Good 2022</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f4f5f1;
+        --surface: #ffffff;
+        --ink: #2c332e;
+        --ink-mid: #525c55;
+        --ink-soft: #7d877f;
+        --sage: #93ac96;
+        --sage-deep: #4f6b56;
+        --wheat: #dcc28c;
+        --wheat-deep: #bfa164;
+        --line: #e2e5de;
+        --line-soft: #edefe9;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: #e8eae4;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-font-smoothing: antialiased;
+      }
+      ::selection {
+        background: var(--wheat);
+        color: var(--ink);
+      }
+
+      /* ---------- fixed 16:9 canvas ---------- */
+      .deck {
+        position: relative;
+        width: 1280px;
+        height: 720px;
+        flex: 0 0 auto;
+        transform-origin: center center;
+        background: var(--bg);
+        overflow: hidden;
+        box-shadow: 0 18px 50px rgba(59, 68, 62, 0.18);
+        border-radius: 2px;
+      }
+      section {
+        position: absolute;
+        inset: 0;
+        width: 1280px;
+        height: 720px;
+        padding: 74px 84px 62px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition:
+          opacity 0.45s ease,
+          transform 0.45s ease,
+          visibility 0s linear 0.45s;
+        pointer-events: none;
+      }
+      section.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition:
+          opacity 0.45s ease,
+          transform 0.45s ease;
+        pointer-events: auto;
+      }
+      section.center {
+        justify-content: center;
+      }
+
+      /* ---------- shared slide furniture ---------- */
+      .slidenum {
+        position: absolute;
+        top: 36px;
+        left: 84px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        color: var(--ink-soft);
+        letter-spacing: 0.08em;
+      }
+      .slidenum b {
+        color: var(--sage-deep);
+        font-weight: 500;
+      }
+      .corner {
+        position: absolute;
+        top: 36px;
+        right: 84px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.66rem;
+        color: var(--ink-soft);
+        letter-spacing: 0.1em;
+        text-align: right;
+        line-height: 1.6;
+        text-transform: uppercase;
+      }
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--sage-deep);
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 14px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 18px;
+        height: 1px;
+        background: var(--sage);
+      }
+      h2.title {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+        font-size: 2.15rem;
+        line-height: 1.25;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+        max-width: 780px;
+        margin-bottom: 34px;
+      }
+      h2.title em {
+        font-style: italic;
+        color: var(--sage-deep);
+      }
+      .body-text {
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: var(--ink-mid);
+      }
+
+      /* ---------- rail nav ---------- */
+      .railnav {
+        position: fixed;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+      }
+      .railnav a {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: transparent;
+        border: 1px solid #b6beb4;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.25s ease;
+      }
+      .railnav a:hover,
+      .railnav a.active {
+        background: var(--sage-deep);
+        border-color: var(--sage-deep);
+        transform: scale(1.35);
+      }
+      .railnav a span {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.6rem;
+        white-space: nowrap;
+        color: var(--bg);
+        background: var(--ink);
+        padding: 3px 8px;
+        border-radius: 3px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+      .railnav a:hover span {
+        opacity: 1;
+      }
+      @media (max-width: 900px) {
+        .railnav {
+          display: none;
+        }
+      }
+
+      /* ---------- controls ---------- */
+      .controls {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 18px;
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        pointer-events: none;
+      }
+      .controls button {
+        pointer-events: auto;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid #c9d0c6;
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--ink-mid);
+        font-size: 0.85rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+      .controls button:hover {
+        background: var(--sage-deep);
+        border-color: var(--sage-deep);
+        color: #fff;
+      }
+      .controls button:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+      .controls button:disabled:hover {
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--ink-mid);
+      }
+      .counter {
+        pointer-events: auto;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.66rem;
+        color: var(--ink-mid);
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid #c9d0c6;
+        padding: 8px 13px;
+        border-radius: 16px;
+        letter-spacing: 0.06em;
+      }
+      .counter b {
+        color: var(--sage-deep);
+        font-weight: 500;
+      }
+
+      /* ================= 01 COVER ================= */
+      #cover {
+        padding-left: 84px;
+      }
+      .cover-grid {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 70px;
+        align-items: center;
+      }
+      .kicker {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        margin-bottom: 20px;
+      }
+      h1 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+        font-size: 3.5rem;
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+      }
+      h1 em {
+        font-style: italic;
+        color: var(--sage-deep);
+      }
+      .cover-sub {
+        margin-top: 20px;
+        max-width: 460px;
+        font-size: 0.97rem;
+        line-height: 1.7;
+        color: var(--ink-mid);
+      }
+      .cover-stats {
+        display: flex;
+        gap: 44px;
+        margin-top: 40px;
+      }
+      .cstat b {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+        font-size: 1.95rem;
+        display: block;
+        color: var(--sage-deep);
+      }
+      .cstat span {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.64rem;
+        color: var(--ink-soft);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        line-height: 1.5;
+        display: block;
+        margin-top: 4px;
+        max-width: 150px;
+      }
+      .source {
+        margin-top: 22px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.64rem;
+        color: var(--ink-soft);
+      }
+      .seal {
+        width: 132px;
+        height: 132px;
+        border-radius: 50%;
+        border: 1px solid var(--sage);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .seal::before {
+        content: "";
+        position: absolute;
+        inset: 8px;
+        border: 1px dashed rgba(147, 172, 150, 0.6);
+        border-radius: 50%;
+      }
+      .seal-text {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.6rem;
+        text-align: center;
+        color: var(--sage-deep);
+        letter-spacing: 0.08em;
+        line-height: 1.7;
+      }
+      .seal-text b {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 500;
+        color: var(--ink);
+      }
+
+      /* ================= lists ================= */
+      .list {
+        list-style: none;
+        max-width: 790px;
+      }
+      .list li {
+        display: block;
+        position: relative;
+        padding: 17px 0 17px 20px;
+        border-bottom: 1px solid var(--line-soft);
+        font-size: 0.97rem;
+        line-height: 1.7;
+        color: var(--ink-mid);
+      }
+      .list li:last-child {
+        border-bottom: none;
+      }
+      .list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 26px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--sage);
+      }
+      .list li b {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 48px;
+        align-items: start;
+      }
+      .note-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 26px;
+        border-top: 2px solid var(--wheat);
+      }
+      .note-card h3 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+        font-size: 1.12rem;
+        margin-bottom: 10px;
+        color: var(--ink);
+      }
+      .note-card p {
+        font-size: 0.9rem;
+        line-height: 1.65;
+        color: var(--ink-mid);
+      }
+
+      /* ================= product screens ================= */
+      .screens {
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+      .frame {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .frame-bar {
+        background: #f0f2ec;
+        padding: 7px 11px;
+        display: flex;
+        gap: 5px;
+        border-bottom: 1px solid var(--line);
+      }
+      .frame-bar i {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #cfd6cb;
+        display: block;
+      }
+      .frame-nav {
+        padding: 9px 13px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--line-soft);
+      }
+      .frame-nav .brand {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+        font-size: 0.82rem;
+        color: var(--sage-deep);
+      }
+      .frame-nav .links {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.55rem;
+        color: var(--ink-soft);
+        letter-spacing: 0.08em;
+      }
+      .frame-nav .links u {
+        color: var(--wheat-deep);
+        text-decoration: none;
+      }
+      .frame-body {
+        padding: 13px;
+      }
+      .promo {
+        background: linear-gradient(120deg, #efe3c6, #e4eae0);
+        border-radius: 4px;
+        padding: 13px;
+        margin-bottom: 11px;
+      }
+      .promo strong {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+        font-size: 0.88rem;
+        color: var(--ink);
+        display: block;
+      }
+      .promo small {
+        font-size: 0.6rem;
+        color: var(--ink-mid);
+        display: block;
+        margin-top: 3px;
+      }
+      .items {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .item {
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 9px;
+        text-align: center;
+        background: #fcfdfb;
+      }
+      .item .ic {
+        font-size: 1.25rem;
+        line-height: 1.3;
+      }
+      .item .nm {
+        font-size: 0.66rem;
+        font-weight: 500;
+        margin-top: 3px;
+        color: var(--ink);
+      }
+      .item .pr {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.58rem;
+        color: var(--sage-deep);
+        margin-top: 1px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 7px 0;
+        border-bottom: 1px solid var(--line-soft);
+        font-size: 0.72rem;
+        color: var(--ink);
+      }
+      .row .q {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--ink-mid);
+      }
+      .btn {
+        margin-top: 11px;
+        background: var(--sage-deep);
+        color: #fff;
+        text-align: center;
+        padding: 8px;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 500;
+      }
+      .btn.dark {
+        background: var(--ink);
+      }
+      .field {
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 7px 9px;
+        font-size: 0.68rem;
+        color: var(--ink-soft);
+        margin-bottom: 6px;
+        background: #fcfdfb;
+      }
+      .cap {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.62rem;
+        color: var(--ink-soft);
+        text-align: center;
+        margin-top: 7px;
+        letter-spacing: 0.06em;
+      }
+
+      /* ================= roles ================= */
+      .roles {
+        display: grid;
+        grid-template-columns: 1fr 78px 1fr;
+        gap: 20px;
+        align-items: center;
+        max-width: 900px;
+      }
+      .role {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 24px;
+      }
+      .role.a {
+        border-top: 2px solid var(--sage);
+      }
+      .role.b {
+        border-top: 2px solid var(--wheat);
+      }
+      .role h3 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+        font-size: 1.18rem;
+        margin-bottom: 13px;
+        color: var(--ink);
+      }
+      .role ul {
+        list-style: none;
+      }
+      .role li {
+        font-size: 0.87rem;
+        line-height: 1.5;
+        color: var(--ink-mid);
+        padding: 8px 0 8px 18px;
+        border-bottom: 1px solid var(--line-soft);
+        position: relative;
+      }
+      .role li:last-child {
+        border-bottom: none;
+      }
+      .role li::before {
+        content: "—";
+        color: var(--ink-soft);
+        position: absolute;
+        left: 0;
+        top: 8px;
+      }
+      .mid {
+        text-align: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.6rem;
+        color: var(--ink-soft);
+        letter-spacing: 0.12em;
+      }
+      .mid svg {
+        display: block;
+        margin: 0 auto 7px;
+      }
+
+      /* ================= schema ================= */
+      .schema {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .entity {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .entity header {
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 500;
+        font-size: 0.7rem;
+        letter-spacing: 0.05em;
+        padding: 8px 12px;
+        background: #eff2ec;
+        color: var(--ink);
+        border-bottom: 1px solid var(--line);
+      }
+      .entity ul {
+        list-style: none;
+        padding: 11px 12px;
+      }
+      .entity li {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.71rem;
+        color: var(--ink-mid);
+        padding: 3px 0;
+      }
+      .foot-note {
+        margin-top: 22px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.66rem;
+        color: var(--ink-soft);
+      }
+
+      /* ================= stack ================= */
+      .stack {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        max-width: 940px;
+      }
+      .stack h3 {
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 500;
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--sage-deep);
+        margin-bottom: 14px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+      .chip {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.74rem;
+        padding: 7px 13px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--ink-mid);
+      }
+
+      /* ================= features ================= */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .feat {
+        background: var(--surface);
+        padding: 22px;
+      }
+      .feat span {
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 500;
+        font-size: 0.63rem;
+        color: var(--wheat-deep);
+        display: block;
+        margin-bottom: 8px;
+        letter-spacing: 0.08em;
+      }
+      .feat p {
+        font-size: 0.89rem;
+        line-height: 1.55;
+        color: var(--ink-mid);
+      }
+
+      /* ================= roadmap ================= */
+      .road {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 26px;
+        max-width: 960px;
+      }
+      .step {
+        border-top: 1px solid var(--sage);
+        padding-top: 20px;
+        position: relative;
+      }
+      .step::before {
+        content: "";
+        position: absolute;
+        top: -4px;
+        left: 0;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--sage-deep);
+      }
+      .step h4 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+        font-size: 1.04rem;
+        margin-bottom: 7px;
+        color: var(--ink);
+      }
+      .step p {
+        font-size: 0.88rem;
+        line-height: 1.55;
+        color: var(--ink-mid);
+      }
+
+      /* ================= team ================= */
+      .team {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 14px;
+        max-width: 900px;
+      }
+      .person {
+        text-align: center;
+      }
+      .face {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin: 0 auto 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Inter", system-ui, sans-serif;
+        font-weight: 600;
+        font-size: 0.82rem;
+        color: #fff;
+      }
+      .person .n {
+        font-size: 0.74rem;
+        color: var(--ink);
+        line-height: 1.35;
+      }
+      .credits {
+        margin-top: 44px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        gap: 52px;
+      }
+      .credits div {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.71rem;
+        color: var(--ink-mid);
+      }
+      .credits b {
+        display: block;
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 0.6rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--sage-deep);
+        margin-bottom: 5px;
+        font-weight: 500;
+      }
+
+      /* ================= closing ================= */
+      #closing {
+        align-items: center;
+        text-align: center;
+      }
+      #closing h2 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+        font-size: 2.9rem;
+        color: var(--ink);
+        margin-bottom: 14px;
+      }
+      #closing p {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        color: var(--ink-soft);
+        letter-spacing: 0.1em;
+      }
+      #closing .seal {
+        margin-top: 30px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        section {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="railnav">
+      <a data-t="cover" class="active"><span>Cover</span></a>
+      <a data-t="problem"><span>Problem</span></a>
+      <a data-t="solution"><span>Solution</span></a>
+      <a data-t="screens"><span>Product</span></a>
+      <a data-t="roles"><span>Roles</span></a>
+      <a data-t="schema"><span>Data model</span></a>
+      <a data-t="stack"><span>Tech stack</span></a>
+      <a data-t="features"><span>Features</span></a>
+      <a data-t="roadmap"><span>Roadmap</span></a>
+      <a data-t="team"><span>Team</span></a>
+      <a data-t="closing"><span>Close</span></a>
+    </nav>
+
+    <div class="deck">
+      <!-- 01 COVER -->
+      <section id="cover" class="active center">
+        <div class="corner">JPMorgan Chase &amp; Co.<br />Code for Good 2022 · Team 02</div>
+        <div class="cover-grid">
+          <div>
+            <div class="kicker">Harvest Ledger Trust · Digital donations</div>
+            <h1>A ledger for<br />every grain <em>given.</em></h1>
+            <p class="cover-sub">
+              A donation portal where people fund exact food items at real market prices — and the
+              food bank steers what gets funded next.
+            </p>
+            <div class="cover-stats">
+              <div class="cstat">
+                <b>78M</b><span>Tonnes of food wasted in India each year</span>
+              </div>
+              <div class="cstat"><b>194M</b><span>People undernourished nationwide</span></div>
+              <div class="cstat">
+                <b
+                  >111<span style="display: inline; font-size: 0.9rem; color: var(--ink-soft)"
+                    >/125</span
+                  ></b
+                ><span>India's Global Hunger Index rank</span>
+              </div>
+            </div>
+            <div class="source">UNEP Food Waste Index 2024 · Global Hunger Index 2023</div>
+          </div>
+          <div class="seal">
+            <div class="seal-text"><b>ZERO-BIT</b>SCRIPTERS<br />TEAM 02</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 PROBLEM -->
+      <section id="problem">
+        <div class="slidenum"><b>02</b> / 11</div>
+        <div class="corner">Harvest Ledger Trust</div>
+        <div class="eyebrow">The brief</div>
+        <h2 class="title">Turning cash into <em>specific</em> food, not vague goodwill.</h2>
+        <ul class="list">
+          <li>
+            <b>Give by the item.</b> Donors should see food items priced at market rate, pick what
+            and how much, then pay that exact total.
+          </li>
+          <li>
+            <b>Prices move.</b> The NGO needs to revise per-item pricing themselves, without
+            touching code.
+          </li>
+          <li>
+            <b>Campaigns steer demand.</b> The food bank wants to push a particular grain or
+            seasonal drive from the same portal.
+          </li>
+          <li>
+            <b>Reach beyond the website.</b> A printable QR code for malls and partner storefronts,
+            and room to onboard partner organizations.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 03 SOLUTION -->
+      <section id="solution">
+        <div class="slidenum"><b>03</b> / 11</div>
+        <div class="corner">Harvest Ledger Trust</div>
+        <div class="eyebrow">Our solution</div>
+        <h2 class="title">
+          One portal, two vantage points — a shelf to give from, a ledger to run it from.
+        </h2>
+        <div class="two-col">
+          <ul class="list">
+            <li>
+              <b>For donors.</b> An item-level catalogue — wheat, rice, pulses — with quantity
+              controls, so a gift is tracked as food, not as a rupee figure.
+            </li>
+            <li>
+              <b>For the food bank.</b> An admin dashboard to add or retire items, revise prices as
+              the market moves, and read back donation insights.
+            </li>
+            <li>
+              <b>For campaigns.</b> Banners the admin controls directly, pointing donors at whatever
+              is running short.
+            </li>
+          </ul>
+          <div class="note-card">
+            <h3>Why item-level</h3>
+            <p>
+              Naming the grain instead of an amount turns a donation into a decision — the same
+              instinct behind a gift registry. It also hands the NGO a live signal of what's stocked
+              versus what's needed.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 SCREENS -->
+      <section id="screens">
+        <div class="slidenum"><b>04</b> / 11</div>
+        <div class="corner">Product walkthrough</div>
+        <div class="eyebrow">The product</div>
+        <h2 class="title">From homepage to checkout, in three screens.</h2>
+        <div class="screens">
+          <div>
+            <div class="frame">
+              <div class="frame-bar"><i></i><i></i><i></i></div>
+              <div class="frame-nav">
+                <span class="brand">harvest ledger trust</span>
+                <span class="links">HOME · ABOUT · <u>DONATE</u></span>
+              </div>
+              <div class="frame-body">
+                <div class="promo">
+                  <strong>You and us — together, we can make a difference</strong>
+                  <small>Admin-configurable campaign banner</small>
+                </div>
+                <div class="items">
+                  <div class="item">
+                    <div class="ic">🌾</div>
+                    <div class="nm">Wheat</div>
+                    <div class="pr">₹32 / kg</div>
+                  </div>
+                  <div class="item">
+                    <div class="ic">🍚</div>
+                    <div class="nm">Rice</div>
+                    <div class="pr">₹41 / kg</div>
+                  </div>
+                  <div class="item">
+                    <div class="ic">🫘</div>
+                    <div class="nm">Toor Dal</div>
+                    <div class="pr">₹118 / kg</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cap">public catalogue — priced &amp; live</div>
+          </div>
+          <div>
+            <div class="frame">
+              <div class="frame-bar"><i></i><i></i><i></i></div>
+              <div class="frame-body">
+                <div class="row"><span>Wheat</span><span class="q">2 kg · ₹64</span></div>
+                <div class="row"><span>Rice</span><span class="q">3 kg · ₹123</span></div>
+                <div class="row" style="border-bottom: none">
+                  <span>Toor Dal</span><span class="q">1 kg · ₹118</span>
+                </div>
+                <div class="btn">Checkout · ₹305 total</div>
+              </div>
+            </div>
+            <div class="cap">cart — totalled automatically</div>
+            <div class="frame" style="margin-top: 14px">
+              <div class="frame-bar"><i></i><i></i><i></i></div>
+              <div class="frame-body">
+                <div style="font-size: 0.74rem; font-weight: 500; margin-bottom: 8px">
+                  Admin login
+                </div>
+                <div class="field">your email</div>
+                <div class="field">your password</div>
+                <div class="btn dark" style="margin-top: 6px">Login now</div>
+              </div>
+            </div>
+            <div class="cap">admin access — JWT secured</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 ROLES -->
+      <section id="roles">
+        <div class="slidenum"><b>05</b> / 11</div>
+        <div class="corner">Access model</div>
+        <div class="eyebrow">Who does what</div>
+        <h2 class="title">Two roles, one shared ledger.</h2>
+        <div class="roles">
+          <div class="role a">
+            <h3>Donor</h3>
+            <ul>
+              <li>Adds any quantity of any food item to the cart</li>
+              <li>Checks out by paying the exact donation amount</li>
+              <li>Sees campaign banners and links across the portal</li>
+            </ul>
+          </div>
+          <div class="mid">
+            <svg width="56" height="14" viewBox="0 0 56 14" fill="none">
+              <path d="M55 7H1M1 7L8 2M1 7L8 12" stroke="#93AC96" stroke-width="1.2" />
+            </svg>
+            GIVES TO
+          </div>
+          <div class="role b">
+            <h3>Administrator</h3>
+            <ul>
+              <li>Views and updates the overall inventory</li>
+              <li>Marks an item as bought or fulfilled</li>
+              <li>Adds, edits or retires items and their pricing</li>
+              <li>Authenticates via JSON Web Tokens</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 SCHEMA -->
+      <section id="schema">
+        <div class="slidenum"><b>06</b> / 11</div>
+        <div class="corner">Data model</div>
+        <div class="eyebrow">Under the hood</div>
+        <h2 class="title">Four collections keep the shelf and the ledger in sync.</h2>
+        <div class="schema">
+          <div class="entity">
+            <header>Item</header>
+            <ul>
+              <li>itemName</li>
+              <li>pricePerKg</li>
+              <li>imageUrl</li>
+              <li>basicUnit</li>
+              <li>foodItemType</li>
+              <li>displayOnPage</li>
+            </ul>
+          </div>
+          <div class="entity">
+            <header>Inventory</header>
+            <ul>
+              <li>itemId</li>
+              <li>quantity</li>
+              <li>donatedQuantity</li>
+              <li style="color: var(--ink-soft)">actual vs donated,<br />tracked separately</li>
+            </ul>
+          </div>
+          <div class="entity">
+            <header>Donor</header>
+            <ul>
+              <li>name</li>
+              <li>email</li>
+              <li>phone</li>
+              <li>donation[ ]</li>
+              <li style="color: var(--ink-soft)">date, contents,<br />payment reference</li>
+            </ul>
+          </div>
+          <div class="entity">
+            <header>Admin</header>
+            <ul>
+              <li>username</li>
+              <li>password</li>
+              <li>location</li>
+              <li>status</li>
+              <li>date</li>
+            </ul>
+          </div>
+        </div>
+        <p class="foot-note">
+          One donor record per gift, itemised — so every rupee maps back to a named food item.
+        </p>
+      </section>
+
+      <!-- 07 STACK -->
+      <section id="stack">
+        <div class="slidenum"><b>07</b> / 11</div>
+        <div class="corner">Engineering</div>
+        <div class="eyebrow">Tech stack</div>
+        <h2 class="title">Built to ship in a weekend, structured to outlive it.</h2>
+        <div class="stack">
+          <div>
+            <h3>Front end</h3>
+            <div class="chips">
+              <span class="chip">HTML</span><span class="chip">CSS</span
+              ><span class="chip">JavaScript</span><span class="chip">jQuery</span
+              ><span class="chip">Swiper</span>
+            </div>
+          </div>
+          <div>
+            <h3>Back end</h3>
+            <div class="chips">
+              <span class="chip">Node.js</span><span class="chip">Express</span
+              ><span class="chip">express-validator</span><span class="chip">bcrypt</span
+              ><span class="chip">jsonwebtoken</span><span class="chip">config</span
+              ><span class="chip">request</span>
+            </div>
+          </div>
+          <div>
+            <h3>Data &amp; payments</h3>
+            <div class="chips">
+              <span class="chip">MongoDB</span><span class="chip">Mongoose</span
+              ><span class="chip">Razorpay</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08 FEATURES -->
+      <section id="features">
+        <div class="slidenum"><b>08</b> / 11</div>
+        <div class="corner">Salient features</div>
+        <div class="eyebrow">What shipped</div>
+        <h2 class="title">Six things the portal does today.</h2>
+        <div class="features">
+          <div class="feat">
+            <span>ITEM-LEVEL GIVING</span>
+            <p>Donors give a specific quantity of a specific food item, not a generic amount.</p>
+          </div>
+          <div class="feat">
+            <span>ADMIN DASHBOARD</span>
+            <p>One place to manage items, quantities and overall inventory.</p>
+          </div>
+          <div class="feat">
+            <span>CAMPAIGN BANNERS</span>
+            <p>Admin-controlled banners steer donations toward what's short.</p>
+          </div>
+          <div class="feat">
+            <span>LIVE CART TOTAL</span>
+            <p>The cart re-totals as items and quantities change.</p>
+          </div>
+          <div class="feat">
+            <span>SECURE CHECKOUT</span>
+            <p>Authenticated payment flow through Razorpay.</p>
+          </div>
+          <div class="feat">
+            <span>PROTECTED ROUTES</span>
+            <p>JWT-secured admin routes, separate from the donor experience.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09 ROADMAP -->
+      <section id="roadmap">
+        <div class="slidenum"><b>09</b> / 11</div>
+        <div class="corner">Future scope</div>
+        <div class="eyebrow">What's next</div>
+        <h2 class="title">Where this goes from here.</h2>
+        <div class="road">
+          <div class="step">
+            <h4>Volunteer accounts</h4>
+            <p>
+              Registration and login for volunteers, so pickup and distribution are coordinated
+              inside the same portal.
+            </p>
+          </div>
+          <div class="step">
+            <h4>Live market pricing</h4>
+            <p>
+              Item prices update automatically via an external commodity price API, replacing manual
+              admin edits.
+            </p>
+          </div>
+          <div class="step">
+            <h4>Inventory analytics</h4>
+            <p>
+              Visualization over the inventory model — what's trending, what's running low, by
+              season and region.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10 TEAM -->
+      <section id="team">
+        <div class="slidenum"><b>10</b> / 11</div>
+        <div class="corner">Code for Good 2022</div>
+        <div class="eyebrow">Team 02 · Zero-Bit Scripters</div>
+        <h2 class="title">Seven people, one weekend.</h2>
+        <div class="team">
+          <div class="person">
+            <div class="face" style="background: #93ac96">AA</div>
+            <div class="n">Affan<br />Ahmed</div>
+          </div>
+          <div class="person">
+            <div class="face" style="background: #dcc28c">GS</div>
+            <div class="n">Gauransh<br />Shukla</div>
+          </div>
+          <div class="person">
+            <div class="face" style="background: #a8b9ae">HK</div>
+            <div class="n">Harshini<br />Konangi</div>
+          </div>
+          <div class="person">
+            <div class="face" style="background: #6d8a73">NG</div>
+            <div class="n">Nandini<br />Goyal</div>
+          </div>
+          <div class="person">
+            <div class="face" style="background: #bfa164">PA</div>
+            <div class="n">Pranjal<br />Arora</div>
+          </div>
+          <div class="person">
+            <div class="face" style="background: #93ac96">PP</div>
+            <div class="n">Pratyusha<br />Patidar</div>
+          </div>
+          <div class="person">
+            <div class="face" style="background: #a8b9ae">RS</div>
+            <div class="n">Rohan<br />Sharma</div>
+          </div>
+        </div>
+        <div class="credits">
+          <div><b>Team mentors</b>Nilesh Dhamandekar · Shatrunjay Mishra</div>
+          <div><b>Organized by</b>JPMorgan Chase &amp; Co. — Code for Good, 10th edition</div>
+          <div><b>Built for</b>Harvest Ledger Trust</div>
+        </div>
+      </section>
+
+      <!-- 11 CLOSING -->
+      <section id="closing" class="center">
+        <h2>Thank you.</h2>
+        <p>TEAM 02 · ZERO-BIT SCRIPTERS · CODE FOR GOOD 2022</p>
+        <div class="seal">
+          <div class="seal-text"><b>HARVEST</b>LEDGER TRUST<br />OVERCOMING HUNGER</div>
+        </div>
+      </section>
+    </div>
+    <!-- /deck -->
+
+    <div class="controls">
+      <button id="prev" aria-label="Previous slide">←</button>
+      <div class="counter"><b id="cur">01</b> / <span id="tot">11</span></div>
+      <button id="next" aria-label="Next slide">→</button>
+    </div>
+
+    <script>
+      const deck = document.querySelector(".deck");
+      function fit() {
+        const s = Math.min((window.innerWidth - 80) / 1280, (window.innerHeight - 90) / 720);
+        deck.style.transform = "scale(" + s + ")";
+      }
+      window.addEventListener("resize", fit);
+      fit();
+
+      const slides = Array.from(document.querySelectorAll(".deck > section"));
+      const dots = document.querySelectorAll(".railnav a");
+      const prev = document.getElementById("prev");
+      const next = document.getElementById("next");
+      const cur = document.getElementById("cur");
+      document.getElementById("tot").textContent = String(slides.length).padStart(2, "0");
+      let i = 0;
+
+      function render() {
+        slides.forEach((s, n) => s.classList.toggle("active", n === i));
+        dots.forEach((d) => d.classList.toggle("active", d.dataset.t === slides[i].id));
+        cur.textContent = String(i + 1).padStart(2, "0");
+        prev.disabled = i === 0;
+        next.disabled = i === slides.length - 1;
+        history.replaceState(null, "", "#" + slides[i].id);
+      }
+      function goTo(n) {
+        if (n < 0 || n >= slides.length || n === i) return;
+        i = n;
+        render();
+      }
+
+      prev.addEventListener("click", () => goTo(i - 1));
+      next.addEventListener("click", () => goTo(i + 1));
+      dots.forEach((d) =>
+        d.addEventListener("click", () => {
+          const n = slides.findIndex((s) => s.id === d.dataset.t);
+          if (n > -1) goTo(n);
+        }),
+      );
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") goTo(i + 1);
+        if (e.key === "ArrowLeft" || e.key === "PageUp") goTo(i - 1);
+        if (e.key === "Home") goTo(0);
+        if (e.key === "End") goTo(slides.length - 1);
+      });
+      let tx = null;
+      document.addEventListener("touchstart", (e) => {
+        tx = e.touches[0].clientX;
+      });
+      document.addEventListener("touchend", (e) => {
+        if (tx === null) return;
+        const d = e.changedTouches[0].clientX - tx;
+        if (d > 60) goTo(i - 1);
+        if (d < -60) goTo(i + 1);
+        tx = null;
+      });
+      const start = slides.findIndex((s) => s.id === location.hash.replace("#", ""));
+      if (start > -1) i = start;
+      render();
+    </script>
+  </body>
+</html>

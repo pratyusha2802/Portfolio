@@ -236,9 +236,12 @@ three, in full, beats five, thin.
   (`public/bangalore-food-bank-deck.html`, filename kept as-is since renaming
   it wouldn't scrub the real name from git history anyway) names the real NGO
   throughout its own content and is intentionally **not linked** from the
-  site for this reason — don't re-link it. If asked to add detail to this
-  case study, only use what's already in the anonymized `.md`/`portfolio.ts`
-  content; don't pull from the original deck.
+  site for this reason — don't re-link it. `public/food-donation-portal.html`
+  is a *different* file: a from-scratch recreation of the deck, anonymized
+  to "Harvest Ledger Trust" throughout, and it *is* linked from the case
+  study ("View deck"). If asked to add detail to this case study, only use
+  what's already in the anonymized `.md`/`portfolio.ts`/`food-donation-portal.html`
+  content; don't pull from the original, real-named deck.
 - **No apologetic framing.** "Although I don't have direct PM experience..." or
   any variant. State what she's done; don't hedge around what she hasn't.
 - **No framework name-dropping without the judgment call attached.** Naming
