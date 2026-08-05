@@ -1029,9 +1029,15 @@ a.work-card:hover {
   margin-bottom: 16px;
 }
 
-.case__head .pill {
-  display: inline-block;
+.case__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 18px;
+}
+
+.case__links .pill {
+  display: inline-block;
 }
 
 .case__body {
