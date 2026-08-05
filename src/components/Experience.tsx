@@ -1,5 +1,4 @@
 import { experience } from "../data/portfolio";
-import { riseDelay } from "../lib/rise";
 
 function Experience() {
   return (
@@ -30,13 +29,9 @@ function Experience() {
                 ))}
               </div>
 
-              <ul className="position-list">
-                {company.positions.map((position, i) => (
-                  <li
-                    className="position-item"
-                    key={`${position.title}-${position.start}`}
-                    style={riseDelay(i)}
-                  >
+              <ul className="position-list rise">
+                {company.positions.map((position) => (
+                  <li className="position-item rise" key={`${position.title}-${position.start}`}>
                     <div className="position-item__head">
                       <h4 className="position-item__title">{position.title}</h4>
                       <span className="position-item__meta">
