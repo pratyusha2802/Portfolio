@@ -24,10 +24,14 @@ shipped product.
 ## Context
 
 A 12-person team deliverable (Team Token Tikkas) from an AI product
-management programme, submitted August 2026. My work spanned primary and
-secondary research, the hypothesis testing that drove the pivot to the final
-problem statement, solution design and MVP scoping, and writing the team's
-PRD.
+management programme, submitted August 2026.
+
+My work:
+
+- Primary and secondary research
+- The hypothesis testing that drove the pivot to the final problem statement
+- Solution design and MVP scoping
+- Writing the team's PRD
 
 ## The problem
 
@@ -35,8 +39,10 @@ Research into India's elder care ecosystem surfaced a paradox: the market
 isn't short on services. Home healthcare, home nursing, teleconsultation,
 medication management, emergency response, assisted living, and caregiver
 agencies all already exist — India's home healthcare market alone was valued
-near USD 6.2 billion. What was missing, consistently, was a single trusted
-place for families to find, compare, and verify them.
+near USD 6.2 billion.
+
+**What was missing, consistently, was a single trusted place** for families
+to find, compare, and verify them.
 
 Two hypotheses were tested against primary research (48 survey responses
 across adult children, elderly respondents, caregivers, NGO workers, and
@@ -64,8 +70,8 @@ What the data converged on instead:
   recommendation together — either alone left the large majority of
   respondents unconvinced.
 
-The common thread across these findings was discovery and coordination, not
-care availability itself.
+**The common thread:** discovery and coordination, not care availability
+itself.
 
 ## Constraints
 
@@ -91,10 +97,10 @@ Research combined:
 - Three additional contributions from an old-age-home operator, a
   caregiver-platform founder, and independent workforce research
 
-Driving the pivot away from both starting hypotheses and toward the pattern
-the data actually showed — that families weren't blocked by a shortage of
-trustworthy care, but by not knowing where to look for it — was my work
-directly.
+**Driving the pivot** away from both starting hypotheses and toward the
+pattern the data actually showed — that families weren't blocked by a
+shortage of trustworthy care, but by not knowing where to look for it — was
+my work directly.
 
 ## Options considered
 
@@ -106,28 +112,38 @@ directly.
 
 ## Decision and the tradeoff it cost
 
-The team chose a two-sided aggregator that hands users off to a provider's
-own site to complete booking, rather than owning bookings and payments
-directly. That kept the platform software-light and avoided taking on
-hiring, training, and liability costs that would scale with volume.
+**The team chose a two-sided aggregator** that hands users off to a
+provider's own site to complete booking, rather than owning bookings and
+payments directly. That kept the platform software-light and avoided taking
+on hiring, training, and liability costs that would scale with volume.
 
-The real cost: no visibility into what happens after handoff — a slow or
+**The real cost:** no visibility into what happens after handoff — a slow or
 broken provider website, or a provider who simply doesn't convert a lead,
 becomes a failure the platform can neither see nor fix.
 
-I worked on this comparison and the MVP scope that followed from it —
-location/care-type search, filters, a service detail and reviews view, and
-mobile-number capture before redirect — deliberately leaving booking,
-payments, and a provider dashboard for a later phase.
+I worked on this comparison and the MVP scope that followed from it. In
+scope:
+
+- Location/care-type search
+- Filters
+- A service detail and reviews view
+- Mobile-number capture before redirect
+
+Deliberately left for a later phase: booking, payments, and a provider
+dashboard.
 
 ## What shipped / what the concept is
 
-Paarth is a **concept** — a PRD, not a shipped product. It proposes a
-two-sided elder-care discovery platform: adult children search by location
-and care type, filter and compare providers, and get redirected to the
-provider's own site to complete booking; providers get visibility and
-qualified demand without paying for it upfront. Scoped to 5 Indian cities for
-initial launch. A [working prototype of the concept exists as a Claude
+Paarth is a **concept** — a PRD, not a shipped product. What it proposes:
+
+- Adult children search by location and care type, filter and compare
+  providers, and get redirected to the provider's own site to complete
+  booking.
+- Providers get visibility and qualified demand without paying for it
+  upfront.
+- Scoped to 5 Indian cities for initial launch.
+
+A [working prototype of the concept exists as a Claude
 artifact](https://claude.ai/code/artifact/155cdbed-1dff-47b8-9c25-eceb00f78503) —
 it's cohort work, so it also names the teammates and mentors on the project
 alongside my own contribution.
@@ -135,25 +151,29 @@ alongside my own contribution.
 ## How I'd measure success
 
 The PRD defines two targets for the concept, both hypothetical — nothing has
-shipped or been measured: a 15–20% search-to-booking conversion rate within 3
-months of launch, and an 80%+ redirect-completion rate (users who enter a
-phone number and actually reach the provider's site). Neither is a result;
-both are what the team judged "working" would look like.
+shipped or been measured:
+
+- 15–20% search-to-booking conversion rate within 3 months of launch
+- 80%+ redirect-completion rate (users who enter a phone number and actually
+  reach the provider's site)
+
+Neither is a result; both are what the team judged "working" would look
+like.
 
 ## What I'd do differently
 
-The handoff model's biggest open risk is one the PRD names but doesn't
-resolve: provider participation. A discovery platform is only as useful as
-the supply behind it, and there's no confirmed answer for how agencies get
-persuaded to onboard before there's a user base to justify it — the classic
-two-sided cold-start problem. If I were taking this further, I'd want that
-answered with real provider conversations before writing another line of the
-MVP spec, not after.
+**The biggest open risk** is one the PRD names but doesn't resolve: provider
+participation. A discovery platform is only as useful as the supply behind
+it, and there's no confirmed answer for how agencies get persuaded to onboard
+before there's a user base to justify it — the classic two-sided cold-start
+problem. If I were taking this further, I'd want that answered with real
+provider conversations before writing another line of the MVP spec, not
+after.
 
-What stuck with me from this project wasn't the platform concept — it was
-how wrong the starting hypotheses were. Family-less elders, the more dramatic
-framing, wasn't a real segment in the data at all. Caregiver trust, the
-obvious pain point, was only a minor one. The actual problem only became
+**What stuck with me** from this project wasn't the platform concept — it
+was how wrong the starting hypotheses were. Family-less elders, the more
+dramatic framing, wasn't a real segment in the data at all. Caregiver trust,
+the obvious pain point, was only a minor one. The actual problem only became
 visible by looking at what four unrelated findings had in common, not by
 chasing the hypothesis that sounded most compelling going in. Evidence over
 intuition is easy to say and easy to skip once there's a deadline attached.
