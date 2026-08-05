@@ -110,7 +110,7 @@ export const profile = {
   role: "Software Engineer, JPMorgan Chase",
 
   tagline:
-    "Software engineer at JPMorgan Chase, moving into product management. I've spent two years building interfaces used by 300,000+ employees. Now I spend as much time on what's worth building as on how to build it.",
+    "Software engineer at JPMorgan Chase, where I spent two years building internal products used by 300,000+ employees. Today, I'm increasingly drawn to the work that comes before the code: understanding users, defining problems, and deciding what deserves to be built.",
 
   about: [
     "I'm a software engineer at JPMorgan Chase, moving toward product management.",
