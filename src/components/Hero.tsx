@@ -29,7 +29,7 @@ function Hero() {
         </div>
         <div>
           <p className="hero__lede rise" style={riseDelay(2)}>
-            {profile.tagline}
+            <strong>{principles[0]}.</strong> {profile.tagline}
           </p>
           <div className="hero__actions">
             {linkedin && (
