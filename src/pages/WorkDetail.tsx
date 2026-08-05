@@ -44,7 +44,7 @@ function WorkDetail() {
         </div>
         {item.href && (
           <a className="pill" href={item.href} target="_blank" rel="noreferrer">
-            View live
+            {item.hrefLabel ?? "View live"}
           </a>
         )}
       </header>

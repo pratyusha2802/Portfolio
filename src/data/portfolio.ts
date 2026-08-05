@@ -55,6 +55,8 @@ export interface WorkItem {
   stages?: Stage[];
   tools: string[];
   href?: string; // live link — empty until real
+  /** Overrides the default "View live" label — use for a prototype/concept link that isn't an actual shipped, running product. */
+  hrefLabel?: string;
   repo?: string;
   reflection?: string;
   /** Exact card sub-heading line, e.g. "Self-directed discovery project · 2025". Overrides the default type/context/tools line when present. */
@@ -183,7 +185,9 @@ export const work: WorkItem[] = [
     ],
     measure:
       "Two hypothetical targets defined for the concept: 15–20% search-to-booking conversion within 3 months, 80%+ redirect completion rate. Neither is a measured result — nothing has shipped.",
-    tools: ["Google Forms"],
+    tools: [],
+    href: "https://claude.ai/code/artifact/155cdbed-1dff-47b8-9c25-eceb00f78503",
+    hrefLabel: "View prototype",
   },
   {
     slug: "gig-economy-worker-passport",
