@@ -451,17 +451,72 @@ button {
   font-size: clamp(16px, 1.15vw, 18px);
 }
 
-.experience-list {
+.company-list {
   display: grid;
-  gap: clamp(22px, 2.6vw, 32px);
+  gap: clamp(28px, 3.2vw, 40px);
 }
 
-.experience-item {
+.company-block {
   padding-top: clamp(18px, 2vw, 24px);
   border-top: var(--rule);
 }
 
-.experience-item__head {
+.company-block__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-bottom: clamp(18px, 2.2vw, 26px);
+}
+
+.company-block__name {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(19px, 1.9vw, 23px);
+  letter-spacing: -0.01em;
+}
+
+.company-block__meta {
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+/* A vertical line connects the positions held at one company; each
+   position gets a dot on it, like a small timeline. */
+.position-list {
+  position: relative;
+  display: grid;
+  gap: clamp(20px, 2.4vw, 28px);
+  padding-left: 22px;
+}
+
+.position-list::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: rgba(46, 33, 56, 0.16);
+}
+
+.position-item {
+  position: relative;
+}
+
+.position-item::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--forest);
+}
+
+.position-item__head {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -469,15 +524,15 @@ button {
   margin-bottom: 10px;
 }
 
-.experience-item__title {
+.position-item__title {
   font-family: var(--display);
-  font-weight: 800;
-  font-size: clamp(17px, 1.6vw, 20px);
+  font-weight: 700;
+  font-size: clamp(16px, 1.4vw, 18px);
   letter-spacing: -0.01em;
 }
 
-.experience-item__meta {
-  font-size: 13.5px;
+.position-item__meta {
+  font-size: 13px;
   color: var(--muted);
 }
 
