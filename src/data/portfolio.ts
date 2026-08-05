@@ -102,11 +102,10 @@ export const profile = {
   role: "Software Engineer, JPMorgan Chase",
 
   tagline:
-    "Software engineer at JPMorgan Chase, moving into product management. I've spent two years building interfaces used by 300,000+ employees. Now I spend as much time on what's worth building as on how to build it.",
+    "Software engineer at JPMorgan Chase, building interfaces used by 300,000+ employees for two years. Now I spend as much time on what's worth building as on how to build it.",
 
   about: [
-    "I'm a software engineer at JPMorgan Chase, moving toward product management.",
-    "Right now I'm a frontend developer on a new internal desktop assistant. Before that I spent a year and a half on the Core UI team behind an employee productivity application used by 300,000+ people across the firm — the team that owns the shared component layer both the core product and every team-built add-on depends on. Other teams across the bank build features that plug into that platform and ship on their own release cycle, which meant our users were internal developers as much as employees.",
+    "Right now I'm a frontend developer on a new internal desktop assistant. Before that, I spent a year and a half on the Core UI team building the shared component layer for an employee productivity platform used by 300,000+ people — including the add-ons other teams built on top of it. My users were often other developers, not just employees.",
     "I'm drawn to the parts of a product that don't announce themselves: the error state, the second-year maintenance cost, the flow nobody diagrammed. Building for teams I didn't control taught me the hardest problems sit upstream of the code — which problem is worth solving, whose constraint actually binds, and what \"good\" means before anyone has agreed how to measure it.",
     "So I've started doing product work deliberately, outside my job, and publishing what comes out of it.",
   ],
