@@ -3,13 +3,20 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build && cp dist/index.html dist/404.html",
     "lint": "oxlint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "preview": "vite preview"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "verify": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run build",
+    "preview": "vite preview",
+    "prepare": "husky"
   },
   "dependencies": {
     "marked": "^18.0.7",
@@ -21,13 +28,20 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "oxlint": "^1.71.0",
     "prettier": "^3.9.6",
     "typescript": "^7.0.2",
-    "vite": "^8.1.1"
+    "vite": "^8.1.1",
+    "vitest": "^4.1.10"
   },
   "optionalDependencies": {
-    "@rolldown/binding-darwin-arm64": "1.1.5",
-    "@oxlint/binding-darwin-arm64": "1.74.0"
+    "@oxlint/binding-darwin-arm64": "1.74.0",
+    "@rolldown/binding-darwin-arm64": "1.1.5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "oxlint",
+    "*.{ts,tsx,js,jsx,json,css,md}": "prettier --write"
   }
 }

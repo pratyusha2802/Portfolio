@@ -1,0 +1,22 @@
+name: CI
+
+# Quality gate for dev and master: type checks, lint, format, and a
+# production build must pass before anything lands on either branch.
+# Separate from deploy.yml, which only runs on master and publishes.
+on:
+  push:
+    branches: [dev, master]
+  pull_request:
+    branches: [dev, master]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run verify
