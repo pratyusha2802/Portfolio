@@ -71,7 +71,6 @@ export interface WorkItem {
   cta?: string;
 }
 
-/** A role with more than one project inside it, each on its own timeline. */
 export interface SubProject {
   name: string;
   start: string;
@@ -79,17 +78,26 @@ export interface SubProject {
   note?: string;
 }
 
-export interface Role {
-  company: string;
+export interface Position {
   title: string;
-  location: string;
   start: string;
   end: string | "Present";
   stack: string[];
-  /** Single-paragraph roles (e.g. internships) use this. */
+  /** Single-paragraph positions (e.g. internships) use this. */
   description?: string;
-  /** Roles spanning more than one project use this instead of `description`. */
+  /** Positions spanning more than one project use this instead of `description`. */
   projects?: SubProject[];
+}
+
+/**
+ * One company, one or more positions held there — same employer shown once,
+ * not repeated per position. `positions` is ordered most-recent-first; the
+ * date range shown next to the company name is derived from it, not stored.
+ */
+export interface CompanyExperience {
+  company: string;
+  location: string;
+  positions: Position[];
 }
 
 export interface Link {
@@ -324,47 +332,54 @@ export const stageOrder: Stage[] = [
 /* Experience                                                          */
 /* ------------------------------------------------------------------ */
 
-export const experience: Role[] = [
+export const experience: CompanyExperience[] = [
   {
     company: "JPMorgan Chase & Co.",
-    title: "Software Engineer",
     location: "Bengaluru",
-    start: "Jul 2024",
-    end: "Present",
-    stack: ["React", "TypeScript", "Node.js", "Electron", "SCSS", "micro-frontend architecture"],
-    projects: [
+    positions: [
       {
-        name: "Internal desktop assistant",
-        start: "Nov 2025",
+        title: "Software Engineer",
+        start: "Jul 2024",
         end: "Present",
+        stack: [
+          "React",
+          "TypeScript",
+          "Node.js",
+          "Electron",
+          "SCSS",
+          "micro-frontend architecture",
+        ],
+        projects: [
+          {
+            name: "Internal desktop assistant",
+            start: "Nov 2025",
+            end: "Present",
+          },
+          {
+            name: "Employee productivity platform, Core UI team",
+            start: "Jul 2024",
+            end: "Nov 2025",
+            note: "accessible, reusable UI components adopted across a platform serving 300,000+ employees",
+          },
+        ],
       },
       {
-        name: "Employee productivity platform, Core UI team",
-        start: "Jul 2024",
-        end: "Nov 2025",
-        note: "accessible, reusable UI components adopted across a platform serving 300,000+ employees",
+        title: "Software Engineering Intern",
+        start: "Jan 2024",
+        end: "Jun 2024",
+        stack: ["React", "TypeScript", "Electron", "HTML/CSS"],
+        description:
+          "Built two proof-of-concepts for the experimental phase of the productivity platform using micro-frontend architecture. Converted to a full-time offer.",
+      },
+      {
+        title: "Software Engineering Intern",
+        start: "May 2023",
+        end: "Jul 2023",
+        stack: ["JavaScript", "TypeScript", "HTML/CSS"],
+        description:
+          "Developed a feature for the productivity platform. Entered through the firm's Code for Good hackathon.",
       },
     ],
-  },
-  {
-    company: "JPMorgan Chase & Co.",
-    title: "Software Engineering Intern",
-    location: "Bengaluru",
-    start: "Jan 2024",
-    end: "Jun 2024",
-    stack: ["React", "TypeScript", "Electron", "HTML/CSS"],
-    description:
-      "Built two proof-of-concepts for the experimental phase of the productivity platform using micro-frontend architecture. Converted to a full-time offer.",
-  },
-  {
-    company: "JPMorgan Chase & Co.",
-    title: "Software Engineering Intern",
-    location: "Bengaluru",
-    start: "May 2023",
-    end: "Jul 2023",
-    stack: ["JavaScript", "TypeScript", "HTML/CSS"],
-    description:
-      "Developed a feature for the productivity platform. Entered through the firm's Code for Good hackathon.",
   },
 ];
 
