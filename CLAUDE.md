@@ -64,7 +64,6 @@ React SPA on Vite, TypeScript strict, `react-router-dom` for client-side routing
 - **Live Medium feed** isn't implemented. `writing.feedUrl` is empty; nothing currently renders `writing` at all (it was dropped from `Background` when that section got rewritten to a flat list — revisit if that was wrong).
 - **`network-intrusion-detection` and `pen-in-the-air`** still have real published case pages and are reachable at their `/work/:slug` URLs, but are no longer featured anywhere in the main flow — `CaseStudies` renders exactly 3 curated slugs, not the full `work` array. Archived, not deleted.
 - **`gig-economy-worker-passport` is intentionally locked** — `cta: "Coming soon"` makes its card non-clickable (see `CaseStudies.tsx`: the literal string `"Coming soon"` is the sentinel that decides this, not `status`). Its `.md` file is still all-TODO past the problem framing.
-- **`emergency-medical-response-india` is set up to be clickable (`cta: "Read the case study"`) even though its `.md` file is still all-TODO** past the problem framing, same as Worker Passport. This was an explicit instruction, not an oversight, but it means anyone who actually clicks through right now sees scaffold placeholders, not a finished case study. Flag this again if she asks you to change anything else on that card — don't just quietly fix the mismatch by re-locking it.
 
 ## Content notes
 
@@ -116,14 +115,19 @@ now 7 — About, Experience, Currently, and Background separated back out once
 real Experience/Background copy arrived that didn't fit a condensed block.
 Don't assume either the 4-section or 6-section version is current.
 
-The three case studies are, in this order: **Emergency Medical Response**
-(self-directed discovery, framed around an ownership gap in the
-pre-ambulance window, not a transport-speed problem) → **Worker Passport**
-(gig-economy/quick-commerce, India — locked, "Coming soon") → **Harvest
-Ledger Trust** (proven, published, closes on established engineering
-credibility). Product-direction work leads now; the engineering-credibility
-piece closes — this flipped from an earlier ordering that led with
-engineering credibility first, which the current copy explicitly overrode.
+The three case studies are, in this order: **Golden Hour Bridge**
+(`convenience-economy-india` — self-directed discovery, an AI product
+management programme brief on India's convenience economy as
+infrastructure, not a transport-speed problem) → **Paarth**
+(`elder-care-india`, published) → **Harvest Ledger Trust** (proven,
+published, closes on established engineering credibility). Product-direction
+work leads now; the engineering-credibility piece closes — this flipped from
+an earlier ordering that led with engineering credibility first, which the
+current copy explicitly overrode. This has changed which product-direction
+slug sits in slot one more than once (`emergency-medical-response-india` →
+`convenience-economy-india` is the latest) — don't assume this exact
+paragraph stays accurate without checking `CaseStudies.tsx`'s
+`featuredSlugs` directly.
 The JPMC work does **not** become a case study — see the hard rule below —
 so the engineering case study is an existing personal/hackathon project
 reframed with full case-study rigor instead.
@@ -170,9 +174,10 @@ longer broken by the shape change.
 
 **Two anatomies coexist here — know which one applies.**
 
-**The 3 featured case studies** (`harvest-ledger-trust`,
-`emergency-medical-response-india`, `gig-economy-worker-passport`) use a fixed,
-recruiter-oriented anatomy, in this order, every time:
+**The 3 featured case studies** (`convenience-economy-india`,
+`elder-care-india`, `harvest-ledger-trust` — check `CaseStudies.tsx`'s
+`featuredSlugs` for the current set, this list has gone stale before) use a
+fixed, recruiter-oriented anatomy, in this order, every time:
 
 TL;DR (problem → approach → outcome, 3 lines max) → Context → The problem (who
 has it, why it matters) → Constraints → Research and discovery → Options

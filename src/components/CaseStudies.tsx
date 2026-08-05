@@ -7,7 +7,7 @@ import { work, typeLabels } from "../data/portfolio";
  * filterable — see CLAUDE.md.
  */
 const featuredSlugs = [
-  "emergency-medical-response-india",
+  "convenience-economy-india",
   "elder-care-india",
   "harvest-ledger-trust",
 ] as const;
