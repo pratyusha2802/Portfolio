@@ -978,6 +978,354 @@
         margin-top: 8px;
       }
 
+      /* ============ map / dot-density (shared) ============ */
+      .map-panel {
+        position: relative;
+        background: #efe9db;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .map-panel svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .map-card {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: var(--surface);
+        border-radius: 6px;
+        padding: 22px 24px;
+        max-width: 300px;
+        box-shadow: 0 10px 26px -12px rgba(34, 28, 23, 0.3);
+      }
+      .map-card h3 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+      .map-card ul {
+        list-style: none;
+        display: grid;
+        gap: 7px;
+        margin-bottom: 14px;
+      }
+      .map-card li {
+        font-size: 0.78rem;
+        color: var(--ink-mid);
+        padding-left: 14px;
+        position: relative;
+      }
+      .map-card li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 7px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--gold-text);
+      }
+      .map-card p.closer-mini {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--ink);
+        line-height: 1.45;
+      }
+      .asset-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+        margin-top: 4px;
+        height: 400px;
+      }
+
+      /* ============ isometric cost cube ============ */
+      .iso-wrap {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+      }
+      .iso-cube {
+        --cube: 140px;
+        width: var(--cube);
+        height: var(--cube);
+        position: relative;
+        transform-style: preserve-3d;
+        transform: rotateX(-18deg) rotateY(-32deg);
+        flex-shrink: 0;
+        margin: 30px 60px 30px 20px;
+      }
+      .iso-face {
+        position: absolute;
+        width: var(--cube);
+        height: var(--cube);
+      }
+      .iso-face.front {
+        background: var(--oxblood);
+        transform: translateZ(calc(var(--cube) / 2));
+      }
+      .iso-face.back {
+        background: var(--oxblood);
+        transform: rotateY(180deg) translateZ(calc(var(--cube) / 2));
+      }
+      .iso-face.right {
+        background: var(--oxblood-deep);
+        transform: rotateY(90deg) translateZ(calc(var(--cube) / 2));
+      }
+      .iso-face.left {
+        background: var(--oxblood-deep);
+        transform: rotateY(-90deg) translateZ(calc(var(--cube) / 2));
+      }
+      .iso-face.top {
+        background: #9a3c3c;
+        transform: rotateX(90deg) translateZ(calc(var(--cube) / 2));
+      }
+      .iso-face.bottom {
+        background: #430f0f;
+        transform: rotateX(-90deg) translateZ(calc(var(--cube) / 2));
+      }
+      .iso-face.front {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #fff;
+        padding: 12px;
+      }
+      .iso-face.front b {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-size: 1.5rem;
+        display: block;
+      }
+      .iso-face.front span {
+        font-size: 0.62rem;
+        line-height: 1.3;
+        margin-top: 4px;
+        color: #ead4d4;
+      }
+      .iso-labels {
+        display: grid;
+        gap: 10px;
+      }
+      .iso-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.8rem;
+        color: var(--ink-mid);
+      }
+      .iso-label::before {
+        content: "";
+        width: 22px;
+        height: 1px;
+        background: var(--ink-soft);
+        flex-shrink: 0;
+      }
+
+      /* ============ classical columns ============ */
+      .colonnade {
+        display: grid;
+        grid-template-columns: 1fr 110px 1fr;
+        gap: 24px;
+        align-items: end;
+        margin-top: 14px;
+      }
+      .column-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .col-label {
+        text-align: center;
+        margin-bottom: 12px;
+      }
+      .col-label h4 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      .col-label span {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.62rem;
+        color: var(--ink-soft);
+        letter-spacing: 0.06em;
+      }
+      .column {
+        width: 90px;
+      }
+      .col-capital {
+        height: 12px;
+        background: var(--oxblood);
+        border-radius: 2px 2px 0 0;
+      }
+      .col-necking {
+        height: 6px;
+        background: var(--oxblood-deep);
+        margin: 0 6px;
+      }
+      .col-shaft {
+        height: 90px;
+        margin: 0 10px;
+        background: repeating-linear-gradient(
+          90deg,
+          var(--oxblood) 0px,
+          var(--oxblood) 7px,
+          var(--oxblood-deep) 7px,
+          var(--oxblood-deep) 9px
+        );
+      }
+      .col-base {
+        height: 8px;
+        background: var(--oxblood-deep);
+        margin: 0 2px;
+      }
+      .col-plinth {
+        height: 10px;
+        background: var(--ink);
+        border-radius: 0 0 2px 2px;
+      }
+      .col-caption {
+        margin-top: 14px;
+        font-size: 0.72rem;
+        color: var(--ink-mid);
+        text-align: center;
+        max-width: 230px;
+        line-height: 1.45;
+      }
+      .engine-connector {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 44px;
+      }
+
+      /* ============ concentric market circles ============ */
+      .market-layout {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+        gap: 40px;
+        align-items: center;
+        margin-top: 6px;
+      }
+      .market-figure {
+        position: relative;
+        width: 340px;
+        height: 340px;
+        flex-shrink: 0;
+      }
+      .market-figure .inner-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 120px;
+        text-align: center;
+        color: #fff;
+      }
+      .market-figure .inner-label b {
+        display: block;
+        font-family: "Source Serif 4", Georgia, serif;
+        font-size: 1.1rem;
+      }
+      .market-figure .inner-label span {
+        font-size: 0.58rem;
+        line-height: 1.3;
+        display: block;
+        margin-top: 3px;
+        color: #ecd4d4;
+      }
+      .market-side {
+        display: grid;
+        gap: 20px;
+      }
+      .market-label {
+        font-size: 0.78rem;
+        color: var(--ink-mid);
+        line-height: 1.5;
+        border-left: 2px solid var(--line);
+        padding-left: 14px;
+      }
+      .market-label b {
+        display: block;
+        font-family: "Source Serif 4", Georgia, serif;
+        font-size: 1.15rem;
+        margin-bottom: 3px;
+      }
+      .market-label.top {
+        border-left-color: var(--gold);
+      }
+      .market-label.top b {
+        color: var(--gold-text);
+      }
+      .market-label.bottom {
+        border-left-color: var(--oxblood);
+      }
+      .market-label.bottom b {
+        color: var(--oxblood);
+      }
+
+      /* ============ wireframe dashboard ============ */
+      .wireframe {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--surface);
+        margin-bottom: 16px;
+      }
+      .wf-bar {
+        display: flex;
+        gap: 5px;
+        padding: 8px 10px;
+        background: var(--line-soft);
+        border-bottom: 1px solid var(--line);
+      }
+      .wf-bar span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--line);
+      }
+      .wf-body {
+        display: grid;
+        grid-template-columns: 30px 1fr;
+      }
+      .wf-side {
+        background: var(--line-soft);
+        display: grid;
+        gap: 6px;
+        padding: 10px 0;
+        justify-items: center;
+      }
+      .wf-side span {
+        width: 12px;
+        height: 3px;
+        background: var(--line);
+        border-radius: 2px;
+      }
+      .wf-main {
+        padding: 12px;
+      }
+      .wf-chart {
+        width: 100%;
+        height: 46px;
+      }
+      .wf-cards {
+        display: flex;
+        gap: 6px;
+        margin-top: 8px;
+      }
+      .wf-cards div {
+        flex: 1;
+        height: 20px;
+        background: var(--line-soft);
+        border-radius: 3px;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         section {
           transition: none;
@@ -1050,8 +1398,14 @@
           <div class="stat-card">
             <b>1 : 406,000</b><span>advanced ambulances to people, nationally</span>
           </div>
-          <div class="stat-card">
-            <b>8–12 km/h</b><span>ambulance speed capped by peak-traffic gridlock</span>
+          <div class="stat-card" style="display: flex; gap: 14px; align-items: center; flex: 1.4">
+            <div class="map-panel" style="width: 90px; height: 66px; flex-shrink: 0">
+              <svg id="grid-map-svg" viewBox="0 0 200 150" preserveAspectRatio="none"></svg>
+            </div>
+            <div>
+              <b style="margin-bottom: 0">8–12 km/h</b>
+              <span>ambulance speed capped by peak-traffic gridlock</span>
+            </div>
           </div>
         </div>
       </section>
@@ -1059,28 +1413,29 @@
       <!-- 03 INVISIBLE ASSET -->
       <section id="asset">
         <div class="slidenum"><b>03</b> / 15</div>
-        <div class="corner">The invisible asset</div>
+        <div class="corner">The golden timeline</div>
         <div class="eyebrow">What the convenience economy already built</div>
-        <h2 class="title">
+        <h2 class="title" style="margin-bottom: 16px; font-size: 1.7rem">
           We aren't building a fleet. We are activating a massive, ubiquitous, and
           <em>dormant</em> infrastructure.
         </h2>
-        <div class="stat-row">
-          <div class="stat-card gold-accent">
-            <b>10M+</b><span>gig delivery riders active daily across Indian cities today</span>
-          </div>
-          <div class="stat-card gold-accent">
-            <b>23.5M</b><span>projected active riders by 2029–30</span>
-          </div>
-          <div class="stat-card gold-accent">
-            <b>GPS</b><span>already tracked, hyper-local, dispatched by the minute</span>
+        <div class="asset-layout">
+          <div class="map-panel" id="asset-map">
+            <svg id="asset-map-svg" viewBox="0 0 1112 400" preserveAspectRatio="none"></svg>
+            <div class="map-card">
+              <h3>The invisible asset</h3>
+              <ul>
+                <li>10+ million gig delivery riders active daily</li>
+                <li>Projected to reach 23.5M by 2029–30</li>
+                <li>Already GPS-tracked and hyper-local</li>
+              </ul>
+              <p class="closer-mini">
+                That workforce already sits closer to most urban emergencies than any ambulance — it
+                was built to get groceries to a door in minutes.
+              </p>
+            </div>
           </div>
         </div>
-        <p class="body-text" style="margin-top: 28px; max-width: 820px">
-          That workforce already sits closer to most urban emergencies than any ambulance does — for
-          reasons that have nothing to do with emergency response. It was built to get groceries to
-          a door in ten minutes.
-        </p>
       </section>
 
       <!-- 04 THE BRIDGE -->
@@ -1275,15 +1630,23 @@
         <div class="corner">Structural cost advantage</div>
         <div class="eyebrow">Fixed fleet vs. per-response payout</div>
         <h2 class="title">Removing transport strips out 90% of the fixed cost.</h2>
-        <div class="cost-compare">
-          <div class="cost-block">
-            <b>₹2,000</b>flat fee — Blinkit BLS ambulance
-            <ul>
-              <li>Paramedic salary (~₹21k/mo)</li>
-              <li>Driver &amp; assistant wages</li>
-              <li>Fuel costs</li>
-              <li>Vehicle depreciation &amp; AED maintenance</li>
-            </ul>
+        <div class="iso-wrap">
+          <div class="iso-cube">
+            <div class="iso-face front">
+              <b>₹2,000</b>
+              <span>flat fee<br />Blinkit BLS ambulance</span>
+            </div>
+            <div class="iso-face back"></div>
+            <div class="iso-face right"></div>
+            <div class="iso-face left"></div>
+            <div class="iso-face top"></div>
+            <div class="iso-face bottom"></div>
+          </div>
+          <div class="iso-labels">
+            <div class="iso-label">Paramedic salary (~₹21k/mo)</div>
+            <div class="iso-label">Driver &amp; assistant wages</div>
+            <div class="iso-label">Fuel costs</div>
+            <div class="iso-label">Vehicle depreciation &amp; AED maintenance</div>
           </div>
           <div class="cost-alt">
             <b>₹100–₹500</b>
@@ -1299,30 +1662,45 @@
         <div class="corner">Government tailwind</div>
         <div class="eyebrow">The aha moment</div>
         <h2 class="title">We don't need to convince consumers to pay for this.</h2>
-        <div class="pillars">
-          <div>
-            <div class="pillar">
-              <h4>PM-RAHAT Scheme<br /><span style="opacity: 0.75">Feb 2026</span></h4>
-              <span
-                >Mandates up to ₹1.5 lakh cashless treatment for road accident victims in the golden
-                hour.</span
-              >
+        <div class="colonnade">
+          <div class="column-wrap">
+            <div class="col-label">
+              <h4>PM-RAHAT Scheme</h4>
+              <span>FEB 2026</span>
             </div>
-            <div class="pillar-base"></div>
+            <div class="column">
+              <div class="col-capital"></div>
+              <div class="col-necking"></div>
+              <div class="col-shaft"></div>
+              <div class="col-necking"></div>
+              <div class="col-base"></div>
+              <div class="col-plinth"></div>
+            </div>
+            <p class="col-caption">
+              Mandates up to ₹1.5 lakh cashless treatment for road accident victims in the golden
+              hour.
+            </p>
           </div>
-          <div class="engine">
+          <div class="engine-connector">
             <div class="engine-arrow">↘ ↙</div>
             <div class="engine-box">Our subsidized revenue engine</div>
           </div>
-          <div>
-            <div class="pillar">
-              <h4>Rah-Veer Reward<br /><span style="opacity: 0.75">Jan 2026</span></h4>
-              <span
-                >Pays ₹25,000 (claimable 5×/year) to Good Samaritans who get victims help in
-                time.</span
-              >
+          <div class="column-wrap">
+            <div class="col-label">
+              <h4>Rah-Veer Reward</h4>
+              <span>JAN 2026</span>
             </div>
-            <div class="pillar-base"></div>
+            <div class="column">
+              <div class="col-capital"></div>
+              <div class="col-necking"></div>
+              <div class="col-shaft"></div>
+              <div class="col-necking"></div>
+              <div class="col-base"></div>
+              <div class="col-plinth"></div>
+            </div>
+            <p class="col-caption">
+              Pays ₹25,000 (claimable 5×/year) to Good Samaritans who get victims help in time.
+            </p>
           </div>
         </div>
         <p class="body-text" style="margin-top: 26px">
@@ -1336,32 +1714,46 @@
         <div class="slidenum"><b>11</b> / 15</div>
         <div class="corner">Addressable market</div>
         <div class="eyebrow">Not the transport market</div>
-        <h2 class="title">
+        <h2 class="title" style="font-size: 1.55rem; margin-bottom: 6px">
           A new "response-enablement" layer, not a slice of ambulance transport.
         </h2>
-        <div class="stat-row">
-          <div class="stat-card">
-            <b>$1.67B</b>
-            <span
-              >Direct ambulance transport market · slow 4.75% CAGR<br /><b style="color: var(--ink)"
-                >Verdict: too small, too capital-intensive.</b
-              ></span
-            >
+        <div class="market-layout">
+          <div class="market-figure">
+            <svg viewBox="0 0 340 340" width="340" height="340">
+              <circle
+                cx="170"
+                cy="170"
+                r="150"
+                fill="#ede7da"
+                stroke="var(--gold)"
+                stroke-width="3"
+              />
+              <circle cx="170" cy="170" r="64" fill="var(--oxblood)" />
+            </svg>
+            <div class="inner-label">
+              <b>$1.67B</b>
+              <span>Direct ambulance transport · 4.75% CAGR</span>
+            </div>
           </div>
-          <div class="stat-card gold-accent">
-            <b>$3.8B → $39.7B</b>
-            <span
-              >India digital health market by 2032 (29.5% CAGR), + ~$2.6B corporate wellness<br /><b
-                style="color: var(--ink)"
+          <div class="market-side">
+            <div class="market-label top">
+              <b>$3.8B → $39.7B</b>India digital health by 2032 (29.5% CAGR) + ~$2.6B corporate
+              wellness.
+              <b
+                style="color: var(--ink); font-family: inherit; font-size: inherit; margin-top: 4px"
                 >Verdict: high growth, pure SaaS margins.</b
-              ></span
-            >
+              >
+            </div>
+            <div class="market-label bottom">
+              <b style="font-size: 0.85rem">Inner circle</b>Direct ambulance transport market, too
+              small and too capital-intensive to build for.
+            </div>
+            <p class="body-text">
+              We're not capturing a slice of ambulance transport. We're creating a
+              response-enablement layer inside the rapidly expanding digital health ecosystem.
+            </p>
           </div>
         </div>
-        <p class="body-text" style="margin-top: 22px">
-          We're not capturing a slice of ambulance transport. We're creating a response-enablement
-          layer inside the digital health ecosystem.
-        </p>
       </section>
 
       <!-- 12 RISK -->
@@ -1400,10 +1792,34 @@
         <div class="slidenum"><b>13</b> / 15</div>
         <div class="corner">Precedent</div>
         <div class="eyebrow">The West validates software; India provides scale</div>
-        <h2 class="title">A globally validated model, at unprecedented density.</h2>
-        <div class="val2">
+        <h2 class="title" style="font-size: 1.7rem; margin-bottom: 20px">
+          A globally validated model, at unprecedented density.
+        </h2>
+        <div class="val2" style="align-items: start">
           <div class="val-col">
             <h3>The West: software validation</h3>
+            <div class="wireframe">
+              <div class="wf-bar"><span></span><span></span><span></span></div>
+              <div class="wf-body">
+                <div class="wf-side"><span></span><span></span><span></span><span></span></div>
+                <div class="wf-main">
+                  <svg class="wf-chart" viewBox="0 0 200 46" preserveAspectRatio="none">
+                    <polyline
+                      points="0,36 25,30 50,32 75,18 100,22 125,10 150,14 175,6 200,10"
+                      fill="none"
+                      stroke="var(--gold-text)"
+                      stroke-width="2"
+                    />
+                    <circle cx="150" cy="14" r="2.5" fill="var(--oxblood)" />
+                  </svg>
+                  <div class="wf-cards">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <p><b>GoodSAM (UK)</b> — raised ~$10.5M, powers 400+ agencies.</p>
             <p><b>PulsePoint (US)</b> — volunteers arrive 2 min 17 sec faster than EMS.</p>
             <div class="val-insight">
@@ -1412,6 +1828,13 @@
           </div>
           <div class="val-col">
             <h3>India: unprecedented scale</h3>
+            <div class="map-panel" style="height: 168px; margin-bottom: 16px">
+              <svg
+                id="india-map-svg"
+                viewBox="0 0 460 400"
+                preserveAspectRatio="xMidYMid meet"
+              ></svg>
+            </div>
             <p><b>The resource</b> — 10 million+ gig workers.</p>
             <div class="val-insight">
               An unmatched, hyper-dense labor pool already deployed, tracked, and ready.
@@ -1537,6 +1960,122 @@
       const start = slides.findIndex((s) => s.id === location.hash.replace("#", ""));
       if (start > -1) i = start;
       render();
+
+      /* ---------- generative map / dot-density panels ---------- */
+      const NS = "http://www.w3.org/2000/svg";
+      function seededRandom(seed) {
+        let s = seed >>> 0;
+        return function () {
+          s = (s * 1664525 + 1013904223) >>> 0;
+          return s / 4294967296;
+        };
+      }
+      function buildStreetGrid(svg, w, h, seed, majorEvery) {
+        const rand = seededRandom(seed);
+        let x = 0,
+          col = 0;
+        while (x < w) {
+          x += w / 14 + rand() * (w / 20);
+          const major = col % (majorEvery || 4) === 0;
+          const line = document.createElementNS(NS, "line");
+          line.setAttribute("x1", x.toFixed(1));
+          line.setAttribute("y1", "0");
+          line.setAttribute("x2", (x + rand() * 6 - 3).toFixed(1));
+          line.setAttribute("y2", h);
+          line.setAttribute("stroke", major ? "var(--oxblood)" : "var(--line)");
+          line.setAttribute("stroke-width", major ? 1.6 : 0.7);
+          line.setAttribute("opacity", major ? 0.55 : 0.7);
+          svg.appendChild(line);
+          col++;
+        }
+        let y = 0,
+          row = 0;
+        while (y < h) {
+          y += h / 10 + rand() * (h / 14);
+          const major = row % (majorEvery || 4) === 0;
+          const line = document.createElementNS(NS, "line");
+          line.setAttribute("x1", "0");
+          line.setAttribute("y1", y.toFixed(1));
+          line.setAttribute("x2", w);
+          line.setAttribute("y2", (y + rand() * 6 - 3).toFixed(1));
+          line.setAttribute("stroke", major ? "var(--oxblood)" : "var(--line)");
+          line.setAttribute("stroke-width", major ? 1.6 : 0.7);
+          line.setAttribute("opacity", major ? 0.5 : 0.65);
+          svg.appendChild(line);
+          row++;
+        }
+      }
+      function scatterDots(svg, w, h, count, seed, clusters) {
+        const rand = seededRandom(seed);
+        const cl = clusters || [{ x: w / 2, y: h / 2, r: Math.max(w, h) / 2 }];
+        let placed = 0,
+          attempts = 0;
+        while (placed < count && attempts < count * 6) {
+          attempts++;
+          const c = cl[Math.floor(rand() * cl.length)];
+          const angle = rand() * Math.PI * 2;
+          const dist = Math.pow(rand(), 1.4) * c.r;
+          const x = c.x + Math.cos(angle) * dist;
+          const y = c.y + Math.sin(angle) * dist * (c.ry ? c.ry / c.r : 1);
+          if (x < 2 || x > w - 2 || y < 2 || y > h - 2) continue;
+          const dot = document.createElementNS(NS, "circle");
+          dot.setAttribute("cx", x.toFixed(1));
+          dot.setAttribute("cy", y.toFixed(1));
+          dot.setAttribute("r", (1 + rand() * 1.4).toFixed(2));
+          dot.setAttribute("fill", "var(--gold-text)");
+          dot.setAttribute("opacity", (0.5 + rand() * 0.4).toFixed(2));
+          svg.appendChild(dot);
+          placed++;
+        }
+      }
+
+      const assetMapSvg = document.getElementById("asset-map-svg");
+      if (assetMapSvg) {
+        buildStreetGrid(assetMapSvg, 1112, 400, 7, 5);
+        scatterDots(assetMapSvg, 1112, 400, 420, 11, [
+          { x: 340, y: 320, r: 130 },
+          { x: 560, y: 200, r: 170 },
+          { x: 780, y: 320, r: 150 },
+          { x: 900, y: 130, r: 110 },
+          { x: 620, y: 90, r: 120 },
+        ]);
+      }
+
+      const gridMapSvg = document.getElementById("grid-map-svg");
+      if (gridMapSvg) {
+        buildStreetGrid(gridMapSvg, 200, 150, 3, 3);
+      }
+
+      const indiaMapSvg = document.getElementById("india-map-svg");
+      if (indiaMapSvg) {
+        const indiaPath =
+          "M195,8 L232,22 L262,14 L292,36 L336,50 L366,84 L344,104 L376,124 L338,146 L316,186 L296,226 L266,274 L238,322 L224,362 L204,326 L186,288 L156,316 L128,286 L108,248 L98,208 L68,190 L86,150 L66,120 L96,100 L86,62 L124,52 L142,32 Z";
+        const clip = document.createElementNS(NS, "clipPath");
+        clip.setAttribute("id", "india-clip");
+        const clipShape = document.createElementNS(NS, "path");
+        clipShape.setAttribute("d", indiaPath);
+        clip.appendChild(clipShape);
+        indiaMapSvg.appendChild(clip);
+
+        const outline = document.createElementNS(NS, "path");
+        outline.setAttribute("d", indiaPath);
+        outline.setAttribute("fill", "#efe9db");
+        outline.setAttribute("stroke", "var(--line)");
+        outline.setAttribute("stroke-width", "1.5");
+        indiaMapSvg.appendChild(outline);
+
+        const group = document.createElementNS(NS, "g");
+        group.setAttribute("clip-path", "url(#india-clip)");
+        indiaMapSvg.appendChild(group);
+        buildStreetGrid(group, 460, 400, 9, 6);
+        scatterDots(group, 460, 400, 260, 13, [
+          { x: 150, y: 90, r: 60 },
+          { x: 240, y: 150, r: 90 },
+          { x: 190, y: 240, r: 80 },
+          { x: 150, y: 300, r: 60 },
+          { x: 300, y: 90, r: 60 },
+        ]);
+      }
     </script>
   </body>
 </html>
