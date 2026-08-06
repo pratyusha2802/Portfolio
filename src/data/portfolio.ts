@@ -121,13 +121,16 @@ export const profile = {
   role: "Software Engineer, JPMorgan Chase",
 
   tagline:
-    "Software engineer at JPMorgan Chase, where I spent two years building internal products used by 300,000+ employees. Today, I'm increasingly drawn to the work that comes before the code: understanding users, defining problems, and deciding what deserves to be built.",
+    "Software engineer at JPMorgan Chase, where I've spent the past two years building internal products used by 300,000+ employees. Building at enterprise scale taught me that the hardest product decisions happen long before the first line of code—understanding users, defining the right problem, and deciding what deserves to be built.",
 
   about: [
-    "I'm a software engineer at JPMorgan Chase, moving toward product management.",
-    "Right now I'm a frontend developer on a new internal desktop assistant. Before that I spent a year and a half on the Core UI team behind an employee productivity application used by 300,000+ people across the firm — the team that owns the shared component layer both the core product and every team-built add-on depends on. Other teams across the bank build features that plug into that platform and ship on their own release cycle, which meant our users were internal developers as much as employees.",
-    "I'm drawn to the parts of a product that don't announce themselves: the error state, the second-year maintenance cost, the flow nobody diagrammed. Building for teams I didn't control taught me the hardest problems sit upstream of the code — which problem is worth solving, whose constraint actually binds, and what \"good\" means before anyone has agreed how to measure it.",
-    "So I've started doing product work deliberately, outside my job, and publishing what comes out of it.",
+    "I'm a software engineer at JPMorgan Chase, transitioning into product management.",
+    "Over the past two years, I've built internal products used by more than 300,000 employees across the firm.",
+    "Right now, I'm a frontend developer building a new internal desktop assistant. Before that, I spent a year and a half on the Core UI team behind one of the firm's employee productivity platforms—the team responsible for the shared component layer that both the core product and every team-built extension depends on. That meant building for two kinds of users: employees using the application, and the internal development teams building on top of it.",
+    "Working on a shared platform changed how I think about building software. Every component, API, and design decision had downstream consequences for teams I didn't directly work with. Success wasn't just about shipping features—it was about understanding different user needs, balancing trade-offs, and designing systems that could scale across products and teams.",
+    "Over time, I found myself increasingly drawn to the questions that come before implementation: Which problem is actually worth solving? Who are we solving it for? What constraints matter most? And how do we know we've built the right thing?",
+    "That curiosity is what pulled me toward product management.",
+    "Outside work, I'm building those skills deliberately—conducting user research, solving product case studies, and sharing my thinking through writing. My goal is to combine an engineer's understanding of execution with a product manager's focus on solving meaningful problems.",
   ],
 } as const;
 
@@ -140,7 +143,7 @@ export const profile = {
  * standalone lines; no elaboration to invent underneath them.
  */
 export const principles: string[] = [
-  "Engineer turned PM",
+  "Engineer → PM",
   "Debugs products, not just code",
   "Ships with intent",
   "Part systems thinker, part storyteller",
