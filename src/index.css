@@ -305,7 +305,17 @@ button {
   aspect-ratio: 3 / 4;
   object-fit: cover;
   object-position: top center;
-  filter: drop-shadow(0 24px 40px rgba(46, 33, 56, 0.14));
+  /* The source photo has a lot of plain-white headroom above the hair
+     (real room background, not a studio backdrop — cropping tighter
+     exposes furniture behind her, so the fix is a fade, not a crop).
+     A touch more contrast/saturation keeps the portrait from reading
+     flat next to the bold display type. */
+  filter: saturate(1.08) contrast(1.04) drop-shadow(0 24px 40px rgba(46, 33, 56, 0.14));
+  /* Fades the blank top margin into the page background instead of
+     cutting it off as a hard rectangle edge; finishes before the
+     hairline (~23% down) so no hair strand renders semi-transparent. */
+  mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 100%);
   border-radius: 14px;
   transform: perspective(800px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
   transition: transform 0.3s ease-out;
@@ -348,6 +358,10 @@ button {
   gap: 2px;
 }
 
+/* Both lines can overlap the portrait at narrow widths, same as .arrow
+   below — the same paper-colored halo keeps dark text readable against
+   dark hair or sweater. Invisible against the plain paper background,
+   so unconditional rather than scoped to the narrow-width media query. */
 .annotation__head {
   font-family: var(--display);
   font-weight: 800;
@@ -355,6 +369,10 @@ button {
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--forest);
+  text-shadow:
+    0 0 4px var(--paper),
+    0 0 4px var(--paper),
+    0 0 8px var(--paper);
 }
 
 .annotation__label {
@@ -362,6 +380,10 @@ button {
   font-size: clamp(12.5px, 1.3vw, 16px);
   line-height: 1.3;
   color: var(--muted);
+  text-shadow:
+    0 0 4px var(--paper),
+    0 0 4px var(--paper),
+    0 0 8px var(--paper);
 }
 
 .arrow {
