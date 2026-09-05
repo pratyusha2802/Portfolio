@@ -7,6 +7,44 @@ Every entry here corresponds to a `package.json` version and a deploy to
 
 Nothing staged yet.
 
+## [0.3.0] — 2026-09-05
+
+- **Hero portrait:** the source photo's top margin is real room background,
+  not a studio backdrop, so a mask-image fade now blends that margin into
+  the page instead of cropping into the furniture behind it, with a touch
+  more saturation/contrast so the portrait doesn't read flat. The arrow
+  annotations' text gets the same paper-colored halo the arrows already use,
+  so it stays legible against dark hair at narrow widths.
+- **Case studies:** each `##` section now renders as its own card that
+  unfolds into view (a clip-path reveal, not just a fade) as the reader
+  scrolls to it, instead of one long unbroken block of prose — addresses
+  the case studies reading as too text-heavy. Fixed two bugs surfaced while
+  building this: the scroll-reveal threshold that suits short elements left
+  tall cards sitting in blank space until scrolled deep past them, and the
+  markdown-rendering change needed to split sections had silently dropped
+  table support (options-considered tables were rendering as raw pipe
+  text).
+- **Content:** removed every em dash from visitor-facing copy across the
+  whole site (profile/work data, all six case-study write-ups, the three
+  linked prototype decks) in favor of whatever reads most naturally in
+  context — no facts changed.
+- **Typography:** replaced the overused Plus Jakarta Sans display face with
+  Bricolage Grotesque.
+- **Positioning:** the JPMorgan Core UI experience note now cites real
+  platform-scale numbers (251k monthly active users, 11.5M+ monthly
+  actions, ~47,500+ hours saved a month) instead of the vaguer "300,000+
+  employees"; the browser tab title and meta description now state the
+  move into product management explicitly.
+- **Currently:** added `@dawnworkdiary` alongside `@dawndailydiary` in the
+  "Elsewhere" line.
+- **Consistency:** the hero's LinkedIn button now matches the "See the
+  work" button's size (they'd drifted to different padding/font-size/
+  radius and sat at different heights); replaced three overshoot/spring
+  easing curves (nav underline, Experience timeline dot, filter chip) with
+  a consistent exponential ease-out, and renamed the back-to-top button's
+  `float-bounce` keyframe to `float-idle` — it was always a smooth
+  ease-in-out float, the name was the only thing reading as a bounce.
+
 ## [0.2.0] — 2026-08-06
 
 First real promotion since the 0.1.0 baseline — `dev` had accumulated 50
