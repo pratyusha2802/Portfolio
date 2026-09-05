@@ -8,7 +8,7 @@
   --muted: #4a3c4d;
   --amber: #b4703f;
 
-  --display: "Plus Jakarta Sans", system-ui, sans-serif;
+  --display: "Bricolage Grotesque", system-ui, sans-serif;
   --body: "Instrument Sans", system-ui, sans-serif;
   --hand: "Caveat", cursive;
 
@@ -150,7 +150,7 @@ button {
   background: var(--forest);
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav__link:hover::after {
@@ -270,10 +270,10 @@ button {
   gap: 8px;
   font-family: var(--display);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15.5px;
   color: var(--forest);
-  padding: 12px 22px;
-  border-radius: 8px;
+  padding: 16px 32px;
+  border-radius: 10px;
   border: 1.5px solid rgba(46, 33, 56, 0.28);
   transition:
     background 0.25s ease,
@@ -569,7 +569,7 @@ button {
   background: var(--paper);
   border: 2px solid var(--forest);
   transform: scale(0);
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
 }
 
 .position-item.in::before {
@@ -762,7 +762,7 @@ button {
     background 0.25s ease,
     color 0.25s ease,
     border-color 0.25s ease,
-    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .filter-chip[aria-pressed="true"] {
@@ -1263,6 +1263,53 @@ a.work-card:hover .work-card__cta::after {
   background: var(--paper-deep);
 }
 
+/* ---------- case body: section cards ----------
+   Each `##` section renders as its own bounded card (see renderCaseBody in
+   src/lib/markdown.ts) instead of one unbroken block of prose — the card
+   edge is what gives a long text-heavy case a scannable rhythm. The reveal
+   reuses .rise's IntersectionObserver wiring (useRiseAnimation) but layers
+   a clip-path unfold on top: the card's content unrolls into view from its
+   top edge rather than just fading up, since "cards that unfold" is a
+   different, more literal moment than the sitewide fade-and-rise. */
+.case-card {
+  background: var(--paper);
+  border: 1px solid rgba(46, 33, 56, 0.14);
+  border-radius: 16px;
+  padding: clamp(24px, 4vw, 40px) clamp(20px, 4.5vw, 38px);
+  margin-bottom: clamp(20px, 3vw, 30px);
+  box-shadow:
+    0 2px 4px rgba(46, 33, 56, 0.05),
+    0 18px 34px -20px rgba(46, 33, 56, 0.35);
+}
+
+.case-card:last-child {
+  margin-bottom: 0;
+}
+
+.case-card.rise {
+  opacity: 0;
+  transform: scale(0.98);
+  clip-path: inset(0 0 100% 0 round 16px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.case-card.rise.in {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0% 0 round 16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-card.rise {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+}
+
 /* ---------- case body: stat bars & meters ----------
    Single-hue magnitude bars/meters for numbers already stated as text in the
    case body — the chart supplements the sentence, never replaces it, so the
@@ -1485,7 +1532,7 @@ a.work-card:hover .work-card__cta::after {
   align-items: center;
   justify-content: center;
   box-shadow: 0 10px 24px rgba(46, 33, 56, 0.22);
-  animation: float-bounce 2.6s ease-in-out infinite;
+  animation: float-idle 2.6s ease-in-out infinite;
   transition: background 0.25s ease;
 }
 
@@ -1493,7 +1540,7 @@ a.work-card:hover .work-card__cta::after {
   background: var(--forest-mid);
 }
 
-@keyframes float-bounce {
+@keyframes float-idle {
   0%,
   100% {
     transform: translateY(0);
