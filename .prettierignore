@@ -2,6 +2,10 @@ dist
 node_modules
 package-lock.json
 
+# Local, git-ignored cache from the Impeccable design-review tool — not
+# repo content, and its churn shouldn't gate `npm run verify`/pre-push.
+.impeccable
+
 # Legacy pre-React static template remnants — not part of the current app.
 about.html
 work.html

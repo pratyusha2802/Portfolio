@@ -118,7 +118,7 @@ export const profile = {
   email: "pratyusha.2802@gmail.com",
 
   /** Used for <title> only — the hero states the direction plainly now. */
-  role: "Software Engineer, JPMorgan Chase",
+  role: "Software Engineer, JPMorgan Chase, transitioning into Product",
 
   tagline:
     "Software engineer at JPMorgan Chase, where I've spent the past two years building internal products used by 300,000+ employees. Building at enterprise scale taught me that the hardest product decisions happen long before the first line of code: understanding users, defining the right problem, and deciding what deserves to be built.",
@@ -126,11 +126,11 @@ export const profile = {
   about: [
     "I'm a software engineer at JPMorgan Chase, transitioning into product management.",
     "Over the past two years, I've built internal products used by more than 300,000 employees across the firm.",
-    "Right now, I'm a frontend developer building a new internal desktop assistant. Before that, I spent a year and a half on the Core UI team behind one of the firm's employee productivity platforms—the team responsible for the shared component layer that both the core product and every team-built extension depends on. That meant building for two kinds of users: employees using the application, and the internal development teams building on top of it.",
-    "Working on a shared platform changed how I think about building software. Every component, API, and design decision had downstream consequences for teams I didn't directly work with. Success wasn't just about shipping features—it was about understanding different user needs, balancing trade-offs, and designing systems that could scale across products and teams.",
+    "Right now, I'm a frontend developer building a new internal desktop assistant. Before that, I spent a year and a half on the Core UI team behind one of the firm's employee productivity platforms, the team responsible for the shared component layer that both the core product and every team-built extension depends on. That meant building for two kinds of users: employees using the application, and the internal development teams building on top of it.",
+    "Working on a shared platform changed how I think about building software. Every component, API, and design decision had downstream consequences for teams I didn't directly work with. Success wasn't just about shipping features. It was about understanding different user needs, balancing trade-offs, and designing systems that could scale across products and teams.",
     "Over time, I found myself increasingly drawn to the questions that come before implementation: Which problem is actually worth solving? Who are we solving it for? What constraints matter most? And how do we know we've built the right thing?",
     "That curiosity is what pulled me toward product management.",
-    "Outside work, I'm building those skills deliberately—conducting user research, solving product case studies, and sharing my thinking through writing. My goal is to combine an engineer's understanding of execution with a product manager's focus on solving meaningful problems.",
+    "Outside work, I'm building those skills deliberately: conducting user research, solving product case studies, and sharing my thinking through writing. My goal is to combine an engineer's understanding of execution with a product manager's focus on solving meaningful problems.",
   ],
 } as const;
 
@@ -170,7 +170,7 @@ export const principles: string[] = [
 export const work: WorkItem[] = [
   {
     slug: "convenience-economy-india",
-    title: "Golden Hour Bridge — Convenience Economy Discovery in India",
+    title: "Golden Hour Bridge: Convenience Economy Discovery in India",
     track: "product",
     type: "case-study",
     status: "published",
@@ -178,15 +178,15 @@ export const work: WorkItem[] = [
     context: "AI product management programme, 2026",
     hook: "The average Indian ambulance takes 25–40 minutes to arrive. The average food-delivery rider is three minutes away.",
     users:
-      "People experiencing a medical emergency in India — especially road-accident and cardiac-arrest victims — and the hospitals, RWAs, and state EMS systems that would license the responder network.",
+      "People experiencing a medical emergency in India (especially road-accident and cardiac-arrest victims), and the hospitals, RWAs, and state EMS systems that would license the responder network.",
     decisions: [
-      "Chose to activate the existing 10M+ gig-delivery workforce as a software-orchestrated 'bridge' (B2B SaaS/B2G Presence-as-a-Service) over competing as an ambulance fleet — zero asset intensity against competitors' fleet-ownership models.",
-      "Bounded the gig worker's intervention strictly to presence, notification, and BLS-level stabilization — explicitly ruled out patient transport and any clinical intervention beyond basic life support.",
+      "Chose to activate the existing 10M+ gig-delivery workforce as a software-orchestrated 'bridge' (B2B SaaS/B2G Presence-as-a-Service) over competing as an ambulance fleet: zero asset intensity against competitors' fleet-ownership models.",
+      "Bounded the gig worker's intervention strictly to presence, notification, and BLS-level stabilization. Explicitly ruled out patient transport and any clinical intervention beyond basic life support.",
       "Targeted the $3.8B→$39.7B India digital-health and corporate-wellness market instead of the $1.67B ambulance-transport market, which is capital-intensive and growing at a slow 4.75% CAGR by comparison.",
       "Sequenced the rollout to prove the arrival-time edge in hospital/RWA pilots before leaning on two government subsidy schemes (PM-RAHAT, Rah-Veer Reward) that were still new and unproven when this was written.",
     ],
     measure:
-      "Two hypothetical targets defined for the concept: a sub-5-minute responder arrival edge against the ₹2,000 flat-fee ambulance benchmark, and a measurable reduction in claims severity insurers would recognize once government subsidy integration begins. Neither is a measured result — nothing has piloted.",
+      "Two hypothetical targets defined for the concept: a sub-5-minute responder arrival edge against the ₹2,000 flat-fee ambulance benchmark, and a measurable reduction in claims severity insurers would recognize once government subsidy integration begins. Neither is a measured result. Nothing has piloted.",
     tools: [],
     topics: ["Emergency response", "Gig economy", "B2B SaaS", "0→1"],
     href: `${import.meta.env.BASE_URL}golden-hour-bridge-deck.html`,
@@ -195,22 +195,22 @@ export const work: WorkItem[] = [
   },
   {
     slug: "elder-care-india",
-    title: "Paarth — Elder Care Discovery in India",
+    title: "Paarth: Elder Care Discovery in India",
     track: "product",
     type: "case-study",
     status: "published",
     date: "2026-08",
     context: "AI product management programme, 2026",
-    hook: "Adult children arranging elder care for ageing parents in India aren't short on providers — home nursing, caregivers, assisted living all exist. What's missing is a single trusted place to find, compare, and verify them. Paarth is a concept for that discovery layer.",
+    hook: "Adult children arranging elder care for ageing parents in India aren't short on providers: home nursing, caregivers, assisted living all exist. What's missing is a single trusted place to find, compare, and verify them. Paarth is a concept for that discovery layer.",
     users:
       "Adult children coordinating elder care for ageing parents in India, often from a different city.",
     decisions: [
       "Drove the pivot away from two failed hypotheses (family-less elders, caregiver trust as the top named pain point) toward the real pattern in the data: families were blocked by discovery and coordination, not by care availability.",
-      "Chose a two-sided aggregator with a handoff to the provider's own site over building a direct-care provider or a reviews-only platform — kept the model software-light while still capturing the booking moment.",
+      "Chose a two-sided aggregator with a handoff to the provider's own site over building a direct-care provider or a reviews-only platform: kept the model software-light while still capturing the booking moment.",
       "Scoped the MVP to search, filters, and redirect only, across 5 cities, deferring booking, payments, and a provider dashboard to a later phase.",
     ],
     measure:
-      "Two hypothetical targets defined for the concept: 15–20% search-to-booking conversion within 3 months, 80%+ redirect completion rate. Neither is a measured result — nothing has shipped.",
+      "Two hypothetical targets defined for the concept: 15–20% search-to-booking conversion within 3 months, 80%+ redirect completion rate. Neither is a measured result. Nothing has shipped.",
     tools: [],
     topics: ["Elder care", "0→1", "User research", "Marketplace"],
     href: `${import.meta.env.BASE_URL}paarth-deck.html`,
@@ -272,11 +272,11 @@ export const work: WorkItem[] = [
     users:
       "Donors giving toward specific items, and the NGO admin managing what's listed, priced, and in stock.",
     decisions: [
-      "Led the frontend under a 24-hour constraint — chose item-level giving (catalogue, cart, checkout) over a simpler undirected-sum form.",
+      "Led the frontend under a 24-hour constraint: chose item-level giving (catalogue, cart, checkout) over a simpler undirected-sum form.",
       "Item-level giving meant building a donor side and an admin side in the same window, on hardware (low-end Android) that punishes an unpolished frontend hardest.",
     ],
     measure:
-      "None tracked — judged by hackathon evaluators, not usage data. There was no usage to measure.",
+      "None tracked: judged by hackathon evaluators, not usage data. There was no usage to measure.",
     tools: ["JavaScript", "Node.js", "Express"],
     reflection: "The hackathon is also how I ended up at JPMorgan Chase.",
     meta: "Build · Code for Good hackathon, 2022 · JavaScript, Node.js, Express",
@@ -300,7 +300,7 @@ export const work: WorkItem[] = [
     hook: "Drawing input assumes a surface. Not everyone has one, and not every context allows touching it.",
     decisions: [
       "Tracked fingertip position through a plain webcam rather than requiring depth hardware.",
-      "Traded tracking accuracy for latency — a laggy pen is unusable in a way a slightly imprecise one isn't.",
+      "Traded tracking accuracy for latency: a laggy pen is unusable in a way a slightly imprecise one isn't.",
     ],
     tools: ["Python", "OpenCV"],
   },
@@ -379,7 +379,7 @@ export const experience: CompanyExperience[] = [
             name: "Employee productivity platform, Core UI team",
             start: "Jul 2024",
             end: "Nov 2025",
-            note: "accessible, reusable UI components adopted across a platform serving 300,000+ employees",
+            note: "accessible, reusable UI components adopted across a platform with 251k monthly active users, 11.5M+ monthly actions, and an estimated 47,500+ hours saved a month",
           },
         ],
       },
@@ -440,6 +440,11 @@ export const currently = {
   elsewhereLink: {
     label: "@dawndailydiary",
     href: "https://www.instagram.com/dawndailydiary/",
+  },
+  elsewhereJoiner: "and learning out loud at",
+  elsewhereLink2: {
+    label: "@dawnworkdiary",
+    href: "https://www.instagram.com/dawnworkdiary/",
   },
 } as const;
 

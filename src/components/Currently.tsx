@@ -37,6 +37,15 @@ function Currently() {
               rel="noreferrer"
             >
               {currently.elsewhereLink.label}
+            </a>{" "}
+            {currently.elsewhereJoiner}{" "}
+            <a
+              className="currently__inline-link"
+              href={currently.elsewhereLink2.href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {currently.elsewhereLink2.label}
             </a>
             .
           </dd>

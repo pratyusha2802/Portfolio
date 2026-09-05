@@ -9,7 +9,7 @@ function Background() {
 
       <ul className="background-list rise">
         <li>
-          {education.degree} — {education.institution} ({education.years})
+          {education.degree} · {education.institution} ({education.years})
           {education.note ? ` · ${education.note}` : ""}
         </li>
         {recognition.map((item) => (

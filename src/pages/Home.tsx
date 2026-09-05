@@ -13,7 +13,7 @@ function Home() {
   useRiseAnimation();
 
   useEffect(() => {
-    document.title = `${profile.name} — ${profile.role}`;
+    document.title = `${profile.name} · ${profile.role}`;
   }, []);
 
   return (
