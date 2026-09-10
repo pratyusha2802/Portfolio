@@ -36,9 +36,13 @@ function CaseStudies() {
           // "Coming soon" is a sentinel: it locks the card instead of linking it.
           const isLocked = item.cta === "Coming soon";
           // Topics (the PM/product-thinking signal: 0→1, AI product, discovery
-          // work) lead and get the amber topic-chip treatment; tools (what was
-          // built with) follow in the neutral tool-chip style — kept visually
-          // distinct so a card doesn't read as just a tech-stack list.
+          // work) lead as plain divider-separated labels — not a pill, so
+          // they can't be mistaken for the dormant .filter-chip toggle UI —
+          // tools (what was built with) follow in the tool-chip pill style.
+          // Chips render regardless of `meta`: whether a card overrides the
+          // type/context line is unrelated to whether it has real tools or
+          // topics to show, and gating both on the same field previously
+          // hid Harvest Ledger Trust's tools for no content reason.
           const topics = item.topics ?? [];
 
           const body = (
@@ -49,13 +53,17 @@ function CaseStudies() {
               <h3 className="work-card__title">{item.title}</h3>
               <p className="work-card__hook">{item.hook}</p>
               {!item.meta && item.context && <p className="work-card__context">{item.context}</p>}
-              {!item.meta && (topics.length > 0 || item.tools.length > 0) && (
+              {(topics.length > 0 || item.tools.length > 0) && (
                 <div className="work-card__tools">
-                  {topics.map((topic) => (
-                    <span className="topic-chip" key={topic}>
-                      {topic}
+                  {topics.length > 0 && (
+                    <span className="topic-group">
+                      {topics.map((topic) => (
+                        <span className="topic-label" key={topic}>
+                          {topic}
+                        </span>
+                      ))}
                     </span>
-                  ))}
+                  )}
                   {item.tools.map((tool) => (
                     <span className="tool-chip" key={tool}>
                       {tool}
