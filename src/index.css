@@ -7,6 +7,7 @@
   --ink: #1b1420;
   --muted: #4a3c4d;
   --amber: #b4703f;
+  --amber-ink: #7a4a12;
 
   --display: "Bricolage Grotesque", system-ui, sans-serif;
   --body: "Instrument Sans", system-ui, sans-serif;
@@ -979,7 +980,11 @@ a.work-card:hover .work-card__cta::after {
   display: inline-block;
   font-size: 12.5px;
   font-weight: 700;
-  color: var(--amber);
+  /* The lighter --amber reads as a proper accent as a 1-2px dot elsewhere,
+     but as chip text on a light tint the two mid-tones blend into a flat,
+     muddy pastel. --amber-ink is the same hue pushed dark enough to sit on
+     the tint with the same crisp contrast tool-chip gets from --forest. */
+  color: var(--amber-ink);
   background: rgba(180, 112, 63, 0.14);
   padding: 5px 12px;
   border-radius: 999px;
