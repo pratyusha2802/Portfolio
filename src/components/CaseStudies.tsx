@@ -2,18 +2,24 @@ import { Link } from "react-router-dom";
 import { work, typeLabels } from "../data/portfolio";
 
 /**
- * Exactly three, curated, in this order: self-directed product work leads,
- * proven engineering work closes. Not the full `work` list, and not
- * filterable — see CLAUDE.md.
+ * Every published (or locked-in-progress) piece of work, hand-ordered by
+ * depth of real evidence, not by track or by date. Real and shipped leads;
+ * desk-research-only concepts and the locked scaffold trail behind proven
+ * builds. Changed 2026-09-10 from a curated top-3 to "show everything,
+ * ranked" — see CLAUDE.md for why. Not filterable.
  */
-const featuredSlugs = [
-  "convenience-economy-india",
+const orderedSlugs = [
+  "scopesync",
   "elder-care-india",
   "harvest-ledger-trust",
+  "convenience-economy-india",
+  "network-intrusion-detection",
+  "pen-in-the-air",
+  "gig-economy-worker-passport",
 ] as const;
 
 function CaseStudies() {
-  const items = featuredSlugs
+  const items = orderedSlugs
     .map((slug) => work.find((item) => item.slug === slug))
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
 

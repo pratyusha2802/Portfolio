@@ -46,7 +46,7 @@ React SPA on Vite, TypeScript strict, `react-router-dom` for client-side routing
 - **`src/data/portfolio.ts`** is the single source of truth for all copy — see "Content model" below for what each export renders as. **To change what the site says, edit this file, not a component.**
 - **`src/content/work/{slug}.md`** — long-form case content for entries in `work`, one markdown file per slug, loaded at build time via `import.meta.glob` and parsed by `src/lib/markdown.ts` (a small hand-rolled frontmatter parser + `marked` for the body — deliberately not `gray-matter`, which assumes a Node `Buffer` global the browser doesn't have). The authoring guide lives at `docs/_authoring.md`, outside this folder so the loader never has to special-case it.
 - **`src/pages/`** — route-level components: `Home.tsx` (the whole single-page scroll), `WorkDetail.tsx` (`/work/:slug`), `NotFound.tsx` (catch-all `*`). Routing lives in `App.tsx`; `main.tsx` mounts `BrowserRouter`.
-- **`src/components/`** — `Hero`, `Currently` (the "building/learning/elsewhere" strip, `id="currently"`, right after the hero), `CaseStudies` (curated 3-item section, `id="work"`), `About` (bio only now, `id="about"`), `Experience` (`id="experience"`), `Background` (`id="background"`), `Footer`, `Nav`. Each presentation-only, reading from `portfolio.ts`.
+- **`src/components/`** — `Hero`, `Currently` (the "building/learning/elsewhere" strip, `id="currently"`, right after the hero), `CaseStudies` (shows every published work item, ordered by depth, `id="work"`), `About` (bio only now, `id="about"`), `Experience` (`id="experience"`), `Background` (`id="background"`), `Footer`, `Nav`. Each presentation-only, reading from `portfolio.ts`.
 - **`src/index.css`** is the only stylesheet — global, BEM-ish class names, CSS custom properties in `:root` for the forest/paper theme. No CSS modules or scoping.
 - **`public/`** — `photo.jpg` (hero headshot, referenced directly as `/photo.jpg`, not part of `portfolio.ts`). There's no local résumé file — `links`' Résumé entry points to an external Google Drive URL instead (see "Known gaps" — that file's sharing permission still needs to be set to "Anyone with the link" for it to actually work for visitors).
 
@@ -100,37 +100,41 @@ seconds; the whole page should triage in about a minute for someone skimming.
    see the softened rule below on "transitioning into product"
 2. Currently — building / learning / elsewhere, a compact strip right under
    the hero, not folded into About anymore
-3. Case studies — exactly three, curated, each with its own `/work/:slug`
-   page. Not a filterable grid of everything she's built.
+3. Case studies — every published (and locked-in-progress) piece of work,
+   each with its own `/work/:slug` page, hand-ordered by depth of real
+   evidence rather than curated down to a top 3. Changed 2026-09-10 (see
+   below). Not filterable.
 4. About — bio only, nothing else folded in
 5. Experience — its own section now, not condensed into About
 6. Background — education, recognition, community, as a flat list. No
    separate card grid, no "Writing" card currently
 7. Contact — the footer's CTA
 
-This has changed shape twice already: it started as 6 sections (Hero/How I
+This has changed shape three times now: it started as 6 sections (Hero/How I
 work/Selected work/Experience/Currently/Background), got compressed to 4
-(Hero/Case Studies/About/Contact) to fit a tight recruiter-scan brief, and is
-now 7 — About, Experience, Currently, and Background separated back out once
-real Experience/Background copy arrived that didn't fit a condensed block.
-Don't assume either the 4-section or 6-section version is current.
+(Hero/Case Studies/About/Contact) to fit a tight recruiter-scan brief, went
+to 7 once About, Experience, Currently, and Background were separated back
+out for real copy that didn't fit a condensed block, and the Case Studies
+section itself changed shape again on 2026-09-10 (see below). Don't assume
+the 4-section or 6-section version, or a curated-top-3 Case Studies section,
+is current.
 
-The three case studies are, in this order: **Golden Hour Bridge**
-(`convenience-economy-india` — self-directed discovery, an AI product
-management programme brief on India's convenience economy as
-infrastructure, not a transport-speed problem) → **Paarth**
-(`elder-care-india`, published) → **Harvest Ledger Trust** (proven,
-published, closes on established engineering credibility). Product-direction
-work leads now; the engineering-credibility piece closes — this flipped from
-an earlier ordering that led with engineering credibility first, which the
-current copy explicitly overrode. This has changed which product-direction
-slug sits in slot one more than once (`emergency-medical-response-india` →
-`convenience-economy-india` is the latest) — don't assume this exact
-paragraph stays accurate without checking `CaseStudies.tsx`'s
-`featuredSlugs` directly.
+**Case studies stopped being curated down to a top 3 on 2026-09-10.**
+Every published piece of work (plus the one locked-in-progress scaffold)
+now shows, hand-ordered by depth of real evidence — real, shipped work
+with the strongest proof leads; desk-research-only concepts and the locked
+scaffold trail behind proven builds. The order lives in `CaseStudies.tsx`'s
+`orderedSlugs` array; don't assume any specific ordering stated in prose
+here stays accurate without checking that array directly, the same caution
+that applied to the old `featuredSlugs` list. This reversed the site's
+earlier explicit "volume signals a course completed, depth signals
+judgement, that's why three" stance (see "Adding new work" below) — the new
+call is that depth can still be the ordering principle without also being a
+cutoff; showing more work isn't the same failure mode as showing
+undifferentiated work, as long as the strongest evidence still leads.
 The JPMC work does **not** become a case study — see the hard rule below —
-so the engineering case study is an existing personal/hackathon project
-reframed with full case-study rigor instead.
+so the engineering case studies are existing personal/hackathon/academic
+projects reframed with full case-study rigor instead.
 
 ## Content model
 
@@ -143,7 +147,7 @@ strings are hardcoded in JSX.
 | `profile.role` | `<title>` only — not shown on the page anymore |
 | `profile.about` | About (bio only) |
 | `currently` | Its own strip section, right after the hero |
-| `work` + `typeLabels` | Case studies — curated 3 only, see `CaseStudies.tsx`'s `featuredSlugs`. `WorkItem.meta`/`.cta` override the default type/context/tools line and CTA per card when present |
+| `work` + `typeLabels` | Case studies — every published item, ordered by depth, see `CaseStudies.tsx`'s `orderedSlugs`. `WorkItem.meta`/`.cta` override the default type/context/tools line and CTA per card when present |
 | `stageLabels` / `stageOrder` | Belong to the older spine+blocks authoring system (`docs/_authoring.md`), not the featured-3 anatomy — still used by `WorkItem.stages` typing, not rendered by `CaseStudies` |
 | `experience` | Its own `Experience` section |
 | `education`, `recognition`, `community` | `Background`, as a flat list |
@@ -172,12 +176,16 @@ longer broken by the shape change.
 
 ## Writing a case page
 
-**Two anatomies coexist here — know which one applies.**
+**Two anatomies coexist here — know which one applies. This split predates,
+and is independent of, the 2026-09-10 change to show every case study
+instead of a curated top 3 — don't conflate "uses the fuller anatomy" with
+"is featured"; nothing is curated out anymore, but not every case gets the
+same depth of write-up.**
 
-**The 3 featured case studies** (`convenience-economy-india`,
+**The richer case studies** (`scopesync`, `convenience-economy-india`,
 `elder-care-india`, `harvest-ledger-trust` — check `CaseStudies.tsx`'s
-`featuredSlugs` for the current set, this list has gone stale before) use a
-fixed, recruiter-oriented anatomy, in this order, every time:
+`orderedSlugs` for the current full set, this list has gone stale before)
+use a fixed, recruiter-oriented anatomy, in this order, every time:
 
 TL;DR (problem → approach → outcome, 3 lines max) → Context → The problem (who
 has it, why it matters) → Constraints → Research and discovery → Options
@@ -189,13 +197,13 @@ differently.
 Options-considered and what-I'd-do-differently are the highest-signal
 sections and the ones most likely to get cut for length. Don't cut them.
 
-**Any other case page** (the two archived engineering projects, anything added
-outside the featured 3) uses the older, looser system in
-`docs/_authoring.md`: a fixed spine (summary → problem → … → what
-I'd do differently) with optional blocks (`discovery`, `solution`, `scope`,
-`ux`, `metrics`, `build`, `evals`) composed in based on how far the work went.
-`stages`/`stageLabels`/`stageOrder` belong to *that* system, not the featured
-anatomy above — `CaseStudies.tsx` doesn't currently render stage chips at all.
+**Any other case page** (currently `network-intrusion-detection` and
+`pen-in-the-air`) uses the older, looser system in `docs/_authoring.md`: a
+fixed spine (summary → problem → … → what I'd do differently) with optional
+blocks (`discovery`, `solution`, `scope`, `ux`, `metrics`, `build`, `evals`)
+composed in based on how far the work went. `stages`/`stageLabels`/`stageOrder`
+belong to *that* system, not the fuller anatomy above — `CaseStudies.tsx`
+doesn't currently render stage chips at all.
 
 Engineering work usually needs no stages under the older system — leave the
 field off rather than retrofitting product vocabulary onto a hackathon build.
@@ -204,21 +212,29 @@ field off rather than retrofitting product vocabulary onto a hackathon build.
 
 1. Add a `work` entry — slug named for the **subject**, never its origin
    ("meal-planning-prd", not "week-3-prd")
-2. Create `src/content/work/{slug}.md` — the featured anatomy if it's going
-   into `CaseStudies.tsx`'s curated 3, the older spine+blocks system otherwise
+2. Create `src/content/work/{slug}.md` — the fuller anatomy for a piece with
+   real decisions and rigor behind it, the older spine+blocks system for a
+   smaller/simpler build (see "Writing a case page" above for which is which)
 3. `status: "in-progress"` while drafting; `"published"` when every included
    section has real content, not a TODO placeholder
+4. Add the slug to `CaseStudies.tsx`'s `orderedSlugs`, positioned by depth
+   of real evidence against what's already there — not appended at the end
+   by default, and not placed by track or by date
 
 **Do not draft the body of a case unless explicitly asked.** A PRD she didn't
 reason through is one she can't defend when someone pushes on the tradeoff.
 Scaffolding, structuring, and challenging a draft is welcome. Ghostwriting isn't.
 
-**Exactly three case studies are featured; everything else is archived, not
-deleted.** `network-intrusion-detection` and `pen-in-the-air` still have real
-published pages at their own URLs — they're just not in `CaseStudies.tsx`'s
-`featuredSlugs` list, and not linked from anywhere in the main page flow.
-Volume signals a course completed; depth signals judgement — that's still why
-three, in full, beats five, thin.
+**Every published case study shows now; nothing is curated out.** This
+reversed the site's earlier "volume signals a course completed, depth
+signals judgement, that's why three" stance — as of 2026-09-10, depth is
+the ordering principle, not a cutoff. `network-intrusion-detection` and
+`pen-in-the-air` are real, published, and now visible in the main grid like
+everything else, just ordered behind the case studies with deeper evidence
+behind them. The locked `gig-economy-worker-passport` scaffold still shows
+too (its card stays non-clickable via the `cta: "Coming soon"` sentinel,
+same as before) — "show everything" doesn't mean "show unfinished work as
+if it were real," it means nothing finished gets hidden.
 
 ## Content rules — hard constraints
 
@@ -294,8 +310,8 @@ its own claims:
 - `prefers-reduced-motion` respected on every animation
 - Meaningful `alt` text; decorative images `alt=""`
 - Filter chips are real buttons with `aria-pressed`, not styled divs — dormant
-  right now (`CaseStudies` has no filter UI, curated 3 don't need one), but
-  the rule stands if filtering comes back
+  right now (`CaseStudies` has no filter UI even after showing every case
+  study), but the rule stands if filtering comes back
 - Stage chips are non-interactive: mark up as a list, never convey coverage by
   colour alone — also dormant, same reason
 - Locked case-study cards ("Coming soon") must not be reachable by keyboard —
