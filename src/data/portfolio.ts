@@ -191,10 +191,6 @@ export const work: WorkItem[] = [
     href: "https://scopesync-app.vercel.app",
     links: [
       {
-        href: "https://claude.ai/code/artifact/8a55512f-043f-4c89-a22c-c87a599cb10e",
-        label: "View PRD",
-      },
-      {
         href: "https://claude.ai/code/artifact/c5868026-bb65-4ed9-9035-88c70bef12c0",
         label: "View pitch deck",
       },
