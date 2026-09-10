@@ -905,6 +905,7 @@ a.work-card:hover {
 .work-card__tools {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
   margin-top: 16px;
 }
@@ -971,31 +972,35 @@ a.work-card:hover .work-card__cta::after {
   background: rgba(46, 33, 56, 0.14);
 }
 
-/* Topic chips (0→1, AI product, discovery work) carry the PM/product-thinking
-   signal and need to visually lead the tool-chip tech stack. A warm accent
-   hue kept reading as a muddy tan against the site's cool lavender no matter
-   how the contrast was tuned, so the distinction is shape, not a new color:
-   an outlined "badge" in the same ink the rest of the card already uses,
-   versus the tool-chip's soft filled tint. */
-.topic-chip {
-  display: inline-block;
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--forest);
-  background: var(--paper);
-  border: 1.5px solid var(--forest);
-  padding: 3.5px 12px;
-  border-radius: 999px;
-  transition:
-    transform 0.2s ease,
-    background 0.2s ease,
-    color 0.2s ease;
+/* Topics (0→1, AI product, discovery work) carry the PM/product-thinking
+   signal and need to visually lead the tool-chip tech stack. Two pill-shaped
+   attempts (a warm accent color, then an outlined badge) both failed for the
+   same underlying reason: this codebase already has a dormant .filter-chip
+   that uses "outlined until pressed" for real filter buttons, so any pill
+   here reads as a clickable toggle that does nothing. The fix is to not be
+   a pill at all — plain divider-separated labels, the same grammar as the
+   (also dormant) .stage-chip list, so topics read as a fact about the card,
+   not a control. */
+.topic-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
 }
 
-.topic-chip:hover {
-  transform: translateY(-2px) rotate(-3deg);
-  background: var(--forest);
-  color: var(--paper);
+.topic-label {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--forest);
+  padding-inline-end: 10px;
+  border-right: 1px solid rgba(46, 33, 56, 0.18);
+}
+
+.topic-label:last-child {
+  border-right: none;
+  padding-inline-end: 0;
 }
 
 /* ---------- experience ---------- */
