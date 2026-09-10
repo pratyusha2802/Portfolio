@@ -175,17 +175,17 @@ export const work: WorkItem[] = [
     type: "case-study",
     status: "published",
     date: "2026-08",
-    context: "Solo build, launched August 2026",
-    hook: "The internet has more technical content than anyone could get through, but watching a video or reading an article rarely leaves you able to actually use what's in it.",
+    context: "AI product management programme, 2026",
+    hook: "Professionals are now expected to work with AI and technical tools they were never taught. Watching a video about it rarely leaves anyone able to actually use it.",
     users:
-      "Product managers and anyone technical-adjacent who needs real fluency in an unfamiliar technical topic fast, not just more content to skim.",
+      "Non-technical professionals, PMs, marketers, HR, founders, finance, and ops people, who need real fluency with AI and technical tools fast, not just more content to skim.",
     decisions: [
+      "Chose to test with a real, live product in front of unscreened strangers on a single launch day instead of a safer walkthrough or a research-first approach, the exact decision that surfaced a production bug no interview would have found.",
       'Refused to let a lesson count as "finished" without a demonstrated-understanding signal: every learning path ends in an AI-evaluated build challenge or interview-style question, not a passive completion checkbox.',
       "Built a Gemini-primary, Groq-fallback, mock-for-local-dev provider chain so the product degrades gracefully instead of breaking outright when one AI provider rate-limits or fails.",
-      "Shipped a full internal admin analytics suite (retention, funnel, growth, content quality) alongside the consumer product from day one, instead of treating measurement as a later add-on.",
     ],
     measure:
-      "Instrumented via a self-built admin dashboard (retention, activation funnel, content quality) backed by Mixpanel, live since launch. Too early for a real usage trend: what's real is that specific, actionable feedback arrived within hours of the Product Hunt launch and was triaged and shipped the same day.",
+      "Launch-day numbers from 19 self-selected signups, read as directional, not representative: 89% onboarding completion (17 of 19), and 37% of signups arriving through in-product referral, ahead of a cold LinkedIn post. The sharpest finding wasn't a number: a database migration silently broke the entire gamification layer mid-launch, found by using the product myself, not by checking a dashboard.",
     tools: ["Next.js", "TypeScript", "Supabase", "Gemini", "Groq", "Tailwind CSS", "Zustand"],
     topics: ["0→1", "AI product", "Solo founder", "B2C", "EdTech"],
     href: "https://scopesync-app.vercel.app",
