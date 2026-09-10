@@ -5,7 +5,7 @@ function Footer() {
     <>
       <section className="contact">
         <div className="wrap">
-          <h2 className="contact__title rise">
+          <h2 className="contact__title rise fill-text">
             Let's build
             <br />
             something useful.

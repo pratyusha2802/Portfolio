@@ -19,7 +19,7 @@ function Hero() {
     <section className="hero wrap" id="top">
       <div className="hero__top">
         <div>
-          <h1 className="hero__title rise" style={riseDelay(0)}>
+          <h1 className="hero__title rise fill-text" style={riseDelay(0)}>
             <span className="hero__greeting">Hi, I'm</span>
             {profile.name}
           </h1>

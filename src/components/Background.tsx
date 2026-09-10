@@ -4,7 +4,7 @@ function Background() {
   return (
     <section className="section wrap" id="background">
       <div className="section__head">
-        <h2 className="section__title rise">Background</h2>
+        <h2 className="section__title rise fill-text">Background</h2>
       </div>
 
       <ul className="background-list rise">
