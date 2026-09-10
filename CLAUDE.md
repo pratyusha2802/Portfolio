@@ -62,8 +62,6 @@ React SPA on Vite, TypeScript strict, `react-router-dom` for client-side routing
 - **Sub-3s-on-4G and Lighthouse have not been measured** against this build — no browser tooling was available when it was assembled. Don't report either as passing without actually running them.
 - **Per-page OG image/meta tags** aren't implemented — same root cause as the no-JS gap (client-only SPA, no prerendering), so crawlers that don't execute JS only ever see `index.html`'s static tags.
 - **Live Medium feed** isn't implemented. `writing.feedUrl` is empty; nothing currently renders `writing` at all (it was dropped from `Background` when that section got rewritten to a flat list — revisit if that was wrong).
-- **`network-intrusion-detection` and `pen-in-the-air`** still have real published case pages and are reachable at their `/work/:slug` URLs, but are no longer featured anywhere in the main flow — `CaseStudies` renders exactly 3 curated slugs, not the full `work` array. Archived, not deleted.
-- **`gig-economy-worker-passport` is intentionally locked** — `cta: "Coming soon"` makes its card non-clickable (see `CaseStudies.tsx`: the literal string `"Coming soon"` is the sentinel that decides this, not `status`). Its `.md` file is still all-TODO past the problem framing.
 
 ## Content notes
 
@@ -197,8 +195,8 @@ differently.
 Options-considered and what-I'd-do-differently are the highest-signal
 sections and the ones most likely to get cut for length. Don't cut them.
 
-**Any other case page** (currently `network-intrusion-detection` and
-`pen-in-the-air`) uses the older, looser system in `docs/_authoring.md`: a
+**Any other case page** (currently `pen-in-the-air`) uses the older, looser
+system in `docs/_authoring.md`: a
 fixed spine (summary → problem → … → what I'd do differently) with optional
 blocks (`discovery`, `solution`, `scope`, `ux`, `metrics`, `build`, `evals`)
 composed in based on how far the work went. `stages`/`stageLabels`/`stageOrder`
@@ -228,13 +226,14 @@ Scaffolding, structuring, and challenging a draft is welcome. Ghostwriting isn't
 **Every published case study shows now; nothing is curated out.** This
 reversed the site's earlier "volume signals a course completed, depth
 signals judgement, that's why three" stance — as of 2026-09-10, depth is
-the ordering principle, not a cutoff. `network-intrusion-detection` and
-`pen-in-the-air` are real, published, and now visible in the main grid like
-everything else, just ordered behind the case studies with deeper evidence
-behind them. The locked `gig-economy-worker-passport` scaffold still shows
-too (its card stays non-clickable via the `cta: "Coming soon"` sentinel,
-same as before) — "show everything" doesn't mean "show unfinished work as
-if it were real," it means nothing finished gets hidden.
+the ordering principle, not a cutoff. `pen-in-the-air` is real, published,
+and visible in the main grid like everything else, just ordered behind the
+case studies with deeper evidence behind them — "show everything" doesn't
+mean "show unfinished work as if it were real," it means nothing finished
+gets hidden. `network-intrusion-detection` and the locked
+`gig-economy-worker-passport` scaffold were removed entirely on 2026-09-10
+at her request — deleted from `work` and `orderedSlugs`, and their `.md`
+files removed, not archived.
 
 ## Content rules — hard constraints
 
