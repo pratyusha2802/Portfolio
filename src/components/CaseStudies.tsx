@@ -35,9 +35,11 @@ function CaseStudies() {
         {items.map((item) => {
           // "Coming soon" is a sentinel: it locks the card instead of linking it.
           const isLocked = item.cta === "Coming soon";
-          // Tools (what was used) and topics (the niche/PM keywords the work
-          // demonstrates) render as the same chip, kept as separate fields.
-          const chips = [...item.tools, ...(item.topics ?? [])];
+          // Topics (the PM/product-thinking signal: 0→1, AI product, discovery
+          // work) lead and get the amber topic-chip treatment; tools (what was
+          // built with) follow in the neutral tool-chip style — kept visually
+          // distinct so a card doesn't read as just a tech-stack list.
+          const topics = item.topics ?? [];
 
           const body = (
             <>
@@ -47,11 +49,16 @@ function CaseStudies() {
               <h3 className="work-card__title">{item.title}</h3>
               <p className="work-card__hook">{item.hook}</p>
               {!item.meta && item.context && <p className="work-card__context">{item.context}</p>}
-              {!item.meta && chips.length > 0 && (
+              {!item.meta && (topics.length > 0 || item.tools.length > 0) && (
                 <div className="work-card__tools">
-                  {chips.map((chip) => (
-                    <span className="tool-chip" key={chip}>
-                      {chip}
+                  {topics.map((topic) => (
+                    <span className="topic-chip" key={topic}>
+                      {topic}
+                    </span>
+                  ))}
+                  {item.tools.map((tool) => (
+                    <span className="tool-chip" key={tool}>
+                      {tool}
                     </span>
                   ))}
                 </div>
