@@ -1,14 +1,15 @@
 import { links, profile } from "../data/portfolio";
+import { splitLetters } from "../lib/splitLetters";
 
 function Footer() {
   return (
     <>
       <section className="contact">
         <div className="wrap">
-          <h2 className="contact__title rise fill-text">
-            Let's build
+          <h2 className="contact__title rise">
+            {splitLetters("Let's build", "contact-line1")}
             <br />
-            something useful.
+            {splitLetters("something useful.", "contact-line2")}
           </h2>
           <p className="contact__note rise">
             Open to conversations about product roles, discovery work, or anything at the

@@ -1,10 +1,11 @@
 import { profile } from "../data/portfolio";
+import { splitLetters } from "../lib/splitLetters";
 
 function About() {
   return (
     <section className="section wrap" id="about">
       <div className="section__head">
-        <h2 className="section__title rise fill-text">About</h2>
+        <h2 className="section__title rise">{splitLetters("About", "about-title")}</h2>
       </div>
 
       <div className="about__bio rise">

@@ -1,10 +1,11 @@
 import { experience } from "../data/portfolio";
+import { splitLetters } from "../lib/splitLetters";
 
 function Experience() {
   return (
     <section className="section wrap" id="experience">
       <div className="section__head">
-        <h2 className="section__title rise fill-text">Experience</h2>
+        <h2 className="section__title rise">{splitLetters("Experience", "exp-title")}</h2>
       </div>
 
       <ul className="company-list">

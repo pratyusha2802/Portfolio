@@ -1608,24 +1608,28 @@ a.work-card:hover .work-card__cta::after {
   transition-delay: calc(var(--i, 0) * 90ms);
 }
 
-/* Bold display headings start faint and fill in solid on the same scroll
-   trigger .rise already uses (useRiseAnimation adds .in once, on load for
-   hero content, on intersection everywhere else), plus a hover fallback for
-   anyone who reaches the heading without ever triggering the observer. The
-   fill is delayed and slower than .rise's own fade so the faint state is
-   actually visible for a beat before it darkens, instead of blurring into
-   one motion. Tried an outlined (-webkit-text-stroke) look first, but on
-   this bold a display face the fill never visibly painted in testing even
-   though computed styles reported it solid — a real cross-browser paint
-   risk, not just a preference. A plain color fade has no such failure mode. */
-.fill-text {
-  color: rgba(46, 33, 56, 0.18);
-  transition: color 1s ease 0.2s;
+/* Bold display headings split into per-letter spans (splitLetters.tsx) that
+   start scattered (small random rotate/offset via --ty/--rot) and snap into
+   normal reading position on the same trigger .rise already uses
+   (useRiseAnimation adds .in once, on load for hero content, on
+   intersection everywhere else), plus a hover fallback for anyone who
+   reaches the heading without ever triggering the observer. --li staggers
+   each letter's transition-delay so they settle in a cascade, not at once. */
+.letter-word {
+  display: inline-block;
+  white-space: nowrap;
 }
 
-.fill-text.in,
-.fill-text:hover {
-  color: var(--forest);
+.letter {
+  display: inline-block;
+  transform: translateY(var(--ty, 0)) rotate(var(--rot, 0deg));
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transition-delay: calc(var(--li, 0) * 18ms);
+}
+
+.rise.in .letter,
+.rise:hover .letter {
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1645,8 +1649,8 @@ a.work-card:hover .work-card__cta::after {
     opacity: 1;
     transform: none;
   }
-  .fill-text {
-    color: var(--forest);
+  .letter {
+    transform: none;
   }
   .position-list::before,
   .position-item::before {

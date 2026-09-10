@@ -1,5 +1,6 @@
 import { links, principles, profile } from "../data/portfolio";
 import { riseDelay } from "../lib/rise";
+import { splitLetters } from "../lib/splitLetters";
 import { pageUrl } from "../lib/url";
 import { usePointerTilt } from "../lib/usePointerTilt";
 
@@ -19,9 +20,9 @@ function Hero() {
     <section className="hero wrap" id="top">
       <div className="hero__top">
         <div>
-          <h1 className="hero__title rise fill-text" style={riseDelay(0)}>
+          <h1 className="hero__title rise" style={riseDelay(0)}>
             <span className="hero__greeting">Hi, I'm</span>
-            {profile.name}
+            {splitLetters(profile.name, "hero-name")}
           </h1>
           <p className="eyebrow rise" style={riseDelay(1)}>
             {profile.location}
