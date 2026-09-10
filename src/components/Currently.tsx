@@ -1,10 +1,11 @@
 import { currently } from "../data/portfolio";
+import { splitLetters } from "../lib/splitLetters";
 
 function Currently() {
   return (
     <section className="section section--tight wrap" id="currently">
       <div className="section__head">
-        <h2 className="section__title rise fill-text">Currently</h2>
+        <h2 className="section__title rise">{splitLetters("Currently", "cur-title")}</h2>
       </div>
       <dl className="currently">
         <div className="currently__row rise">

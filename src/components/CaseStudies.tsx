@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { work, typeLabels } from "../data/portfolio";
+import { splitLetters } from "../lib/splitLetters";
 
 /**
  * Every published (or locked-in-progress) piece of work, hand-ordered by
@@ -24,7 +25,7 @@ function CaseStudies() {
   return (
     <section className="section wrap" id="work">
       <div className="section__head">
-        <h2 className="section__title rise fill-text">Case studies</h2>
+        <h2 className="section__title rise">{splitLetters("Case studies", "cs-title")}</h2>
         <p className="section__note rise">
           Real problems. Thoughtful decisions. Product work driven by curiosity, structured
           thinking, and user needs.
