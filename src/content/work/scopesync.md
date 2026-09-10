@@ -97,6 +97,38 @@ than picking whichever explanation flatters the number. A smaller, quieter
 launch (a walkthrough, a handful of friendly testers) would never have
 found this bug, and also would never have told me anything real.
 
+## Goals and requirements
+
+**In scope for v0.1:** turn any single source (video, article, PDF, or bare
+topic) into a structured, scoped learning path; verify understanding through
+active demonstration, not passive completion; personalize register and depth
+to the learner's self-reported technical comfort; make progress and mastery
+visible and motivating; measure activation, retention, and content quality
+from day one.
+
+**Explicitly out of scope for v0.1:** synthesizing multiple sources into one
+path, team or organization accounts, authoring tools for someone else to
+build a path for a learner, native mobile apps.
+
+| Area | Requirement | Status |
+| --- | --- | --- |
+| Ingestion | Accept a YouTube link, article URL, PDF upload, or bare topic string | Shipped |
+| Ingestion | Score each resource for quality, difficulty, and relevance before use | Shipped |
+| Ingestion | Synthesize a path from more than one source at a time | Known gap |
+| Lessons | Generate a structured path scoped to the source content | Shipped |
+| Lessons | Adjust explanation register to the learner's stated comfort level | Shipped (fixed post-launch) |
+| Lessons | In-lesson AI Q&A ("Ask Compass") for anything unclear mid-lesson | Shipped |
+| Verification | AI-evaluated build challenge in a visual, node-based playground | Shipped |
+| Verification | Interview-practice mode, scored on correctness and clarity | Shipped |
+| Motivation | XP, streaks, and badges tied to real learning actions, not logins | Shipped (broke mid-launch, see above) |
+| Measurement | Event instrumentation and an internal funnel/retention/growth dashboard | Shipped |
+
+**Roadmap, in order:** re-measure completion depth on the now-fixed build;
+pull the AI-pipeline failure rate against free-tier rate limits; multi-source
+learning paths, the most-requested gap; long-video content quality, capped
+transcript length degrades a 6-hour video into a shallow summary; a more
+granular, directly navigable learning map.
+
 ## What shipped
 
 A live, working product tested end to end by strangers, not a prototype:
