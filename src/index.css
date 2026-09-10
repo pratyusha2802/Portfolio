@@ -779,23 +779,27 @@ button {
   transform: scale(0.92);
 }
 
+/* Cards vary a lot in content length (a locked scaffold vs. a full case
+   study with tags), and the list length isn't always a multiple of the
+   column count. A two-track CSS grid leaves both a stretched-short-card gap
+   and a blank trailing cell when a row doesn't fill. A balanced multi-column
+   flow (masonry-style) has no row concept at all, so neither gap can occur:
+   each card is exactly its own height, and the last card just ends a column
+   instead of leaving its row-mate's cell empty. */
 .work-grid {
-  display: grid;
-  gap: clamp(18px, 2vw, 26px);
-  /* Cards vary a lot in content length (a locked scaffold vs. a full case
-     study with tags). Without this, grid's default row-stretch pads a
-     shorter card with dead space up to its taller row-mate's height. */
-  align-items: start;
+  column-gap: clamp(18px, 2vw, 26px);
 }
 
 @media (min-width: 720px) {
   .work-grid {
-    grid-template-columns: repeat(2, 1fr);
+    columns: 2;
   }
 }
 
 .work-card {
   display: block;
+  break-inside: avoid;
+  margin-bottom: clamp(18px, 2vw, 26px);
   background: var(--paper-deep);
   border-radius: 16px;
   padding: clamp(22px, 2.4vw, 30px);
