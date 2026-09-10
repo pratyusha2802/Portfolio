@@ -4,7 +4,7 @@ function Currently() {
   return (
     <section className="section section--tight wrap" id="currently">
       <div className="section__head">
-        <h2 className="section__title rise">Currently</h2>
+        <h2 className="section__title rise fill-text">Currently</h2>
       </div>
       <dl className="currently">
         <div className="currently__row rise">

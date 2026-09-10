@@ -4,7 +4,7 @@ function About() {
   return (
     <section className="section wrap" id="about">
       <div className="section__head">
-        <h2 className="section__title rise">About</h2>
+        <h2 className="section__title rise fill-text">About</h2>
       </div>
 
       <div className="about__bio rise">

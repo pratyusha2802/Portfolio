@@ -24,7 +24,7 @@ function CaseStudies() {
   return (
     <section className="section wrap" id="work">
       <div className="section__head">
-        <h2 className="section__title rise">Case studies</h2>
+        <h2 className="section__title rise fill-text">Case studies</h2>
         <p className="section__note rise">
           Real problems. Thoughtful decisions. Product work driven by curiosity, structured
           thinking, and user needs.
