@@ -252,43 +252,7 @@ export const work: WorkItem[] = [
     ],
     cta: "Read the case study",
   },
-  /* Scaffolded case study. Every substantive claim beyond the problem
-   * framing below is a placeholder until real research/decision material
-   * is supplied — see the TODOs in the matching .md file. */
-  {
-    slug: "gig-economy-worker-passport",
-    title: "Worker Passport",
-    track: "product",
-    type: "case-study",
-    status: "planned",
-    date: "2025",
-    context: "",
-    hook: "Gig and quick-commerce workers rebuild their standing from zero every time they switch platforms. Worker Passport is a concept for portable, verified work history.",
-    users: "",
-    decisions: [],
-    measure: "",
-    tools: [],
-    meta: "Self-directed concept work · 2025 · In progress",
-    cta: "Coming soon",
-  },
-
   /* Engineering track */
-  {
-    slug: "network-intrusion-detection",
-    title: "Network Intrusion Detection",
-    track: "engineering",
-    type: "build",
-    status: "published",
-    date: "2024-04",
-    context: "Final-year project, MANIT Bhopal",
-    hook: "Intrusion detection models drown in correlated features and overfit to the benchmark rather than the attack.",
-    decisions: [
-      "Used correlation-based feature selection to cut redundant signals before modelling rather than after.",
-      "Chose a stacked ensemble over a single classifier to trade a little interpretability for stability across attack classes.",
-      "Evaluated on both KDD Cup 99 and NSL-KDD, because results on the former alone are known to flatter.",
-    ],
-    tools: ["Python", "scikit-learn"],
-  },
   {
     slug: "harvest-ledger-trust",
     title: "Harvest Ledger Trust",

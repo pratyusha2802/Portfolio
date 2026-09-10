@@ -13,9 +13,7 @@ const orderedSlugs = [
   "elder-care-india",
   "harvest-ledger-trust",
   "convenience-economy-india",
-  "network-intrusion-detection",
   "pen-in-the-air",
-  "gig-economy-worker-passport",
 ] as const;
 
 function CaseStudies() {
