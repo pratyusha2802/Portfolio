@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { profile } from "../data/portfolio";
 import { pageUrl } from "../lib/url";
+import { useMagneticHover } from "../lib/useMagneticHover";
 
 function Nav() {
   const [isStuck, setIsStuck] = useState(false);
+  const sayHelloRef = useMagneticHover<HTMLAnchorElement>();
 
   useEffect(() => {
     const onScroll = () => setIsStuck(window.scrollY > 12);
@@ -32,7 +34,7 @@ function Nav() {
           <a className="nav__link" href={pageUrl("experience")}>
             Experience
           </a>
-          <a className="pill" href={`mailto:${profile.email}`}>
+          <a className="pill magnetic" href={`mailto:${profile.email}`} ref={sayHelloRef}>
             Say hello
             <span className="wave" aria-hidden="true">
               👋

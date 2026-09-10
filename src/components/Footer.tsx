@@ -1,7 +1,10 @@
 import { links, profile } from "../data/portfolio";
 import { splitLetters } from "../lib/splitLetters";
+import { useMagneticHover } from "../lib/useMagneticHover";
 
 function Footer() {
+  const sayHelloRef = useMagneticHover<HTMLAnchorElement>();
+
   return (
     <>
       <section className="contact">
@@ -15,7 +18,11 @@ function Footer() {
             Open to conversations about product roles, discovery work, or anything at the
             intersection of engineering and product.
           </p>
-          <a className="pill pill--lg rise" href={`mailto:${profile.email}`}>
+          <a
+            className="pill pill--lg magnetic rise"
+            href={`mailto:${profile.email}`}
+            ref={sayHelloRef}
+          >
             Say hello
             <span className="wave" aria-hidden="true">
               👋
