@@ -782,6 +782,10 @@ button {
 .work-grid {
   display: grid;
   gap: clamp(18px, 2vw, 26px);
+  /* Cards vary a lot in content length (a locked scaffold vs. a full case
+     study with tags). Without this, grid's default row-stretch pads a
+     shorter card with dead space up to its taller row-mate's height. */
+  align-items: start;
 }
 
 @media (min-width: 720px) {
