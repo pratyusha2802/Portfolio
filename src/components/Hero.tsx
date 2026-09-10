@@ -2,6 +2,7 @@ import { links, principles, profile } from "../data/portfolio";
 import { riseDelay } from "../lib/rise";
 import { splitLetters } from "../lib/splitLetters";
 import { pageUrl } from "../lib/url";
+import { useMagneticHover } from "../lib/useMagneticHover";
 import { usePointerTilt } from "../lib/usePointerTilt";
 
 /** Splits "Head, rest of the line" into a bold lead + lighter label below it. */
@@ -12,6 +13,8 @@ function splitPrinciple(text: string): [string, string] {
 
 function Hero() {
   const portraitRef = usePointerTilt<HTMLImageElement>();
+  const linkedinRef = useMagneticHover<HTMLAnchorElement>();
+  const workCtaRef = useMagneticHover<HTMLAnchorElement>();
   const linkedin = links.find((link) => link.label === "LinkedIn" && link.href);
   const [leftHead, leftLabel] = splitPrinciple(principles[1]);
   const [rightHead, rightLabel] = splitPrinciple(principles[3]);
@@ -35,11 +38,12 @@ function Hero() {
           <div className="hero__actions">
             {linkedin && (
               <a
-                className="pill-outline rise"
+                className="pill-outline magnetic rise"
                 style={riseDelay(3)}
                 href={linkedin.href}
                 target="_blank"
                 rel="noreferrer"
+                ref={linkedinRef}
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
                   <path
@@ -50,7 +54,12 @@ function Hero() {
                 LinkedIn
               </a>
             )}
-            <a className="pill pill--lg hero__cta rise" style={riseDelay(4)} href={pageUrl("work")}>
+            <a
+              className="pill pill--lg hero__cta magnetic rise"
+              style={riseDelay(4)}
+              href={pageUrl("work")}
+              ref={workCtaRef}
+            >
               See the work
               <svg width="22" height="12" viewBox="0 0 22 12" fill="none" aria-hidden="true">
                 <path
