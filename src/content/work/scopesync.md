@@ -4,151 +4,146 @@ title: "ScopeSync: Make the Internet Learnable"
 type: "case-study"
 status: "published"
 date: "2026-08"
-context: "Solo build, launched August 2026"
-hook: "The internet has more technical content than anyone could get through, but watching a video or reading an article rarely leaves you able to actually use what's in it."
+context: "AI product management programme, 2026"
+hook: "Professionals are now expected to work with AI and technical tools they were never taught. Watching a video about it rarely leaves anyone able to actually use it."
 tools: ["Next.js", "TypeScript", "Supabase", "Gemini", "Groq", "Tailwind CSS", "Zustand"]
 ---
 
 ## TL;DR
 
-**Problem:** product managers (and anyone technical-adjacent) are expected to
-get fluent in unfamiliar technical topics fast, but the internet's default
-formats, a 40-minute video, a long article, are built for consumption, not
-for building real understanding. **Approach:** built and shipped ScopeSync
-solo over about a week: paste a topic, video, or article; it extracts and
-scores the content, turns it into a structured learning path, and then
-refuses to call a lesson "done" until you've demonstrated understanding
-through an AI-evaluated build challenge or interview-style question, not
-just a completion checkbox. **Outcome:** a real, working product, live and
-[launched on Product Hunt](https://scopesync-app.vercel.app), not a
-concept. Real user feedback from launch day was triaged and shipped back
-into the product within 24 hours.
+**Problem:** non-technical professionals (PMs, marketers, HR, founders, finance,
+ops) are expected to build real fluency with AI and technical tools fast, but
+existing options (YouTube tutorials, generic bootcamps, ad-hoc ChatGPT use)
+optimize for content consumed, not capability built. **Approach:** built
+ScopeSync over about a week, then put it in front of real strangers for a
+single-day live launch test, not a demo walkthrough: paste a resource, get a
+sequenced path, and don't count a lesson as done until you've demonstrated
+understanding through it. **Outcome:** 19 real signups, a real (partial)
+funnel, and the sharpest lesson of the day had nothing to do with the
+curriculum: a database migration silently disabled the entire gamification
+layer mid-launch, found by using my own product, not by looking at data.
 
 ## Context
 
-A solo, self-directed build: idea to public launch in about a week (89
-commits, August 19 to 26, 2026). One person, me, across product, design,
-prompt engineering, and engineering, with no team to hand any of it off to.
+Built as the final deliverable of an AI product management case-study
+challenge: design a learning product that moves non-technical professionals
+from "I don't understand technology" to "I can confidently use and build with
+it," with Duolingo's habit-forming loop as the reference point. No predefined
+user, problem, or curriculum, that part was mine to decide. The product was
+built over roughly a week; the challenge's own test was a single-day live
+launch in front of real, unscreened users.
 
 ## The problem
 
-Technical fluency is something a lot of people need on a deadline: a PM
-scoping a feature they don't fully understand the mechanics of, an engineer
-picking up an unfamiliar system, anyone trying to keep up with how fast the
-tooling underneath their job is changing. The content to learn from already
-exists: YouTube, technical blogs, documentation, but consuming it and being
-able to use it are two different things, and most tools optimize for the
-first. Finishing a video is not the same as being able to explain the
-concept in it, and it's definitely not the same as being able to build
-something with it.
+AI and technical fluency have moved from an engineering-only skill to an
+everyday expectation across PM, marketing, HR, ops, and finance roles, faster
+than most professionals' formal training prepared them for. The content to
+close that gap already exists in abundance. What's missing is what happens
+after opening it: no sequencing, no forced engagement, no application, and no
+reason to come back tomorrow. The size of the content pile is itself a
+deterrent. Consumption keeps getting mistaken for capability.
 
 ## Constraints
 
-- Solo, compressed timeline: no team to divide product, design, prompt
-  engineering, and engineering across.
-- Free/metered third-party APIs with real limits. YouTube blocks
-  unauthenticated transcript requests from cloud/datacenter IPs entirely,
-  confirmed directly against this deployment, which returned "Sign in to
-  confirm you're not a bot" regardless of whether the video actually had
-  captions. Worked around it with a paid transcript API
-  ([Supadata](https://supadata.ai)) rather than let the core input path
-  silently fail in production.
-- No dedicated AI provider budget to lean on a single model without a
-  fallback plan if it rate-limited or went down mid-demo.
+- A single-day real-user launch window: no gating, no waitlist, no do-over if
+  something broke, which something did.
+- No budget for paid acquisition or research incentives. Reach limited to my
+  own network, one LinkedIn post, and whatever an in-product referral link
+  could generate on its own.
+- Free-tier AI providers (Gemini, Groq) with real rate limits. I hit them in
+  production during the launch.
+- Solo across product, research, design, and engineering: no team to divide
+  the work across.
 
 ## Research and discovery
 
-No formal user research phase. This was built on a need I had directly
-(bridging technical understanding fast while moving from engineering toward
-product) and validated by shipping to real users immediately rather than
-by surveying hypothetical ones first. The real discovery mechanism was the
-launch itself: a Product Hunt launch produced concrete, specific feedback
-within hours, including a literal quote about a feature nobody was finding:
-*"'ask compass' ka mujhe randomly pta chla"* (roughly: "I found out 'ask
-compass' existed by accident"), which is a more honest signal about a
-discoverability problem than any amount of pre-launch speculation would
-have been.
+No pre-build interviews. Given a single-day real-user test as the actual
+deliverable, I chose to learn from real behavior fast rather than front-load
+discovery before anything existed to react to: 48 hours of instrumentation
+(roughly 30 event types, a custom Supabase event log mirrored to Mixpanel)
+across the launch window. What that produced: onboarding wasn't where people
+left (17 of 19 signups completed a four-question flow), referral quietly
+outperformed a cold LinkedIn post (37% of signups vs. 30% from LinkedIn), and
+the real gap sat between starting and finishing (15 paths created, 0 fully
+completed), a number I can't fully trust on its own, because of what happened
+next.
 
 ## Options considered
 
 | Option | Why it's tempting | Why not |
 | --- | --- | --- |
-| Track completion by "watched" / "read," like most content tools | Much simpler to build; ships faster | Doesn't measure the thing that actually matters: whether the person can now use what they learned, not just that they were exposed to it |
-| **Chosen: gate progress behind an AI-evaluated build challenge or interview-style question** | Forces a real understanding signal, not a vanity metric; matches the actual goal ("become capable," not "consume more") | Much harder to get right: the AI evaluator has to be reliable, has to respect the constraints of what it's grading against, and becomes a new failure surface. A bug in the evaluator is now a bug in whether someone feels they understand something |
-| One AI provider, simplest integration | Fastest to build | A single point of failure for the entire product: no fallback if the provider rate-limits or degrades |
-| **Chosen: Gemini primary, Groq fallback, mock provider for local dev** | The product keeps working under provider failure instead of breaking entirely | More integration surface to maintain across three providers instead of one |
+| Interview a recruited panel before building anything | Lower risk, cleaner data, no live production surface to break | The case's own test was real usage, not opinions about a concept. A panel's stated preferences don't reveal what a live migration failure looks like |
+| Screen participants for a clean, representative sample | Would make every stat above defensible as a rate, not just a count | Trades away reach and speed at a scale (19 users) where screening would have meant almost no users at all |
+| **Chosen: ship a real, live product and observe unscreened real usage** | The only way to find an operational failure that only appears when a stranger actually touches the product | Directly cost the launch its cleanest read on completion: I can't separate genuine mid-path drop-off from a motivation loop that wasn't running for part of the window |
 
 ## Decision and the tradeoff it cost
 
-The real decision that shaped everything else: refusing to let "finished a
-lesson" mean anything less than "demonstrated understanding of it." That's
-why every learning path ends in either a build challenge (evaluated by AI on
-an understanding score) or an interview-practice round (scored on technical
-correctness and clarity), not a passive checkbox.
+The real decision was upstream of any single feature: test with a live
+product and real strangers on launch day, instead of a safer walkthrough or
+a research-first approach. That decision is exactly what surfaced the
+launch's most important finding, and what makes one of its three
+headline numbers unusable on its own.
 
-The cost showed up immediately in production, not in theory. Two real bugs
-from launch week were direct consequences of this choice being hard to get
-right: the lesson content generator was hardcoded to explain everything "like
-a curious 5-year-old" regardless of the technical comfort level a user
-actually selected. The setting existed in the prompt as a fact, but nothing
-told the model to change register because of it, so someone who deliberately
-chose an advanced setting still got a toy-box analogy for an API. Separately,
-the AI evaluator grading an "explain this to a sales leader in 30 seconds"
-exercise was dinging users for not mentioning details (like rate limits)
-that the prompt's own stated audience and time constraint had explicitly
-made out of scope. A simpler "did you click through the video" tracker would
-never have hit either failure mode, but it also would never have told
-anyone whether they actually understood anything.
+Partway through the launch window, a missing database migration silently
+disabled XP, streaks, and badges, the entire motivation loop the product's
+core hypothesis rests on. I found it by using my own product, not by
+noticing it in a dashboard. That's the gap shipping actually teaches: the
+distance between "the feature is built" and "the feature is running for a
+real user" is invisible until someone checks. The fix shipped and deployed
+the same day. It does not repair the launch-day dataset: the 15
+paths-created-to-0-completed figure is now confounded between real
+drop-off and a broken reward loop, and I'm carrying that honestly rather
+than picking whichever explanation flatters the number. A smaller, quieter
+launch (a walkthrough, a handful of friendly testers) would never have
+found this bug, and also would never have told me anything real.
 
 ## What shipped
 
-A live, working product, not a concept:
+A live, working product tested end to end by strangers, not a prototype:
 
-- Paste a topic, YouTube link, article, or PDF; the system extracts the
-  content and scores each resource for quality, difficulty, and relevance
-  to the learner's role before building a learning path from it.
-- Structured lessons with an in-lesson AI Q&A ("Ask Compass") for anything
-  unclear mid-lesson.
-- Two ways to prove understanding: an AI-evaluated build challenge (a
-  visual, node-based playground) or an interview-practice mode scored on
-  technical correctness and clarity.
-- Gamification (XP, streaks, achievements) and a dashboard tracking
-  resources read, concepts mastered, learning paths, and builds completed.
-- A full internal admin analytics suite: retention, activation funnel,
-  growth, content quality, and raw event views, instrumented with Mixpanel
-  from day one, not bolted on after launch.
-- [Launched publicly on Product Hunt](https://scopesync-app.vercel.app),
-  with real launch-day user feedback shipped back into the product within
-  24 hours.
+- Resource intake from a pasted URL or an uploaded PDF, AI-ranked and scoped
+  into a sequenced learning path.
+- A four-step lesson loop, Understand, Check, Apply, Explain, so a lesson
+  only counts as done once it's been demonstrated, not just viewed.
+- Three challenge types (build, interview-style, and a visual playground) to
+  apply a concept, not just recall it.
+- A full gamification layer: XP, day streaks, badges, and a Learning Map
+  visualizing accumulated progress.
+- An in-product referral link with attribution tracking, which ended up
+  outperforming a cold LinkedIn post.
+- A multi-provider AI fallback chain (Gemini, then Groq, then a
+  deterministic mock) so a rate-limited provider degrades the experience
+  instead of breaking it, a real production condition on launch day.
+- A full analytics and admin layer (funnel, retention, growth) instrumented
+  from day one, not bolted on after.
 
 ## How I'd measure success
 
-Already instrumented, not hypothetical: a self-built admin dashboard
-tracks retention, activation funnel, and content-quality metrics directly,
-backed by Mixpanel events. It's early, days old at the time of writing, so
-there isn't yet enough usage to call a real trend, and I'm not going to
-dress up a few days of data as a result. What is real: specific, actionable
-feedback arrived within hours of launch and was triaged and shipped the
-same day, which is the metric I actually trust most at this stage over any
-early usage number.
+North-star metric: Weekly Active Learners, unique users completing at least
+one lesson in a trailing seven days, defined and instrumented but with no
+real reading yet, the launch and this writeup happened the same day, so a
+seven-day metric has zero observations so far. What launch day did produce,
+read as directional, not representative, from 19 self-selected signups on a
+single day: 89% onboarding completion (17 of 19), the cleanest result of the
+launch; 37% of signups from in-product referral, ahead of a cold LinkedIn
+post; and 0 of 15 created paths fully completed, a number I can't yet
+attribute to genuine drop-off versus the motivation-loop bug above.
 
 ## What I'd do differently
 
-Three gaps are already known, not newly discovered in hindsight. They came
-directly out of launch-week feedback and were deliberately deferred rather
-than rushed:
+In order, because the order matters more than speed to the next number:
 
-- **Multi-source learning paths.** Right now a path is built from one
-  resource. Real topics usually need synthesizing more than one source, and
-  users have already asked for it.
-- **Long-video content quality.** A fixed character cap on transcript
-  processing likely causes both the surface-level summaries and an
-  irrelevant quiz question a user reported for a 6-hour video. The
-  extraction pipeline needs to scale with source length, not truncate it.
-- **A more granular, Obsidian-style learning map.** The current concept
-  graph is a good first cut at showing how ideas connect, but users want to
-  navigate and manipulate it more directly than the current view allows.
-
-Given more time before launch, I'd have built the multi-source path first.
-It's the constraint most likely to make someone bounce on their very first
-real use, rather than one they run into later.
+- **Move database migrations into the deploy pipeline.** The specific bug
+  is fixed; the manual process that let it ship silently isn't, and that's
+  the actual fix, not the patch.
+- **Re-measure completion depth on the now-fixed build**, before changing
+  anything else about the lesson flow. Until I know whether the gap is
+  behavioral or operational, any product fix to it is a guess.
+- **Pull the AI-pipeline failure rate.** I know I hit free-tier rate limits
+  in production; I don't yet know what share of the 15 unfinished paths
+  that actually explains. It's a query I haven't run yet, not a number I
+  don't have access to.
+- **Push toward the real target (40-50 users) through the referral and
+  LinkedIn mix that already worked**, and report the invite denominator
+  this time, so "referral works" becomes a measured claim instead of a
+  promising ratio from 19 people.
