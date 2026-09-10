@@ -1608,25 +1608,24 @@ a.work-card:hover .work-card__cta::after {
   transition-delay: calc(var(--i, 0) * 90ms);
 }
 
-/* Bold display headings start as an outline and fill solid on the same
-   scroll trigger .rise already uses (useRiseAnimation adds .in once, on
-   load for hero content, on intersection everywhere else), plus a hover
-   fallback for anyone who reaches the heading without ever triggering the
-   observer. The fill is delayed and slower than .rise's own fade so the
-   outline is actually visible for a beat before it fills, instead of
-   blurring into one motion. @supports guards it: browsers without
-   text-stroke keep plain solid headings instead of losing the text. */
-@supports (-webkit-text-stroke: 1px black) {
-  .fill-text {
-    color: transparent;
-    -webkit-text-stroke: 1.5px var(--forest);
-    transition: color 1s ease 0.2s;
-  }
+/* Bold display headings start faint and fill in solid on the same scroll
+   trigger .rise already uses (useRiseAnimation adds .in once, on load for
+   hero content, on intersection everywhere else), plus a hover fallback for
+   anyone who reaches the heading without ever triggering the observer. The
+   fill is delayed and slower than .rise's own fade so the faint state is
+   actually visible for a beat before it darkens, instead of blurring into
+   one motion. Tried an outlined (-webkit-text-stroke) look first, but on
+   this bold a display face the fill never visibly painted in testing even
+   though computed styles reported it solid — a real cross-browser paint
+   risk, not just a preference. A plain color fade has no such failure mode. */
+.fill-text {
+  color: rgba(46, 33, 56, 0.18);
+  transition: color 1s ease 0.2s;
+}
 
-  .fill-text.in,
-  .fill-text:hover {
-    color: var(--forest);
-  }
+.fill-text.in,
+.fill-text:hover {
+  color: var(--forest);
 }
 
 @media (prefers-reduced-motion: reduce) {
