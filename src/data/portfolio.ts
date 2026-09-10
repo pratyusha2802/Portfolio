@@ -169,6 +169,39 @@ export const principles: string[] = [
  */
 export const work: WorkItem[] = [
   {
+    slug: "scopesync",
+    title: "ScopeSync: Make the Internet Learnable",
+    track: "product",
+    type: "case-study",
+    status: "published",
+    date: "2026-08",
+    context: "Solo build, launched August 2026",
+    hook: "The internet has more technical content than anyone could get through, but watching a video or reading an article rarely leaves you able to actually use what's in it.",
+    users:
+      "Product managers and anyone technical-adjacent who needs real fluency in an unfamiliar technical topic fast, not just more content to skim.",
+    decisions: [
+      'Refused to let a lesson count as "finished" without a demonstrated-understanding signal: every learning path ends in an AI-evaluated build challenge or interview-style question, not a passive completion checkbox.',
+      "Built a Gemini-primary, Groq-fallback, mock-for-local-dev provider chain so the product degrades gracefully instead of breaking outright when one AI provider rate-limits or fails.",
+      "Shipped a full internal admin analytics suite (retention, funnel, growth, content quality) alongside the consumer product from day one, instead of treating measurement as a later add-on.",
+    ],
+    measure:
+      "Instrumented via a self-built admin dashboard (retention, activation funnel, content quality) backed by Mixpanel, live since launch. Too early for a real usage trend: what's real is that specific, actionable feedback arrived within hours of the Product Hunt launch and was triaged and shipped the same day.",
+    tools: ["Next.js", "TypeScript", "Supabase", "Gemini", "Groq", "Tailwind CSS", "Zustand"],
+    topics: ["0→1", "AI product", "Solo founder", "B2C", "EdTech"],
+    href: "https://scopesync-app.vercel.app",
+    links: [
+      {
+        href: "https://claude.ai/code/artifact/8a55512f-043f-4c89-a22c-c87a599cb10e",
+        label: "View PRD",
+      },
+      {
+        href: "https://claude.ai/code/artifact/c5868026-bb65-4ed9-9035-88c70bef12c0",
+        label: "View pitch deck",
+      },
+    ],
+    cta: "Read the case study",
+  },
+  {
     slug: "convenience-economy-india",
     title: "Golden Hour Bridge: Convenience Economy Discovery in India",
     track: "product",
