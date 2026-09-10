@@ -42,6 +42,11 @@ function WorkDetail() {
           {item.context && <span>{item.context}</span>}
         </div>
         <div className="work-card__tools">
+          {item.topics?.map((topic) => (
+            <span className="topic-chip" key={topic}>
+              {topic}
+            </span>
+          ))}
           {item.tools.map((tool) => (
             <span className="tool-chip" key={tool}>
               {tool}

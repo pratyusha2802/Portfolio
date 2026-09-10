@@ -971,6 +971,28 @@ a.work-card:hover .work-card__cta::after {
   background: rgba(46, 33, 56, 0.14);
 }
 
+/* Topic chips (0→1, AI product, discovery work) carry the PM/product-thinking
+   signal, so they get the site's amber accent instead of the neutral
+   tool-chip grey — a card should read as product judgement first, tech
+   stack second, not the other way around. */
+.topic-chip {
+  display: inline-block;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--amber);
+  background: rgba(180, 112, 63, 0.14);
+  padding: 5px 12px;
+  border-radius: 999px;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.topic-chip:hover {
+  transform: translateY(-2px) rotate(-3deg);
+  background: rgba(180, 112, 63, 0.22);
+}
+
 /* ---------- experience ---------- */
 .timeline {
   display: grid;
