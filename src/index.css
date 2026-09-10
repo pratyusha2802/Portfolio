@@ -7,7 +7,6 @@
   --ink: #1b1420;
   --muted: #4a3c4d;
   --amber: #b4703f;
-  --amber-ink: #7a4a12;
 
   --display: "Bricolage Grotesque", system-ui, sans-serif;
   --body: "Instrument Sans", system-ui, sans-serif;
@@ -973,29 +972,30 @@ a.work-card:hover .work-card__cta::after {
 }
 
 /* Topic chips (0→1, AI product, discovery work) carry the PM/product-thinking
-   signal, so they get the site's amber accent instead of the neutral
-   tool-chip grey — a card should read as product judgement first, tech
-   stack second, not the other way around. */
+   signal and need to visually lead the tool-chip tech stack. A warm accent
+   hue kept reading as a muddy tan against the site's cool lavender no matter
+   how the contrast was tuned, so the distinction is shape, not a new color:
+   an outlined "badge" in the same ink the rest of the card already uses,
+   versus the tool-chip's soft filled tint. */
 .topic-chip {
   display: inline-block;
   font-size: 12.5px;
   font-weight: 700;
-  /* The lighter --amber reads as a proper accent as a 1-2px dot elsewhere,
-     but as chip text on a light tint the two mid-tones blend into a flat,
-     muddy pastel. --amber-ink is the same hue pushed dark enough to sit on
-     the tint with the same crisp contrast tool-chip gets from --forest. */
-  color: var(--amber-ink);
-  background: rgba(180, 112, 63, 0.14);
-  padding: 5px 12px;
+  color: var(--forest);
+  background: var(--paper);
+  border: 1.5px solid var(--forest);
+  padding: 3.5px 12px;
   border-radius: 999px;
   transition:
     transform 0.2s ease,
-    background 0.2s ease;
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .topic-chip:hover {
   transform: translateY(-2px) rotate(-3deg);
-  background: rgba(180, 112, 63, 0.22);
+  background: var(--forest);
+  color: var(--paper);
 }
 
 /* ---------- experience ---------- */
