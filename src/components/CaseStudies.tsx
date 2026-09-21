@@ -11,10 +11,12 @@ import { usePointerTilt } from "../lib/usePointerTilt";
  * ranked" — see CLAUDE.md for why. Not filterable.
  */
 const orderedSlugs = [
+  "rideinsync",
   "scopesync",
   "elder-care-india",
-  "harvest-ledger-trust",
+  "fastlane",
   "convenience-economy-india",
+  "harvest-ledger-trust",
   "pen-in-the-air",
 ] as const;
 
@@ -27,7 +29,7 @@ function WorkCard({ item }: { item: WorkItem }) {
   // A much smaller max angle than the hero portrait's: these cards carry
   // paragraphs of body text, and a strong 3D tilt would fight legibility
   // instead of just adding a bit of tactile depth on hover.
-  const tiltRef = usePointerTilt<HTMLAnchorElement>(3);
+  const tiltRef = usePointerTilt<HTMLDivElement>(3);
 
   // "Coming soon" is a sentinel: it locks the card instead of linking it.
   const isLocked = item.cta === "Coming soon";
@@ -40,8 +42,15 @@ function WorkCard({ item }: { item: WorkItem }) {
   // gating both on the same field previously hid Harvest Ledger Trust's
   // tools for no content reason.
   const topics = item.topics ?? [];
+  // The live/deck/prototype links (real, external, another site) — shown
+  // as their own quick-jump row on the card itself, alongside the read-more
+  // Link to /work/:slug, instead of only surfacing on the detail page.
+  const actions = [
+    ...(item.href ? [{ href: item.href, label: item.hrefLabel ?? "View live" }] : []),
+    ...(item.links ?? []),
+  ];
 
-  const body = (
+  const details = (
     <>
       <div className="work-card__top">
         <span className="work-card__type">{item.meta ?? typeLabels[item.type]}</span>
@@ -67,20 +76,49 @@ function WorkCard({ item }: { item: WorkItem }) {
           ))}
         </div>
       )}
-      {item.cta && (
-        <span className={`work-card__cta${isLocked ? " work-card__cta--locked" : ""}`}>
-          {item.cta}
-        </span>
-      )}
     </>
   );
 
-  return isLocked ? (
-    <div className="work-card work-card--static rise">{body}</div>
-  ) : (
-    <Link className="work-card tilt rise" to={`/work/${item.slug}`} ref={tiltRef}>
-      {body}
-    </Link>
+  return (
+    <div
+      className={`work-card${isLocked ? " work-card--static" : " tilt"} rise`}
+      ref={isLocked ? undefined : tiltRef}
+    >
+      {isLocked ? (
+        <div className="work-card__body">{details}</div>
+      ) : (
+        <Link className="work-card__body" to={`/work/${item.slug}`}>
+          {details}
+        </Link>
+      )}
+      {(actions.length > 0 || item.cta) && (
+        <div className="work-card__footer">
+          {actions.length > 0 && (
+            <div className="work-card__actions">
+              {actions.map((action) => (
+                <a
+                  className="work-card__action"
+                  href={action.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  key={action.href}
+                >
+                  {action.label}
+                </a>
+              ))}
+            </div>
+          )}
+          {item.cta &&
+            (isLocked ? (
+              <span className="work-card__cta work-card__cta--locked">{item.cta}</span>
+            ) : (
+              <Link className="work-card__cta" to={`/work/${item.slug}`}>
+                {item.cta}
+              </Link>
+            ))}
+        </div>
+      )}
+    </div>
   );
 }
 

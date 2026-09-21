@@ -502,6 +502,28 @@ button {
   border-top: var(--rule);
 }
 
+/* Same light-touch photo treatment as .background-education — a small
+   thumbnail beside the entry, not its own card. Only renders when
+   company.photo is set, so companies without one keep the plain layout. */
+.company-block__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.company-block__photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.company-block__content {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
 .company-block__head {
   display: flex;
   flex-wrap: wrap;
@@ -828,18 +850,21 @@ button {
   display: none;
 }
 
-/* Only the real links get a resting elevation + border — otherwise a
-   clickable case-study card and a purely informational box using the
+/* Only real, clickable cards get a resting elevation + border — otherwise
+   a clickable case-study card and a purely informational box using the
    same .work-card-ish chrome elsewhere (e.g. Currently's rows) were
-   indistinguishable until you happened to hover one. */
-a.work-card {
+   indistinguishable until you happened to hover one. The card itself is a
+   plain div now, not an <a> — it holds the read-more Link *and* a row of
+   real external action links (View live / View deck), and anchors can't
+   nest — so these key off :not(.work-card--static) instead of the tag. */
+.work-card:not(.work-card--static) {
   border: 1px solid rgba(46, 33, 56, 0.14);
   box-shadow:
     0 2px 4px rgba(46, 33, 56, 0.08),
     0 14px 28px -14px rgba(46, 33, 56, 0.5);
 }
 
-a.work-card:hover {
+.work-card:not(.work-card--static):hover {
   transform: translateY(-4px) rotate(-0.6deg);
   box-shadow:
     0 2px 4px rgba(46, 33, 56, 0.1),
@@ -852,9 +877,13 @@ a.work-card:hover {
   will-change: transform;
 }
 
-a.work-card.tilt:hover {
+.work-card.tilt:hover {
   transform: perspective(1400px) translateY(-4px) rotateX(var(--tilt-x, 0deg))
     rotateY(var(--tilt-y, 0deg)) rotate(-0.6deg);
+}
+
+.work-card__body {
+  display: block;
 }
 
 .work-card--static {
@@ -934,6 +963,70 @@ a.work-card.tilt:hover {
   margin-top: 16px;
 }
 
+/* Groups the external action pills (View live / View deck — real links to
+   another site, so they can't live inside the read-more Link, which itself
+   already points to /work/:slug) and the "read more" CTA button under one
+   spacing rhythm, in that order: quick jump to the real thing first, full
+   write-up second. */
+.work-card__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.work-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* The secondary sibling of .work-card__cta below — same button family
+   (outlined instead of solid at rest, inverts to solid forest on hover,
+   same corner radius as the CTA), deliberately NOT shaped or filled like
+   .tool-chip above: those are inert pill tags, these are real links, and a
+   soft rgba fill in the chips' own pill shape made the two read as the
+   same kind of thing at a glance. The brighter --paper fill (lighter than
+   the card's own --paper-deep) is what actually separates a button from
+   its background — a bare tinted outline disappeared into the card. The
+   small ↗ marks these as the ones that leave the site — the case study's
+   own → always means "keep reading here". */
+.work-card__action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  background: var(--paper);
+  border: 1.5px solid var(--forest);
+  color: var(--forest);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 12.5px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.work-card__action::after {
+  content: "↗";
+  display: inline-block;
+  font-size: 11px;
+  transition: transform 0.2s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.work-card__action:hover {
+  background: var(--forest);
+  color: var(--paper);
+  transform: translateY(-2px);
+}
+
+.work-card__action:hover::after {
+  transform: translate(1px, -1px);
+}
+
 /* Styled like a real button (same family as .pill in the hero) rather
    than a text link — a card is easy to skim past, but a solid button
    sitting inside it reads as "click me" without needing to hover first. */
@@ -941,7 +1034,6 @@ a.work-card.tilt:hover {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  margin-top: 18px;
   padding: 10px 16px;
   border-radius: 8px;
   background: var(--forest);
@@ -960,11 +1052,11 @@ a.work-card.tilt:hover {
   transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
-a.work-card:hover .work-card__cta {
+.work-card:hover .work-card__cta {
   background: var(--forest-mid);
 }
 
-a.work-card:hover .work-card__cta::after {
+.work-card:hover .work-card__cta::after {
   transform: translateX(4px);
 }
 
@@ -1191,10 +1283,85 @@ a.work-card:hover .work-card__cta::after {
   color: var(--muted);
 }
 
+/* Background stays a flat list (deliberately minimal) — this just adds a
+   small thumbnail next to the education line rather than promoting it to
+   its own card. The box matches the source photo's own aspect ratio
+   (3:4, a portrait phone shot) so object-fit: cover has nothing to crop;
+   kept anyway as a safe default if the photo's ever swapped for one with a
+   different ratio. */
+.background-education {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.background-education__photo {
+  width: 96px;
+  height: 128px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.background-education__text {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Degree, institution and dates/CGPA used to run together as one long
+   "·"-separated line that wrapped wherever the browser felt like — long
+   institution name mid-clause, most often. Split onto their own lines
+   instead, ranked like a Position/Experience entry: degree as the bold
+   headline, institution second, dates/CGPA smallest and most muted. */
+.background-education__degree {
+  display: block;
+  color: var(--forest);
+}
+
+.background-education__institution {
+  display: block;
+  margin-top: 2px;
+}
+
+.background-education__meta {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+/* Reuses .work-card__tools' chip-row layout — six course names as one
+   comma-separated clause inside the sentence above read as a wall of text;
+   breaking them out as .tool-chip pills (the site's existing "list of
+   short items" pattern) makes them scannable instead. */
+.background-education__coursework {
+  margin-top: 10px;
+}
+
+/* MMVY is tied to the degree itself (a merit scholarship for all four
+   years), not a separate credential — nested here as a subpoint instead of
+   its own top-level bullet in .background-list, so it reads as part of the
+   education entry instead of an unrelated sibling next to it. */
+.background-education__recognition {
+  margin-top: 8px;
+  font-size: 13.5px;
+}
+
+.background-education__recognition li {
+  position: relative;
+  padding-left: 14px;
+}
+
+.background-education__recognition li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+}
+
 /* ---------- case (work detail) page ---------- */
 .case {
   padding-block: clamp(48px, 7vw, 90px);
-  max-width: 960px;
+  max-width: 1180px;
 }
 
 .case__back {
@@ -1263,6 +1430,101 @@ a.work-card:hover .work-card__cta::after {
   font-size: clamp(15.5px, 1.1vw, 17.5px);
 }
 
+/* ---------- case body: left index + single active section ----------
+   Only one ## section renders at a time (WorkDetail picks it from
+   content.sections by id) instead of the whole case as one long scroll —
+   the left-hand index (a plain link list, same pattern as Nav.tsx's
+   nav__links, not a <ul>) jumps straight to any section; a "next" button
+   at the end of each section's content (case-next, below) advances
+   sequentially. Replaces an earlier horizontal preview-card carousel that
+   read as a worse way to get through a case than either of these. */
+.case-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(24px, 4vw, 48px);
+}
+
+.case-index {
+  flex: 0 0 220px;
+  position: sticky;
+  top: 112px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.case-index__item {
+  padding: 9px 12px;
+  border-radius: 8px;
+  border-left: 2px solid transparent;
+  font-size: 13.5px;
+  color: var(--muted);
+  transition:
+    color 0.15s ease,
+    background 0.15s ease;
+}
+
+.case-index__item:hover {
+  color: var(--forest);
+}
+
+.case-index__item.is-active {
+  color: var(--forest);
+  font-weight: 700;
+  background: var(--paper-deep);
+  border-left-color: var(--amber);
+}
+
+.case-layout .case-card {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.case-next {
+  display: inline-block;
+  margin-top: clamp(20px, 3vw, 28px);
+  background: var(--forest);
+  color: var(--paper);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.case-next:hover {
+  background: var(--forest-mid);
+}
+
+@media (max-width: 820px) {
+  .case-layout {
+    flex-direction: column;
+  }
+
+  .case-index {
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    width: 100%;
+    gap: 6px;
+    padding-bottom: 6px;
+  }
+
+  .case-index__item {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+  }
+
+  .case-index__item.is-active {
+    border-left-color: transparent;
+    border-bottom-color: var(--amber);
+  }
+}
+
 .case__body h2 {
   font-family: var(--display);
   font-weight: 800;
@@ -1327,33 +1589,54 @@ a.work-card:hover .work-card__cta::after {
   background: var(--paper-deep);
 }
 
-/* ---------- case body: section cards ----------
-   Each `##` section renders as its own bounded card (see renderCaseBody in
-   src/lib/markdown.ts) instead of one unbroken block of prose — the card
-   edge is what gives a long text-heavy case a scannable rhythm. The reveal
-   reuses .rise's IntersectionObserver wiring (useRiseAnimation) but layers
-   a clip-path unfold on top: the card's content unrolls into view from its
-   top edge rather than just fading up, since "cards that unfold" is a
-   different, more literal moment than the sitewide fade-and-rise. */
-.case-card {
-  background: var(--paper);
-  border: 1px solid rgba(46, 33, 56, 0.14);
-  border-radius: 16px;
-  padding: clamp(24px, 4vw, 40px) clamp(20px, 4.5vw, 38px);
-  margin-bottom: clamp(20px, 3vw, 30px);
-  box-shadow:
-    0 2px 4px rgba(46, 33, 56, 0.05),
-    0 18px 34px -20px rgba(46, 33, 56, 0.35);
+/* ---------- case body: screenshot carousels ----------
+   Consecutive `![]()` lines in a case .md (see isImageOnlyParagraph in
+   markdown.ts) render as one side-by-side, horizontally-scrolling strip
+   instead of stacking as separate full-width blocks — screenshots of
+   different aspect ratios stacked at full width read as misaligned; fixed
+   equal height with auto width keeps every card the same size next to
+   each other. Native overflow-x scroll/swipe, no JS: focusable via
+   tabindex so keyboard users can scroll it (arrow keys) using the
+   sitewide :focus-visible ring above. */
+.case-carousel {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin-bottom: 20px;
+  padding-bottom: 6px;
 }
 
-.case-card:last-child {
-  margin-bottom: 0;
+.case-carousel img {
+  flex: 0 0 auto;
+  height: clamp(160px, 34vw, 320px);
+  width: auto;
+  max-width: 85vw;
+  border-radius: 12px;
+  border: 1px solid rgba(46, 33, 56, 0.14);
+  scroll-snap-align: start;
+}
+
+/* ---------- case body: active section ----------
+   Only one ## section is in the DOM at a time (WorkDetail picks it from
+   content.sections, shown next to the left-hand case-index) — the boxed
+   "card" chrome this used to have (border, background panel, shadow) was
+   redundant once that nav already marks which section you're in and where
+   it ends; this is now just the section's content, unboxed. The reveal
+   still reuses .rise's IntersectionObserver-free trigger (see WorkDetail's
+   own effect) with a clip-path unfold layered on top, minus the card's
+   former corner radius. */
+.case-card {
+  /* Anchor target for #id links (e.g. a direct/shared link to one
+     section) — lands the section clear of the sticky nav instead of
+     flush under it. */
+  scroll-margin-top: 96px;
 }
 
 .case-card.rise {
   opacity: 0;
   transform: scale(0.98);
-  clip-path: inset(0 0 100% 0 round 16px);
+  clip-path: inset(0 0 100% 0);
   transition:
     opacity 0.5s ease,
     transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
@@ -1363,7 +1646,7 @@ a.work-card:hover .work-card__cta::after {
 .case-card.rise.in {
   opacity: 1;
   transform: none;
-  clip-path: inset(0 0 0% 0 round 16px);
+  clip-path: inset(0 0 0% 0);
 }
 
 @media (prefers-reduced-motion: reduce) {

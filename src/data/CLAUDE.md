@@ -1,0 +1,8 @@
+## Why the Experience data model is shaped this way
+
+`Role` shape changed, twice — this explains why, so it doesn't get
+"simplified" back to an earlier shape that already didn't work.
+
+**`Role` shape changed, twice.** Real experience copy required a role to contain more than one project with its own date range (e.g. the current FTE role: desktop-assistant project since Nov 2025, Core UI project before that). `Role` dropped `summary`/`highlights` in favor of optional `description` (single-paragraph roles, e.g. internships) or `projects: SubProject[]` (multi-project roles). The old `Experience.tsx` referenced the removed fields directly and stopped compiling, so it was deleted; the recreated `Experience.tsx` was built against that shape, rendering as its own top-level section rather than a block inside `About`.
+
+**Then `Role` was replaced entirely** once all three JPMC entries (the FTE role plus two earlier internships) were repeating the same `company`/`location` three times in a row — three flat, disconnected-looking cards for what's actually one continuous ~2-year relationship with progression (hackathon-sourced intern → returning intern → converted to FTE). `Role` is gone; `Position` (title/dates/stack/description-or-projects — same shape `Role` had, minus `company`/`location`) nests under `CompanyExperience` (`company`/`location`/`positions: Position[]`), and `experience` is now `CompanyExperience[]`, one entry per employer. `Experience.tsx` renders one header per company (its date range is derived from `positions`, min start to max end, not stored) with its positions underneath as a connected vertical timeline. See the type definitions above `profile`.
