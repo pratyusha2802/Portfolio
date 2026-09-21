@@ -63,7 +63,7 @@ discovery before anything existed to react to: 48 hours of instrumentation
 (roughly 30 event types, a custom Supabase event log mirrored to Mixpanel)
 across the launch window. What that produced: onboarding wasn't where people
 left (17 of 19 signups completed a four-question flow), referral quietly
-outperformed a cold LinkedIn post (37% of signups vs. 30% from LinkedIn), and
+outperformed a cold LinkedIn post (35% of signups vs. 30% from LinkedIn), and
 the real gap sat between starting and finishing (15 paths created, 0 fully
 completed), a number I can't fully trust on its own, because of what happened
 next.
@@ -149,6 +149,18 @@ A live, working product tested end to end by strangers, not a prototype:
 - A full analytics and admin layer (funnel, retention, growth) instrumented
   from day one, not bolted on after.
 
+From the live product:
+
+![Sequenced learning path roadmap: a skill-tree style map of lesson nodes for "How to Become an AI Product Manager in 2026," generated from a pasted resource.](/scopesync-lesson-roadmap.jpg)
+
+![The "Understand" step of the four-step lesson loop, explaining a concept with a plain-language analogy before the learner is checked on it.](/scopesync-lesson-understand.jpg)
+
+![The "Check" step: a multiple-choice question gating progress, so a lesson only counts as done once understanding is demonstrated.](/scopesync-lesson-check.jpg)
+
+![The Learning Map: a node graph visualizing every concept learned so far and how they connect, the gamification layer's progress view.](/scopesync-learning-map.jpg)
+
+![The Paths view: every learning path started, grouped as courses with per-path lesson-completion progress bars.](/scopesync-paths.jpg)
+
 ## How I'd measure success
 
 North-star metric: Weekly Active Learners, unique users completing at least
@@ -157,7 +169,7 @@ real reading yet, the launch and this writeup happened the same day, so a
 seven-day metric has zero observations so far. What launch day did produce,
 read as directional, not representative, from 19 self-selected signups on a
 single day: 89% onboarding completion (17 of 19), the cleanest result of the
-launch; 37% of signups from in-product referral, ahead of a cold LinkedIn
+launch; 35% of signups from in-product referral, ahead of a cold LinkedIn
 post; and 0 of 15 created paths fully completed, a number I can't yet
 attribute to genuine drop-off versus the motivation-loop bug above.
 

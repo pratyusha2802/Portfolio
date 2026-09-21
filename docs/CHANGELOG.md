@@ -7,6 +7,35 @@ Every entry here corresponds to a `package.json` version and a deploy to
 
 Nothing staged yet.
 
+## [0.4.0] — 2026-09-21
+
+- **Case studies:** added RideInSync (group ride coordination, Rethink
+  Systems buildathon) and FastLane (vendor onboarding orchestration, AI
+  product management programme) to the grid, each with real screenshots
+  from the live product/landing page.
+- **Case study detail page, restructured:** replaced the single long
+  vertical scroll with a left-hand section index and one section shown at a
+  time, with a "Next" button at the end of each section for sequential
+  reading; removed the boxed card chrome around section content (redundant
+  once the index already marks where you are) and widened the content
+  column to use more of the page on desktop. Screenshots dropped into a
+  case's markdown as consecutive `![]()` lines now render as a horizontally
+  scrolling carousel instead of stacking at full width.
+- **Case study cards, on the home page grid:** live/deck/prototype links now
+  show directly on the card as their own action row, instead of only
+  surfacing after opening the full case study.
+- **Content accuracy:** ScopeSync's in-product-referral figure corrected
+  from 37% to 35% (matches the source data); the JPMorgan Core UI
+  experience note now includes the SDK's two busiest surfaces (meeting
+  join, employee search) and the spec-driven development / micro-frontend
+  refactor work behind it.
+- **Background:** added a convocation photo and Class 12 / Class 10 school
+  entries alongside the degree; coursework now renders as chips instead of
+  a comma-separated sentence; the MMVY scholarship line moved from a
+  standalone bullet to a subpoint under Education, since it's tied to the
+  degree, not a separate credential.
+- **Experience:** added a JPMorgan Chase office photo alongside the entry.
+
 ## [0.3.0] — 2026-09-05
 
 - **Hero portrait:** the source photo's top margin is real room background,

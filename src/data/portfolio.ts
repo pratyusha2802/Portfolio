@@ -101,6 +101,9 @@ export interface CompanyExperience {
   location: string;
   stack: string[];
   positions: Position[];
+  /** Optional — same light-touch treatment as education.photo: a small
+   * thumbnail next to the entry, not a promotion to its own card. */
+  photo?: string;
 }
 
 export interface Link {
@@ -185,7 +188,7 @@ export const work: WorkItem[] = [
       "Built a Gemini-primary, Groq-fallback, mock-for-local-dev provider chain so the product degrades gracefully instead of breaking outright when one AI provider rate-limits or fails.",
     ],
     measure:
-      "Launch-day numbers from 19 self-selected signups, read as directional, not representative: 89% onboarding completion (17 of 19), and 37% of signups arriving through in-product referral, ahead of a cold LinkedIn post. The sharpest finding wasn't a number: a database migration silently broke the entire gamification layer mid-launch, found by using the product myself, not by checking a dashboard.",
+      "Launch-day numbers from 19 self-selected signups on ~30 instrumented event types, read as directional, not representative: 89% onboarding completion (17 of 19), 15 paths created against 0 fully completed, and 35% of signups arriving through in-product referral, ahead of a cold LinkedIn post. The sharpest finding wasn't a number: a database migration silently broke the entire gamification layer mid-launch, found by using the product myself, not by checking a dashboard.",
     tools: ["Next.js", "TypeScript", "Supabase", "Gemini", "Groq", "Tailwind CSS", "Zustand"],
     topics: ["0→1", "AI product", "Solo founder", "B2C", "EdTech"],
     href: "https://scopesync-app.vercel.app",
@@ -250,6 +253,57 @@ export const work: WorkItem[] = [
         label: "View prototype",
       },
     ],
+    cta: "Read the case study",
+  },
+  {
+    slug: "fastlane",
+    title: "FastLane: Vendor Onboarding Orchestration Platform",
+    track: "product",
+    type: "case-study",
+    status: "published",
+    date: "2026",
+    context: "AI product management programme, 2026",
+    hook: "Vendor onboarding at mid-market Indian companies takes 15–30 days not because approvals are hard, but because the request lives outside any shared system, scattered across email, WhatsApp, spreadsheets and ERP screens with no single record of status, owner or blocker.",
+    users:
+      "Procurement coordinators managing multiple onboarding cases at once, and the business requesters, vendors, and Finance/Legal/IT reviewers who all wait on the same case without visibility into it, at mid-market Indian companies running a lightweight ERP (Tally, Zoho, ERPNext) with no built-in vendor-onboarding module.",
+    decisions: [
+      "Scoped the addressable market to roughly 6,677 mid-market Indian companies on lightweight ERPs, explicitly excluding large enterprises on SAP S/4HANA or Oracle Fusion where Ariba, Coupa and Oracle Procurement Cloud already cover this — a smaller TAM in exchange for a market the product can actually win instead of competing against entrenched procurement suites.",
+      "Positioned the product as a coordination and evidence layer that sits alongside existing ERP and procurement systems rather than a new ERP, source-to-pay suite or payments platform, differentiating on India-specific onboarding depth (GST, PAN, Udyam, Section 43B(h)) against an already-established general orchestration category (Zip: Gartner 2026 Visionary, 7M+ suppliers).",
+      "Excluded Aadhaar from verification even though the team's current manual process uses it, treating that as a practice to fix rather than a feature to carry forward, and scoped MVP verification to GSTIN/PAN with an authorized, evidence-backed override path instead.",
+      "Kept ERP activation as a recorded manual attestation rather than a live write-back integration in MVP, on the reasoning that the platform has to establish reconciled truth across existing systems before it tries to replace any part of them.",
+      "Split the feature set into an always-on layer (visibility and escalation, live on every case regardless of stage) and stage-specific layers tied to each point in the onboarding lifecycle, naming always-on visibility and escalation as the differentiator rather than any single stage feature — and pulled banking-detail verification out as its own layer, on the reasoning that it's a fraud surface, not just another onboarding step.",
+    ],
+    measure:
+      "The PRD's north-star metric is a 'low-chase completion rate with maximum visibility': cases reaching transaction-ready with zero or one logged status chase, against a stated baseline of 'near 0%, chasing is the default behaviour.' Every supporting number, including the ~$46,700/year illustrative savings estimate, is explicitly labeled in the PRD as an assumption pending real pilot data, not a measured result — nothing has piloted yet.",
+    tools: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+    topics: ["B2B SaaS", "0→1", "Market sizing", "Enterprise workflow"],
+    href: "https://fastlane-xi.vercel.app/fastlane",
+    hrefLabel: "View prototype",
+    cta: "Read the case study",
+  },
+  {
+    slug: "rideinsync",
+    title: "RideInSync: Group Ride Coordination for Motorcyclists",
+    track: "product",
+    type: "case-study",
+    status: "published",
+    date: "2026-09",
+    context: "Rethink Systems buildathon, 2026",
+    hook: "A group of ten motorcycles leaves together, and every navigation app in every rider's pocket answers where do I go while none of them answer whether the group is still whole once someone drops back or the pack splits at a junction.",
+    users:
+      "Ride captains organizing group rides, the lead/navigator setting pace, the sweep riding last to catch stragglers, and regular riders trying to keep up — four roles on the same ride, each currently blind to the group's actual state.",
+    decisions: [
+      "Shipped as a PWA with an optional Android wrapper instead of a native app first, trading some native-app reliability (background location, on-device voice recognition) for zero-install joining by link, code or QR — the product only has value once the whole pack is on it, so store friction at the moment a rider needs to join was the risk that mattered most.",
+      "Kept the entire coordination layer, live map, group status, voice signals, one-tap SOS, free in v1 and deferred all payments to future scope, because a paywall anywhere in that loop would gate the product's core value instead of creating revenue from it; monetization moves to paid tiers outside the free core, and to partners paying for access to a verified riding audience.",
+      "Resolved raw GPS into four plain group-status states (intact, rider behind, rider stopped, location stale) instead of showing dots on a map, so the lead and sweep read a status at a glance instead of decoding positions at riding speed.",
+      "Scoped the MVP to the live-ride loop (map, SOS, voice signals, ride creation, join, discovery) and explicitly deferred pace warnings, proximity SOS to strangers, in-ride voice chat and offline mesh fallback to future scope.",
+    ],
+    measure:
+      "No formal success metric was defined for the MVP. The only validation so far is qualitative: product managers reacted well to the problem framing and demo, which is directional, not usage data. Proposed metrics (share of rides staying 'intact,' time-to-notice-a-split, join completion time) are my own suggestions for what to track next, not numbers the team has committed to.",
+    tools: ["React", "TypeScript", "Supabase", "Google Maps", "Web Speech API", "Web Push"],
+    topics: ["0→1", "Voice UX", "Real-time", "Safety"],
+    href: "https://www.rideinsync.in/",
+    links: [{ href: `${import.meta.env.BASE_URL}rideinsync-deck.html`, label: "View deck" }],
     cta: "Read the case study",
   },
   /* Engineering track */
@@ -346,6 +400,7 @@ export const experience: CompanyExperience[] = [
   {
     company: "JPMorgan Chase & Co.",
     location: "Bengaluru",
+    photo: "jpmc-office.jpg",
     // Union of every position's stack below, most-recent-role-first order.
     stack: [
       "React",
@@ -372,7 +427,7 @@ export const experience: CompanyExperience[] = [
             name: "Employee productivity platform, Core UI team",
             start: "Jul 2024",
             end: "Nov 2025",
-            note: "accessible, reusable UI components adopted across a platform with 251k monthly active users, 11.5M+ monthly actions, and an estimated 47,500+ hours saved a month",
+            note: "built and owned the micro-frontend SDK behind accessible, reusable UI components adopted across a platform with 251k monthly active users, 11.5M+ monthly actions, and an estimated 47,500+ hours saved a month, including the two busiest surfaces, meeting join (3.96M actions/month) and employee search (2.15M). Ran spec-driven development for two service integrations, agreeing contracts with partner teams before build, and led the refactor of shared UI into reusable micro-frontends that cut duplicated component code across consuming apps",
           },
         ],
       },
@@ -450,13 +505,59 @@ export const education = {
   institution: "Maulana Azad National Institute of Technology, Bhopal",
   years: "2020 – 2024",
   note: "CGPA 8.19",
+  photo: "manit-graduation.jpg",
+  /** Curated from her full coursework list — course codes and foundation
+   * subjects (maths, physics, chemistry, humanities) dropped; this is the
+   * subset that actually maps to what she builds now. */
+  coursework: [
+    "Data Structures & Algorithms",
+    "Database Management Systems",
+    "Software Engineering",
+    "Computer Networks",
+    "Artificial Intelligence",
+    "Machine Learning",
+  ],
 } as const;
 
+export interface SchoolEntry {
+  level: string;
+  institution: string;
+  years: string;
+  note: string;
+}
+
 /**
- * College-only, per her instruction — Background shows nothing outside her
- * degree now. Flipkart GRID and GirlScript Summer of Code were cut (neither
- * is a college credential); MMVY stayed because it's a merit scholarship
- * tied to her four years of the degree itself.
+ * Curated the same way as the B.Tech entry above: one aggregate result per
+ * level, not a subject-by-subject mark sheet. Two things from her original
+ * raw export were left out on purpose, not by oversight — flag if either
+ * should come back:
+ * - IIT JEE coaching (Nucleus Education, Kota) — coaching attended for an
+ *   exam, not an institution/credential, same reasoning that already cut
+ *   Flipkart GRID and GirlScript Summer of Code from `recognition` below.
+ * - The NTSE Stage 1 note under Class 10 — she didn't clear the cutoff
+ *   (132 against 135), so it's an attempt, not a highlight.
+ */
+export const schooling: SchoolEntry[] = [
+  {
+    level: "Class 12, Physics, Chemistry, Mathematics",
+    institution: "Imperial Academy Higher Secondary School, Burhanpur",
+    years: "2018 – 2020",
+    note: "90.60% · Madhya Pradesh Board of Secondary Education",
+  },
+  {
+    level: "Class 10",
+    institution: "Macro Vision Academy, Burhanpur",
+    years: "2016 – 2018",
+    note: "95.40% · CBSE, District Rank 2",
+  },
+];
+
+/**
+ * Education is no longer college-only (school added alongside it above),
+ * but everything else in Background still is, per her instruction. Flipkart
+ * GRID and GirlScript Summer of Code were cut (neither is a college
+ * credential); MMVY stayed because it's a merit scholarship tied to her
+ * four years of the degree itself.
  */
 export const recognition: string[] = ["MMVY merit scholarship, all four years"];
 

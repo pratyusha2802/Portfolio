@@ -14,13 +14,6 @@ this file stays at the repo root because Claude Code only auto-loads
 
 ## Commands
 
-- `npm run dev` — start the Vite dev server (http://localhost:5173)
-- `npm run build` — production build to `dist/`
-- `npm run preview` — serve the production build locally
-- `npm run lint` — run oxlint (config in `.oxlintrc.json`)
-- `npm run format` — apply Prettier (`.prettierrc.json`) to all source files
-- `npm run format:check` — check formatting without writing, for CI-style use
-
 There is no test suite in this project.
 
 **Prettier scope:** `.prettierignore` excludes `about.html`/`work.html` (legacy pre-React
@@ -45,16 +38,13 @@ React SPA on Vite, TypeScript strict, `react-router-dom` for client-side routing
 
 - **`src/data/portfolio.ts`** is the single source of truth for all copy — see "Content model" below for what each export renders as. **To change what the site says, edit this file, not a component.**
 - **`src/content/work/{slug}.md`** — long-form case content for entries in `work`, one markdown file per slug, loaded at build time via `import.meta.glob` and parsed by `src/lib/markdown.ts` (a small hand-rolled frontmatter parser + `marked` for the body — deliberately not `gray-matter`, which assumes a Node `Buffer` global the browser doesn't have). The authoring guide lives at `docs/_authoring.md`, outside this folder so the loader never has to special-case it.
-- **`src/pages/`** — route-level components: `Home.tsx` (the whole single-page scroll), `WorkDetail.tsx` (`/work/:slug`), `NotFound.tsx` (catch-all `*`). Routing lives in `App.tsx`; `main.tsx` mounts `BrowserRouter`.
 - **`src/components/`** — `Hero`, `Currently` (the "building/learning/elsewhere" strip, `id="currently"`, right after the hero), `CaseStudies` (shows every published work item, ordered by depth, `id="work"`), `About` (bio only now, `id="about"`), `Experience` (`id="experience"`), `Background` (`id="background"`), `Footer`, `Nav`. Each presentation-only, reading from `portfolio.ts`.
 - **`src/index.css`** is the only stylesheet — global, BEM-ish class names, CSS custom properties in `:root` for the forest/paper theme. No CSS modules or scoping.
 - **`public/`** — `photo.jpg` (hero headshot, referenced directly as `/photo.jpg`, not part of `portfolio.ts`). There's no local résumé file — `links`' Résumé entry points to an external Google Drive URL instead (see "Known gaps" — that file's sharing permission still needs to be set to "Anyone with the link" for it to actually work for visitors).
 
 **Orphaned files — not deleted, not wired up.** `Principles.tsx` and `SelectedWork.tsx` are still on disk but nothing imports them. They compile fine in isolation (that's why `tsc`/`oxlint` stay clean with them present) but are dead code. Left in place rather than deleted since this repo has no git history to fall back on if that turns out to be wrong — delete them once that's confirmed, don't silently resurrect them. (`Currently.tsx` and `Background.tsx` *were* in this list too, in the previous IA — both are back in active use now, un-orphaned rather than rebuilt from scratch. `Experience.tsx` was fully deleted at one point — see next paragraph — then recreated as a new file once it became its own section again.)
 
-**`Role` shape changed, twice.** Real experience copy required a role to contain more than one project with its own date range (e.g. the current FTE role: desktop-assistant project since Nov 2025, Core UI project before that). `Role` dropped `summary`/`highlights` in favor of optional `description` (single-paragraph roles, e.g. internships) or `projects: SubProject[]` (multi-project roles). The old `Experience.tsx` referenced the removed fields directly and stopped compiling, so it was deleted; the recreated `Experience.tsx` was built against that shape, rendering as its own top-level section rather than a block inside `About`.
-
-**Then `Role` was replaced entirely** once all three JPMC entries (the FTE role plus two earlier internships) were repeating the same `company`/`location` three times in a row — three flat, disconnected-looking cards for what's actually one continuous ~2-year relationship with progression (hackathon-sourced intern → returning intern → converted to FTE). `Role` is gone; `Position` (title/dates/stack/description-or-projects — same shape `Role` had, minus `company`/`location`) nests under `CompanyExperience` (`company`/`location`/`positions: Position[]`), and `experience` is now `CompanyExperience[]`, one entry per employer. `Experience.tsx` renders one header per company (its date range is derived from `positions`, min start to max end, not stored) with its positions underneath as a connected vertical timeline. See the type definitions above `profile`.
+See `src/data/CLAUDE.md` for why the Experience data model (`Position`/`CompanyExperience`) is shaped the way it is — it changed twice, and that history explains why not to "simplify" it back.
 
 **Known gaps, not yet built:**
 - **`links` are all filled in now** (GitHub, LinkedIn, Medium, Résumé, Email) — this was the single biggest concrete blocker and it's closed. One catch: the Résumé link is a Google Drive share URL, and as of when it was added, fetching it returned a sign-in/permission-required page, not the file — the Drive sharing setting needs to be "Anyone with the link" or visitors hit a wall. Verify this before treating the résumé link as actually working.
@@ -172,52 +162,11 @@ to render these as plain lines instead of the old claim/detail cards, but
 it's not wired into `Home.tsx` — same orphaned status as before, just no
 longer broken by the shape change.
 
-## Writing a case page
+## Adding new work
 
-**Two anatomies coexist here — know which one applies. This split predates,
-and is independent of, the 2026-09-10 change to show every case study
-instead of a curated top 3 — don't conflate "uses the fuller anatomy" with
-"is featured"; nothing is curated out anymore, but not every case gets the
-same depth of write-up.**
-
-**The richer case studies** (`scopesync`, `convenience-economy-india`,
-`elder-care-india`, `harvest-ledger-trust` — check `CaseStudies.tsx`'s
-`orderedSlugs` for the current full set, this list has gone stale before)
-use a fixed, recruiter-oriented anatomy, in this order, every time:
-
-TL;DR (problem → approach → outcome, 3 lines max) → Context → The problem (who
-has it, why it matters) → Constraints → Research and discovery → Options
-considered (a real table: option / why tempting / why not) → Decision and the
-tradeoff it cost → What shipped (or what the concept is, labeled as such if
-it's a concept, not a product) → How I'd measure success → What I'd do
-differently.
-
-Options-considered and what-I'd-do-differently are the highest-signal
-sections and the ones most likely to get cut for length. Don't cut them.
-
-**Any other case page** (currently `pen-in-the-air`) uses the older, looser
-system in `docs/_authoring.md`: a
-fixed spine (summary → problem → … → what I'd do differently) with optional
-blocks (`discovery`, `solution`, `scope`, `ux`, `metrics`, `build`, `evals`)
-composed in based on how far the work went. `stages`/`stageLabels`/`stageOrder`
-belong to *that* system, not the fuller anatomy above — `CaseStudies.tsx`
-doesn't currently render stage chips at all.
-
-Engineering work usually needs no stages under the older system — leave the
-field off rather than retrofitting product vocabulary onto a hackathon build.
-
-### Adding new work
-
-1. Add a `work` entry — slug named for the **subject**, never its origin
-   ("meal-planning-prd", not "week-3-prd")
-2. Create `src/content/work/{slug}.md` — the fuller anatomy for a piece with
-   real decisions and rigor behind it, the older spine+blocks system for a
-   smaller/simpler build (see "Writing a case page" above for which is which)
-3. `status: "in-progress"` while drafting; `"published"` when every included
-   section has real content, not a TODO placeholder
-4. Add the slug to `CaseStudies.tsx`'s `orderedSlugs`, positioned by depth
-   of real evidence against what's already there — not appended at the end
-   by default, and not placed by track or by date
+See the `add-case-study` skill for the case-page anatomy (which of the two
+in-repo formats applies) and the step-by-step process for adding a work
+entry.
 
 **Do not draft the body of a case unless explicitly asked.** A PRD she didn't
 reason through is one she can't defend when someone pushes on the tradeoff.
