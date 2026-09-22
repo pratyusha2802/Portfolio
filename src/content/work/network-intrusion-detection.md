@@ -28,7 +28,7 @@ rather than chasing a leaderboard number on one dataset.
   first place.
 - Used a stacked ensemble instead of a single classifier, trading a little
   interpretability for more stable performance across different attack types.
-- Evaluated on both KDD Cup 99 and NSL-KDD rather than KDD Cup 99 alone —
+- Evaluated on both KDD Cup 99 and NSL-KDD rather than KDD Cup 99 alone:
   NSL-KDD exists specifically because KDD Cup 99 results are known to overstate
   real-world performance.
 
@@ -36,7 +36,7 @@ Built in Python with scikit-learn.
 
 ## What I'd do differently
 
-Both benchmarks are dated — KDD Cup 99 and its NSL-KDD successor reflect attack
+Both benchmarks are dated: KDD Cup 99 and its NSL-KDD successor reflect attack
 traffic from the late 1990s and early 2000s. Next time I'd validate the ensemble
 against a more recent capture before trusting that its accuracy holds up on
 current traffic patterns.

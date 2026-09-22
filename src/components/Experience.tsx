@@ -51,7 +51,7 @@ function Experience() {
                             <span className="about__range">
                               ({project.start} – {project.end})
                             </span>
-                            {project.note && <> — {project.note}</>}
+                            {project.note && <> · {project.note}</>}
                           </li>
                         ))}
                       </ul>
